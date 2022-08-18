@@ -1,5 +1,5 @@
 package DBMain;
-
+import Login.*;
 
 import QueryInterface.*;
 import java.sql.Connection;
@@ -7,8 +7,11 @@ import java.sql.Connection;
 public class DBMain {
 
 
-	public static void main(String[] args) 
-	{
+	public static String email;
+	public static void setEmail(String e) {
+		email = e;
+	}
+	public static void main(String[] args) {
 		Connection con = null;
 		EstablishConnection cnct = new EstablishConnection("java","password");
 		try
@@ -33,6 +36,7 @@ public class DBMain {
 		
 		
 
-	}
-
+		LoginFrame.initiateLogin();
+		System.out.println(email + "auto einai");
+	} 
 }
