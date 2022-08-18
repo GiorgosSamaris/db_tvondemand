@@ -1,19 +1,37 @@
 package DBMain;
 
 
+import QueryInterface.*;
+import java.sql.Connection;
+
 public class DBMain {
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
+		Connection con = null;
 		EstablishConnection cnct = new EstablishConnection("java","password");
 		try
 		{
-			cnct.connect();
+			con = cnct.connect();
 		}
 		catch (Exception e)
 		{
 			System.out.println(e);
 		}
+		
+		QueryInterface qri = new QueryInterface(con);
+		try
+		{
+			qri.loginAttempt("'BESSIE.MOSON@sakilacustomer.org'");
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		
+		
 
 	}
 
