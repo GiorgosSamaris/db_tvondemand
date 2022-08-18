@@ -1,9 +1,18 @@
 package DBMain;
 
+
 public class DBMain {
 
+	EstablishConnection cnct = new EstablishConnection();
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		try
+		{
+			cnct.connect();
+		}
+		catch (Exception e)
+		{
+			
+		}
 
 	}
 
