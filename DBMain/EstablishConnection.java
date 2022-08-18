@@ -5,11 +5,18 @@ import java.sql.*;
 
 public class EstablishConnection 
 {
-	public void connect() throws Exception
+	private String db_url = "jdbc:mysql://localhost:3306/tvondemand";
+	private String usrname;
+	private String password;
+	
+	public EstablishConnection(String usrname, String password)
 	{
-		String db_url = "jdbc:mysql://localhost::3306/tvondemand";
-		String usrname = "java";
-		String password = "password";
+		this.usrname = usrname;
+		this.password = password;
+	}
+	
+	public Connection connect() throws Exception
+	{
 		
 		//Driver
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -19,6 +26,7 @@ public class EstablishConnection
 				db_url,usrname,password);
 		
 		System.out.println("Connection Established Successfully!");
+		return con;
 		
 	}
 	
