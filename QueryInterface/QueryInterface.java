@@ -15,23 +15,77 @@ public class QueryInterface {
 		this.con = con;
 	}
 	
-	public ResultSet loginAttempt(String email) throws Exception
+	public void loginAttempt(String email) throws Exception
 	{
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(query+email+";");
+		
+		//temp statements
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
+	        //wrong email
 	    } 
 		else 
 		{
+			//login
 			do 
 			{
 		          String data = rs.getString("email");
 		          System.out.println(data);
 	        } while (rs.next());
 		}
-		return rs;
+		
 	}
+	
+	public void showAvailableForRent() throws Exception
+	{
+	}
+	
+	public void showFilmsForRent() throws Exception
+	{
+		
+		String query = "SELECT title FROM film;";
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(query);
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+	        //wrong email
+	    } 
+		else 
+		{
+			//login
+			do 
+			{
+		          String data = rs.getString("title");
+		          System.out.println(data);
+	        } while (rs.next());
+		}
+	
+	}
+	public void showSeriesForRent() throws Exception
+	{
+		
+		String query = "SELECT title FROM series;";
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(query);
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+	        //wrong email
+	    } 
+		else 
+		{
+			//login
+			do 
+			{
+		          String data = rs.getString("title");
+		          System.out.println(data);
+	        } while (rs.next());
+		}
+	
+	};
+
 
 }
