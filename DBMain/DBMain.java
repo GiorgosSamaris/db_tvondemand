@@ -4,6 +4,8 @@ package DBMain;
 import QueryInterface.*;
 import java.sql.Connection;
 
+import Login.LoginFrame;
+
 public class DBMain {
 
 
@@ -31,10 +33,8 @@ public class DBMain {
 			System.out.println(e);
 		}
 		
+		LoginFrame.initiateLogin(con);
 		
-		
-		
-
 	}
 
 }

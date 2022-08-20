@@ -13,8 +13,9 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.awt.event.ActionEvent;
-
+import QueryInterface.*;
 public class LoginFrame extends JFrame {
 
 	private JPanel contentPane;
@@ -23,11 +24,11 @@ public class LoginFrame extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void initiateLogin() {
+	public static void initiateLogin(Connection con) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginFrame frame = new LoginFrame();
+					LoginFrame frame = new LoginFrame(con);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +40,7 @@ public class LoginFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginFrame() {
+	public LoginFrame(Connection con) {
 		setBackground(Color.LIGHT_GRAY);
 		setTitle("Login Form");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,9 +69,16 @@ public class LoginFrame extends JFrame {
 		JButton btnLetMeIn = new JButton("Let me in!");
 		btnLetMeIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DBMain.setEmail(email_in.getText());
-				System.out.println(DBMain.email);
-				notify();
+				QueryInterface qri = new QueryInterface(con);
+				try
+				{
+					qri.loginAttempt(email_in.getText());
+					
+				}
+				catch(Exception e)
+				{
+					System.out.println(e);
+				}
 			}
 		});
 		panel.add(btnLetMeIn);

@@ -15,7 +15,7 @@ class Customer extends User
 	boolean active;
 	String create_date;
 	char subscription_type;
-}return user_type
+}
 
 class Employee extends User
 {
