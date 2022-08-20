@@ -23,7 +23,7 @@ public class DBMain {
 		QueryInterface qri = new QueryInterface(con);
 		try
 		{
-			qri.loginAttempt("'BESSIE.MORRISON@sakilacustomer.org'");
+			qri.loginAttempt("VIRGINIA.GREEN@sakilacustomer.org");
 			
 		}
 		catch(Exception e)
@@ -32,7 +32,7 @@ public class DBMain {
 		}
 		
 		
-		//idk bro
+		
 		
 
 	}

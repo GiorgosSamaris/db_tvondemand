@@ -7,35 +7,33 @@ import java.io.*;
 public class QueryInterface {
 	
 	private Connection con;
-	private String query = 
-			"SELECT email FROM user WHERE user.email = ";
-	
+		
 	public QueryInterface(Connection con)
 	{
 		this.con = con;
 	}
 	
+	public String checkTypeOfUser(String email) throws Exception
+	{
+		String user_type;
+		CallableStatement cs = con.prepareCall("CALL userType(?,?);");
+		cs.setString(1,email);
+		cs.registerOutParameter(2,Types.VARCHAR);
+		ResultSet rs = cs.executeQuery();
+		user_type = cs.getString(2);
+		cs.close();
+		return user_type;
+	}
+	
 	public void loginAttempt(String email) throws Exception
 	{
-		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery(query+email+";");
-		
-		//temp statements
-		if (rs.next() == false) 
-		{
-	        System.out.println("ResultSet in empty in Java");
-	        //wrong email
-	    } 
-		else 
-		{
-			//login
-			do 
-			{
-		          String data = rs.getString("email");
-		          System.out.println(data);
-	        } while (rs.next());
-		}
-		
+		String user_type;
+		user_type = checkTypeOfUser(email);
+		System.out.println(user_type);
+		if(user_type == "customer") ;
+		else if (user_type == "employee");
+		else if (user_type == "admin");
+		else ;
 	}
 	
 	public void showAvailableForRent() throws Exception
