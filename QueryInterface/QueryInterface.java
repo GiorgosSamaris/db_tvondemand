@@ -1,5 +1,7 @@
 package QueryInterface;
 
+import DBMain.*;
+
 import java.util.*;
 import java.sql.*;
 import java.io.*;
@@ -25,15 +27,26 @@ public class QueryInterface {
 		return user_type;
 	}
 	
-	public void loginAttempt(String email) throws Exception
+	public int getUserId(String email)throws Exception
 	{
+		int id;
+		String query = "SELECT user_id FROM user WHERE email = ";
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(query+email+";");
+		
+		id = rs.getInt("user_id");
+		return id;
+	}
+	
+	public User loginAttempt(String email) throws Exception
+	{
+		int id;
 		String user_type;
 		user_type = checkTypeOfUser(email);
 		System.out.println(user_type);
-		if(user_type == "customer") ;
-		else if (user_type == "employee");
-		else if (user_type == "admin");
-		else ;
+		id = getUserId(email);
+		User usr = new User(id,user_type,email);
+		return usr;
 	}
 	
 	public void showAvailableForRent() throws Exception
@@ -83,7 +96,11 @@ public class QueryInterface {
 	        } while (rs.next());
 		}
 	
-	};
+	}
+	
+	public void changeFirstName(String f_name)
+	{
+	}
 
 
 }
