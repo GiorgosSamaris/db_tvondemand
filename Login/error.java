@@ -22,7 +22,7 @@ public class error extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void invokeError() {
 		try {
 			error dialog = new error();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -40,17 +40,17 @@ public class error extends JDialog {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		contentPanel.setBounds(0, 0, 434, 261);
-		contentPanel.setBackground(Color.CYAN);
+		contentPanel.setBackground(Color.GRAY);
 		contentPanel.setForeground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
 		{
 			JTextArea txtrError = new JTextArea();
-			txtrError.setForeground(Color.RED);
+			txtrError.setForeground(Color.BLACK);
 			txtrError.setFont(new Font("Serif", Font.BOLD, 15));
 			txtrError.setText("Error!We couldnt find your email.\r\nPlease contact an administrator to sign you up. ");
-			txtrError.setBackground(Color.CYAN);
+			txtrError.setBackground(Color.GRAY);
 			txtrError.setBounds(59, 73, 346, 97);
 			contentPanel.add(txtrError);
 		}
