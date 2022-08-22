@@ -19,8 +19,6 @@ import javax.swing.SwingConstants;
 
 public class error extends JDialog {
 
-	private final JPanel contentPanel = new JPanel();
-
 	/**
 	 * Launch the application.
 	 */
@@ -38,33 +36,27 @@ public class error extends JDialog {
 	 * Create the dialog.
 	 */
 	public error() {
+		getContentPane().setBackground(new Color(169, 169, 169));
 		setTitle("CEID SS");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 228, 176);
 		getContentPane().setLayout(null);
-		contentPanel.setBounds(0, 0, 434, 261);
-		contentPanel.setBackground(new Color(169, 169, 169));
-		contentPanel.setForeground(Color.WHITE);
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel);
-		contentPanel.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Please consider contacting an ");
-		lblNewLabel_1.setBackground(new Color(169, 169, 169));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Serif", Font.BOLD, 25));
-		lblNewLabel_1.setBounds(0, 128, 434, 35);
-		contentPanel.add(lblNewLabel_1);
+		JLabel lblNewLabel = new JLabel("We couldn't find your email.");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Serif", Font.BOLD, 12));
+		lblNewLabel.setBounds(10, 27, 213, 14);
+		getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("administrator to sign you up!");
-		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_2.setFont(new Font("Serif", Font.BOLD, 25));
-		lblNewLabel_1_2.setBounds(0, 185, 434, 35);
-		contentPanel.add(lblNewLabel_1_2);
+		JLabel lblPleaseConsiderContacting = new JLabel("Please consider contacting");
+		lblPleaseConsiderContacting.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPleaseConsiderContacting.setFont(new Font("Serif", Font.BOLD, 12));
+		lblPleaseConsiderContacting.setBounds(0, 52, 213, 14);
+		getContentPane().add(lblPleaseConsiderContacting);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("We couldn't find your email!");
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1.setFont(new Font("Serif", Font.BOLD, 25));
-		lblNewLabel_1_1.setBounds(0, 63, 434, 35);
-		contentPanel.add(lblNewLabel_1_1);
+		JLabel lblOurAdministratorTo = new JLabel("our administrator to you up!");
+		lblOurAdministratorTo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOurAdministratorTo.setFont(new Font("Serif", Font.BOLD, 12));
+		lblOurAdministratorTo.setBounds(0, 80, 213, 14);
+		getContentPane().add(lblOurAdministratorTo);
 	}
 }
