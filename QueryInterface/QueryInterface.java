@@ -2,7 +2,9 @@ package QueryInterface;
 
 import java.util.*;
 
+import Login.LoginFrame;
 import Login.error;
+import mockFrame.MockMenu;
 
 import java.sql.*;
 import java.io.*;
@@ -35,8 +37,11 @@ public class QueryInterface {
 		System.out.println(user_type);
 		if(user_type.equals("customer"));										//TODO customer gui
 		else if (user_type.equals("employee"));									//TODO employee gui
-		else if (user_type.equals("admin")) System.out.println("adminif");		//TODO admin gui
-		else error.invokeError();												//TODO call log in
+		else if (user_type.equals("admin"))	MockMenu.show(this);				//TODO admin gui
+		else {
+			LoginFrame.initiateLogin(this);
+			error.invokeError();												//TODO call log in
+		}
 	}
 	
 	public void showAvailableForRent() throws Exception

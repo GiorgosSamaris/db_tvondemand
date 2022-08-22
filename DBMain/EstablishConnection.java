@@ -9,6 +9,7 @@ public class EstablishConnection
 	private String usrname;
 	private String password;
 	
+	//constructor
 	public EstablishConnection(String usrname, String password)
 	{
 		this.usrname = usrname;
@@ -25,7 +26,7 @@ public class EstablishConnection
 		Connection con = DriverManager.getConnection(
 				db_url,usrname,password);
 		
-		System.out.println("Connection Established Successfully!");
+//		System.out.println("Connection Established Successfully!");
 		return con;
 		
 	}
