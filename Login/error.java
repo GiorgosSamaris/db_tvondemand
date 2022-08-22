@@ -14,6 +14,8 @@ import javax.swing.JTextArea;
 import java.awt.Window.Type;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class error extends JDialog {
 
@@ -40,19 +42,29 @@ public class error extends JDialog {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		contentPanel.setBounds(0, 0, 434, 261);
-		contentPanel.setBackground(Color.GRAY);
+		contentPanel.setBackground(new Color(169, 169, 169));
 		contentPanel.setForeground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
-		{
-			JTextArea txtrError = new JTextArea();
-			txtrError.setForeground(Color.BLACK);
-			txtrError.setFont(new Font("Serif", Font.BOLD, 15));
-			txtrError.setText("Error!We couldnt find your email.\r\nPlease contact an administrator to sign you up. ");
-			txtrError.setBackground(Color.GRAY);
-			txtrError.setBounds(59, 73, 346, 97);
-			contentPanel.add(txtrError);
-		}
+		
+		JLabel lblNewLabel_1 = new JLabel("Please consider contacting an ");
+		lblNewLabel_1.setBackground(new Color(169, 169, 169));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Serif", Font.BOLD, 25));
+		lblNewLabel_1.setBounds(0, 128, 434, 35);
+		contentPanel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("administrator to sign you up!");
+		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_2.setFont(new Font("Serif", Font.BOLD, 25));
+		lblNewLabel_1_2.setBounds(0, 185, 434, 35);
+		contentPanel.add(lblNewLabel_1_2);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("We couldn't find your email!");
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1.setFont(new Font("Serif", Font.BOLD, 25));
+		lblNewLabel_1_1.setBounds(0, 63, 434, 35);
+		contentPanel.add(lblNewLabel_1_1);
 	}
 }

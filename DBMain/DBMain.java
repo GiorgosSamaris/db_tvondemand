@@ -11,6 +11,7 @@ public class DBMain {
 
 	public static void main(String[] args) 
 	{
+		User usr = null;
 		Connection con = null;
 		EstablishConnection cnct = new EstablishConnection("java","password");
 		try

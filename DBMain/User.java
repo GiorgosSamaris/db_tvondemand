@@ -2,28 +2,15 @@ package DBMain;
 
 public class User 
 {
-	int user_id;
-	String first_name;
-	String last_name;
-	String email;
-	int address_id;
-
-}
-
-class Customer extends User
-{
-	boolean active;
-	String create_date;
-	char subscription_type;
-}
-
-class Employee extends User
-{
-	boolean active;
-	String create_date;
-}
-
-class Admin extends User
-{
-	String create_date;
+	private int user_id;
+	private String user_type;
+	private String email;
+	
+	public User(int user_id,String user_type,String email)
+	{
+		this.user_id = user_id;
+		this.user_type = user_type;
+		this.email = email;
+		
+	}
 }

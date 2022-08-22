@@ -20,6 +20,7 @@ public class LoginFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
+	private final JPanel panel_2 = new JPanel();
 
 	/**
 	 * Launch the application.
@@ -52,7 +53,7 @@ public class LoginFrame extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(5, 98, 424, 36);
-		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBackground(new Color(169, 169, 169));
 		contentPane.add(panel);
 		
 		JLabel lblNewLabel = new JLabel("Enter your email:");
@@ -82,13 +83,25 @@ public class LoginFrame extends JFrame {
 		btnNewButton.setFont(new Font("Serif", Font.BOLD, 15));
 		btnNewButton.setBackground(new Color(119, 136, 153));
 		
-		JTextArea txtrWelcomeToCeid = new JTextArea();
-		txtrWelcomeToCeid.setBackground(Color.LIGHT_GRAY);
-		txtrWelcomeToCeid.setFont(new Font("Serif", Font.BOLD, 25));
-		txtrWelcomeToCeid.setText("Welcome to CEID Streaming \r\nService!");
-		txtrWelcomeToCeid.setForeground(Color.BLACK);
-		txtrWelcomeToCeid.setBounds(58, 11, 333, 76);
-		contentPane.add(txtrWelcomeToCeid);
+		JLabel lblNewLabel_1 = new JLabel("Welcome to CEID Streaming \r\n\r\n");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Serif", Font.BOLD, 20));
+		lblNewLabel_1.setBounds(47, -5, 316, 58);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Service!");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setFont(new Font("Serif", Font.BOLD, 20));
+		lblNewLabel_2.setBounds(37, 46, 345, 26);
+		contentPane.add(lblNewLabel_2);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(204, 153, 204));
+		panel_1.setBounds(0, 0, 434, 72);
+		contentPane.add(panel_1);
+		panel_2.setBackground(new Color(169, 169, 169));
+		panel_2.setBounds(5, 72, 424, 189);
+		contentPane.add(panel_2);
 	}
 
 }

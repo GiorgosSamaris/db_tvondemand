@@ -30,6 +30,17 @@ public class QueryInterface {
 		return user_type;
 	}
 	
+	public int getUserId(String email)throws Exception
+	{
+		int id;
+		String query = "SELECT user_id FROM user WHERE email = ";
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(query+email+";");
+		
+		id = rs.getInt("user_id");
+		return id;
+	}
+	
 	public void loginAttempt(String email) throws Exception
 	{
 		String user_type;
