@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import QueryInterface.QueryInterface;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -14,34 +17,46 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 import java.awt.event.ActionEvent;
+import mockFrame.*;
 
 public class LoginFrame extends JFrame {
-
+	private QueryInterface qri = null;
 	private JPanel contentPane;
-	private JTextField textField;
+
+
 	private final JPanel panel_2 = new JPanel();
+
+	private static JTextField textField;
+	
+		
+	public static String getTextField() {
+		return textField.getText();
+	}
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+	public static void initiateLogin(QueryInterface query){
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
 				try {
-					LoginFrame frame = new LoginFrame();
+					LoginFrame frame = new LoginFrame(query);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
-		});
+//			}
+//		});
+
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public LoginFrame() {
+	public LoginFrame(QueryInterface query) {
+		this.qri = query;  
 		setTitle("CEID SS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -73,8 +88,13 @@ public class LoginFrame extends JFrame {
 				/*TO DO: check if email exists
 				 * An den brei email error.java(thelei kai ekei kodika) or access
 				 */
-				
-				
+				try {
+					qri.loginAttempt(LoginFrame.getTextField());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
 			}
 		});
 		btnNewButton.setBounds(5, 227, 424, 29);

@@ -2,12 +2,14 @@ package DBMain;
 
 
 import QueryInterface.*;
+
+import java.awt.EventQueue;
 import java.sql.Connection;
 
 import Login.LoginFrame;
 
 public class DBMain {
-
+	
 
 	public static void main(String[] args) 
 	{
@@ -22,19 +24,21 @@ public class DBMain {
 		{
 			System.out.println(e);
 		}
-		
+
 		QueryInterface qri = new QueryInterface(con);
 		try
 		{
 			qri.loginAttempt("VIRGINIA.GREEN@sakilacustomer.org");
-			
+
 		}
 		catch(Exception e)
 		{
 			System.out.println(e);
 		}
 		
-		LoginFrame.initiateLogin(con);
+		LoginFrame.initiateLogin(qri);
+		
+		
 		
 	}
 
