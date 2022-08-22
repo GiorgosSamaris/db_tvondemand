@@ -45,13 +45,14 @@ public class LoginFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(5, 98, 424, 36);
-		panel.setBackground(Color.GRAY);
+		panel.setBackground(Color.LIGHT_GRAY);
 		contentPane.add(panel);
 		
 		JLabel lblNewLabel = new JLabel("Enter your email:");
@@ -62,7 +63,7 @@ public class LoginFrame extends JFrame {
 		textField = new JTextField();
 		textField.setFont(new Font("Serif", Font.ITALIC, 15));
 		textField.setColumns(10);
-		textField.setBackground(Color.LIGHT_GRAY);
+		textField.setBackground(Color.WHITE);
 		panel.add(textField);
 		
 		JButton btnNewButton = new JButton("Sign In");
