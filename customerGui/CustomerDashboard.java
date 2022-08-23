@@ -93,7 +93,14 @@ public class CustomerDashboard extends JFrame {
 		signoutlogo.setBounds(10, 307, 48, 60);
 		panel.add(signoutlogo);
 		
-		JLabel lblNewLabel = new JLabel("Welcome Email");
+		JLabel homedash = new JLabel("Home");
+		homedash.setBounds(74, 61, 208, 60);
+		panel.add(homedash);
+		homedash.setForeground(new Color(255, 255, 255));
+		homedash.setFont(new Font("Dialog", Font.BOLD, 15));
+		homedash.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JLabel lblNewLabel = new JLabel(qri.usr.getEmail());
 		lblNewLabel.setFont(new Font("Serif", Font.BOLD, 11));
 		lblNewLabel.setBounds(114, 11, 128, 39);
 		panel.add(lblNewLabel);
