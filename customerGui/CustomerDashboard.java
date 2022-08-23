@@ -23,6 +23,7 @@ public class CustomerDashboard extends JFrame {
 	private PanelShowMyRents panelShowMyRents;
 	private PanelCatalogue panelCatalogue;
 
+
 	/**
 	 * Launch the application.
 	 */
@@ -165,5 +166,10 @@ public class CustomerDashboard extends JFrame {
 		JPanel MainPanel = new JPanel();
 		MainPanel.setBounds(280, 0, 522, 378);
 		contentPane.add(MainPanel);
+		MainPanel.add(panelCatalogue);
+		MainPanel.add(panelShowMyRents);
+		MainPanel.add(panelSettings);
+		MainPanel.add(panelHome);
 	}
+	
 }
