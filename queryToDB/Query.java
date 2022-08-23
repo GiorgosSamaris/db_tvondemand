@@ -15,7 +15,7 @@ import java.io.*;
 public class Query {
 	
 	private Connection con;
-	private User usr = null;
+	public User usr = null;
 	
 	public void setUser(User usr)
 	{
@@ -53,10 +53,10 @@ public class Query {
 	public void loginAttempt(String email) throws Exception
 	{
 		String user_type;
-		user_type = checkTypeOfUser(email);
 		createUserObject(email);
+		user_type = usr.getUser_type();
 		System.out.println(user_type);
-		if(user_type.equals("customer")) CustomerDashboard.initiateCustomerDashboard(this); //starts customer GUI
+		if(user_type.equals("customer"))CustomerDashboard.initiateCustomerDashboard(this); //starts customer GUI
 		else if (user_type.equals("employee")) MockMenu.show(this);							//TODO employee GUI
 		else if (user_type.equals("admin"))	MockMenu.show(this);							//TODO Administrator GUI
 		else {
@@ -67,10 +67,10 @@ public class Query {
 	
 	public void createUserObject(String email) throws Exception
 	{
-		String user_type;
-		int user_id;
-		String f_name;
-		String l_name;
+		String user_type="";
+		int user_id=0;
+		String f_name="";
+		String l_name="";
 		try
 		{
 			
@@ -87,14 +87,14 @@ public class Query {
 				user_id = rs.getInt("user_id");
 				
 			}while(rs.next());
-			User usr = new User(user_id,user_type,email,f_name,l_name);
-			this.setUser(usr);
 			
 		}
 		catch(Exception e)
 		{
 			
 		}
+		User usr = new User(user_id,user_type,email,f_name,l_name);
+		this.setUser(usr);
 		
 
 		
