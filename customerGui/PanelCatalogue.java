@@ -15,7 +15,7 @@ public class PanelCatalogue extends JPanel {
 	 */
 	public PanelCatalogue() {
 		setBackground(new Color(112, 128, 144));
-		setSize(522,378);
+		setBounds(0, 0, 522,378);
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();

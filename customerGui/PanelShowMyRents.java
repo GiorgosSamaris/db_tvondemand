@@ -17,7 +17,7 @@ public class PanelShowMyRents extends JPanel {
 	 */
 	public PanelShowMyRents() {
 		setBackground(new Color(105, 105, 105));
-		setSize(522,378);
+		setBounds(0, 0, 522,378);
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Your Rented Content");

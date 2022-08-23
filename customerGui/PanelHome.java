@@ -14,7 +14,7 @@ public class PanelHome extends JPanel {
 	public PanelHome() {
 		setBackground(new Color(112, 128, 144));
 		setForeground(new Color(255, 255, 255));
-		setSize(522,378);
+		setBounds(0, 0, 522,378);
 		setLayout(null);
 		
 		JTextArea txtrAStreamingService = new JTextArea();

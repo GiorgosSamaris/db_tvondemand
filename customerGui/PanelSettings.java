@@ -24,7 +24,7 @@ public class PanelSettings extends JPanel {
 	 */
 	public PanelSettings() {
 		setBackground(new Color(112, 128, 144));
-		setSize(522,378);
+		setBounds(0, 0, 522,378);
 		setLayout(null);
 		
 		JLabel lblNewLabel_5 = new JLabel("Customer info:");
