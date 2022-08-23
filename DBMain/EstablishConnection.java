@@ -1,4 +1,4 @@
-package dBMain;
+package DBMain;
 
 import java.io.*;
 import java.sql.*;

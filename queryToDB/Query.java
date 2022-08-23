@@ -1,5 +1,7 @@
 package queryToDB;
 
+import user.*;
+import mockFrame.*;
 import java.util.*;
 
 import customerGui.CustomerDashboard;
@@ -13,7 +15,13 @@ import java.io.*;
 public class Query {
 	
 	private Connection con;
-		
+	private User usr = null;
+	
+	public void setUser(User usr)
+	{
+		this.usr= usr;
+	}
+	
 	public Query(Connection con)
 	{
 		this.con = con;
@@ -45,7 +53,8 @@ public class Query {
 	public void loginAttempt(String email) throws Exception
 	{
 		String user_type;
-		user_type = checkTypeOfUser(email); 	//TODO try catch block? checkTypeOfUser throws exception!!!
+		user_type = checkTypeOfUser(email);
+		createUserObject(email);
 		System.out.println(user_type);
 		if(user_type.equals("customer")) CustomerDashboard.initiateCustomerDashboard(this); //starts customer GUI
 		else if (user_type.equals("employee")) MockMenu.show(this);							//TODO employee GUI
@@ -54,6 +63,41 @@ public class Query {
 			LoginFrame.initiateLogin(this);													//Recall login window 
 			error.invokeError();															//display error dialog				
 		}
+	}
+	
+	public void createUserObject(String email) throws Exception
+	{
+		String user_type;
+		int user_id;
+		String f_name;
+		String l_name;
+		try
+		{
+			
+			user_type = checkTypeOfUser(email); 	//TODO try catch block? checkTypeOfUser throws exception!!!
+			
+			PreparedStatement ps = con.prepareStatement("SELECT user_id,first_name,last_name FROM user WHERE email = ?;");
+			ps.setString(1,email);
+			ResultSet rs = ps.executeQuery();
+			
+			do
+			{
+				f_name = rs.getString("first_name");
+				l_name = rs.getString("last_name");
+				user_id = rs.getInt("user_id");
+				
+			}while(rs.next());
+			User usr = new User(user_id,user_type,email,f_name,l_name);
+			this.setUser(usr);
+			
+		}
+		catch(Exception e)
+		{
+			
+		}
+		
+
+		
 	}
 	
 	public void showAvailableForRent() throws Exception
