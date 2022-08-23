@@ -1,4 +1,4 @@
-package DBMain;
+package user;
 
 public class User 
 {

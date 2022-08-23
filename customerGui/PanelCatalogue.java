@@ -1,4 +1,4 @@
-package gui3;
+package customerGui;
 
 import javax.swing.JPanel;
 import java.awt.Color;

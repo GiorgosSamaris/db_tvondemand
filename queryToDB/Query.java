@@ -1,19 +1,19 @@
-package QueryInterface;
+package queryToDB;
 
 import java.util.*;
 
-import Login.LoginFrame;
-import Login.error;
+import loginGUI.LoginFrame;
+import loginGUI.error;
 import mockFrame.MockMenu;
 
 import java.sql.*;
 import java.io.*;
 
-public class QueryInterface {
+public class Query {
 	
 	private Connection con;
 		
-	public QueryInterface(Connection con)
+	public Query(Connection con)
 	{
 		this.con = con;
 	}
@@ -68,11 +68,11 @@ public class QueryInterface {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-	        //wrong email
+
 	    } 
 		else 
 		{
-			//login
+
 			do 
 			{
 		          String data = rs.getString("title");
@@ -90,11 +90,9 @@ public class QueryInterface {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-	        //wrong email
 	    } 
 		else 
 		{
-			//login
 			do 
 			{
 		          String data = rs.getString("title");

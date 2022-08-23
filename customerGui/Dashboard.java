@@ -1,4 +1,4 @@
-package gui3;
+package customerGui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

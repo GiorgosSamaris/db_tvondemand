@@ -1,4 +1,4 @@
-package Login;
+package loginGUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -6,8 +6,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import QueryInterface.QueryInterface;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -20,9 +18,10 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
 import java.awt.event.ActionEvent;
 import mockFrame.*;
+import queryToDB.Query;
 
 public class LoginFrame extends JFrame {
-	private QueryInterface qri = null;
+	private Query qri = null;
 	private JPanel contentPane;
 
 
@@ -38,7 +37,7 @@ public class LoginFrame extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void initiateLogin(QueryInterface query){
+	public static void initiateLogin(Query query){
 //		EventQueue.invokeLater(new Runnable() {
 //			public void run() {
 				try {
@@ -55,7 +54,7 @@ public class LoginFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginFrame(QueryInterface query) {
+	public LoginFrame(Query query) {
 		this.qri = query;  
 		setTitle("CEID SS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

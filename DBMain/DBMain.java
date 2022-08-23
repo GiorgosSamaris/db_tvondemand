@@ -1,12 +1,12 @@
-package DBMain;
+package dBMain;
 
 
-import QueryInterface.*;
+import loginGUI.LoginFrame;
+import queryToDB.*;
+import user.User;
 
 import java.awt.EventQueue;
 import java.sql.Connection;
-
-import Login.LoginFrame;
 
 public class DBMain {
 	
@@ -25,17 +25,17 @@ public class DBMain {
 			System.out.println(e);
 		}
 
-		QueryInterface qri = new QueryInterface(con);
-		try
-		{
-			qri.loginAttempt("VIRGINIA.GREEN@sakilacustomer.org");
-
-		}
-		catch(Exception e)
-		{
-			System.out.println(e);
-		}
-		
+		Query qri = new Query(con);
+//		try
+//		{
+//			qri.loginAttempt("VIRGINIA.GREEN@sakilacustomer.org");
+//
+//		}
+//		catch(Exception e)
+//		{
+//			System.out.println(e);
+//		}
+//		
 		LoginFrame.initiateLogin(qri);
 		
 		
