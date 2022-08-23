@@ -23,13 +23,9 @@ import queryToDB.Query;
 public class LoginFrame extends JFrame {
 	private Query qri = null;
 	private JPanel contentPane;
-
-
 	private final JPanel panel_2 = new JPanel();
-
 	private static JTextField textField;
-	
-		
+			
 	public static String getTextField() {
 		return textField.getText();
 	}

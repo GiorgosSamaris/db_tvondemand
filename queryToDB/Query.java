@@ -2,6 +2,7 @@ package queryToDB;
 
 import java.util.*;
 
+import customerGui.CustomerDashboard;
 import loginGUI.LoginFrame;
 import loginGUI.error;
 import mockFrame.MockMenu;
@@ -18,6 +19,7 @@ public class Query {
 		this.con = con;
 	}
 	
+	//given email return user type
 	public String checkTypeOfUser(String email) throws Exception
 	{
 		String user_type;
@@ -29,29 +31,28 @@ public class Query {
 		cs.close();
 		return user_type;
 	}
-	
+	//given email return user ID
 	public int getUserId(String email)throws Exception
 	{
 		int id;
 		String query = "SELECT user_id FROM user WHERE email = ";
 		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery(query+email+";");
-		
+		ResultSet rs = st.executeQuery(query+email+";");		
 		id = rs.getInt("user_id");
 		return id;
 	}
-	
+	//given email call appropriate navigation GUI
 	public void loginAttempt(String email) throws Exception
 	{
 		String user_type;
-		user_type = checkTypeOfUser(email);
+		user_type = checkTypeOfUser(email); 	//TODO try catch block? checkTypeOfUser throws exception!!!
 		System.out.println(user_type);
-		if(user_type.equals("customer"));										//TODO customer gui
-		else if (user_type.equals("employee"));									//TODO employee gui
-		else if (user_type.equals("admin"))	MockMenu.show(this);				//TODO admin gui
+		if(user_type.equals("customer")) CustomerDashboard.initiateCustomerDashboard(this); //starts customer GUI
+		else if (user_type.equals("employee")) MockMenu.show(this);							//TODO employee GUI
+		else if (user_type.equals("admin"))	MockMenu.show(this);							//TODO Administrator GUI
 		else {
-			LoginFrame.initiateLogin(this);
-			error.invokeError();												//TODO call log in
+			LoginFrame.initiateLogin(this);													//Recall login window 
+			error.invokeError();															//display error dialog				
 		}
 	}
 	

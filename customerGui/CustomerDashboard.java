@@ -6,13 +6,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import queryToDB.Query;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class Dashboard extends JFrame {
-
+public class CustomerDashboard extends JFrame {
+	private Query qri = null;
 	private JPanel contentPane;
 	private PanelHome panelHome;
 	private PanelSettings panelSettings;
@@ -22,11 +25,11 @@ public class Dashboard extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void initiateCustomerDashboard(Query qri) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Dashboard frame = new Dashboard();
+					CustomerDashboard frame = new CustomerDashboard(qri);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,10 +38,14 @@ public class Dashboard extends JFrame {
 		});
 	}
 
+//	private class PanelButtonMouseAdapter extends MouseAdapter
+	
+	
+	
 	/**
 	 * Create the frame.
 	 */
-	public Dashboard() {
+	public CustomerDashboard(Query qri) {
 		setTitle("CEID SS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 818, 417);
