@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import loginGUI.LoginFrame;
 import queryToDB.Query;
 
 import javax.swing.JLabel;
@@ -206,6 +207,8 @@ public class CustomerDashboard extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//TODO logout and call login again
+				dispose();
+				LoginFrame.initiateLogin(qri);
 			}
 		});
 		signoutpanel.setBackground(new Color(0, 128, 128));
