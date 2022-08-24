@@ -45,6 +45,7 @@ public class mockCatalogue2 extends JPanel {
 		tabbedPane.addTab("New tab", null, scrollableList, null);
 		
 		JTextArea textArea = new JTextArea("Choose a film to show description and rent");
+		textArea.setLineWrap(true);
 		textArea.setBounds(10, 223, 304, 144);
 		add(textArea);
 
