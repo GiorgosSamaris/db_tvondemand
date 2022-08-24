@@ -10,6 +10,9 @@ import loginGUI.LoginFrame;
 import loginGUI.error;
 import mockFrame.MockMenu;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+
 import java.sql.*;
 import java.io.*;
 
@@ -225,9 +228,17 @@ public class Query {
 	{
 	}
 	
-	public List<Film> getAvailableFilms() throws Exception
+	public JList<Film> getAvailableFilms() throws Exception
 	{
-		List<Film> list = new ArrayList<>();
+		
+		
+		JList<Film> list = new JList<Film>();
+		
+		DefaultListModel<Film> listModel;
+
+		 
+
+		listModel = new DefaultListModel<Film>();
 		String query = "SELECT * FROM film INNER JOIN film_inventory USING (film_id);";
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);
@@ -238,10 +249,13 @@ public class Query {
 	    } 
 		else 
 		{
-			while(rs.next()) {
+			do{
+				
 				Film tempFilm = new Film(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getInt(4), rs.getInt(7),rs.getString(8) ,rs.getString(9));
-				list.add(tempFilm);
-			}
+				listModel.addElement(tempFilm);
+			}while(rs.next());
+			
+			
 			
 		}
 		return list;

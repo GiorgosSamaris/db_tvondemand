@@ -86,7 +86,7 @@ public class CustomerDashboard extends JFrame {
 		panelHome = new PanelHome();
 		panelSettings = new PanelSettings(qri);
 		panelShowMyRents = new PanelShowMyRents();
-		panelCatalogue = new PanelCatalogue();
+		panelCatalogue = new PanelCatalogue(qri);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 128, 128));
