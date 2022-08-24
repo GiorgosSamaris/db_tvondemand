@@ -30,7 +30,7 @@ public class PanelSettings extends JPanel {
 	 */
 	public PanelSettings(Query query) {
 		qri = query;
-		System.out.print(qri.usr.getUser_type());
+		
 		setBackground(new Color(112, 128, 144));
 		setBounds(0, 0, 522,378);
 		setLayout(null);
@@ -61,14 +61,14 @@ public class PanelSettings extends JPanel {
 		firstname_1.setBounds(99, 68, 79, 20);
 		add(firstname_1);
 		
-		JLabel lastname_1 = new JLabel("Last Name:");
+		JLabel lastname_1 = new JLabel(qri.usr.getL_name());
 		lastname_1.setFont(new Font("Serif", Font.BOLD, 15));
-		lastname_1.setBounds(99, 109, 79, 20);
+		lastname_1.setBounds(99, 109, 100, 20);
 		add(lastname_1);
 		
 		JLabel email_1 = new JLabel(qri.usr.getEmail());
 		email_1.setFont(new Font("Serif", Font.BOLD, 15));
-		email_1.setBounds(99, 152, 79, 20);
+		email_1.setBounds(99, 152, 300, 20);
 		add(email_1);
 		
 		JLabel lblSubscriptionType = new JLabel("Subscription type:");
@@ -83,13 +83,32 @@ public class PanelSettings extends JPanel {
 		list.setBounds(198, 211, -58, -14);
 		add(list);
 		
+		String films [] =  {"Films","Series", "Both"};
+		String series [] =  {"Series", "Films","Both"};
+		String both [] =  {"Both","Films","Series" };
+		String current [] = null;
+		String sub_type="";
+		try
+		{
+			sub_type = qri.getCustomerSub(qri.usr.getUser_id());
+		}
+		catch(Exception e)
+		{
+			
+		}
+		System.out.print(sub_type);
+		if(sub_type.equals("M")) current = films;
+		else if(sub_type.equals("S")) current = series;
+		else current = both;
+		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Films", "Series", "Both"}));
-		comboBox.setBounds(138, 193, 62, 22);
+		comboBox.setModel(new DefaultComboBoxModel(current));
+		comboBox.setBounds(138, 193, 82, 22);
 		add(comboBox);
 		
+		boolean active = true;
 		JCheckBox activechckbx = new JCheckBox("");
-		activechckbx.setSelected(true);
+		activechckbx.setSelected(active);
 		activechckbx.setBounds(138, 234, 28, 23);
 		add(activechckbx);
 		
