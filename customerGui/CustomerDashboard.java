@@ -73,7 +73,8 @@ public class CustomerDashboard extends JFrame {
 		ImageIcon homeIcon = createImageIcon("images/home.png", "Home");
 		ImageIcon catalogueIcon = createImageIcon("images/film.png", "Catalogue");
 		ImageIcon ceidIcon = createImageIcon("images/ceid52.png", "CEID");
-		ImageIcon settingsIcon = createImageIcon("images/settings.png", "CEID");
+		ImageIcon settingsIcon = createImageIcon("images/settings.png", "Settings");
+		ImageIcon showRentsIcon = createImageIcon("images/rents.png", "Show all rents");
 		setTitle("CEID SS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 818, 417);
@@ -104,10 +105,10 @@ public class CustomerDashboard extends JFrame {
 		panel.add(logohome);
 		
 		JLabel logosettings = new JLabel(settingsIcon);
-		logosettings.setBounds(14, 122, 34, 34);
+		logosettings.setBounds(14, 130, 34, 34);
 		panel.add(logosettings);
 		
-		JLabel logorents = new JLabel("RentsImg");
+		JLabel logorents = new JLabel(showRentsIcon);
 		logorents.setBounds(10, 183, 48, 60);
 		panel.add(logorents);
 		
