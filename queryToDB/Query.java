@@ -39,16 +39,7 @@ public class Query {
 		cs.close();
 		return user_type;
 	}
-	//given email return user ID
-	public int getUserId(String email)throws Exception
-	{
-		int id;
-		String query = "SELECT user_id FROM user WHERE email = ";
-		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery(query+email+";");		
-		id = rs.getInt("user_id");
-		return id;
-	}
+	
 	//given email call appropriate navigation GUI
 	public void loginAttempt(String email) throws Exception
 	{
