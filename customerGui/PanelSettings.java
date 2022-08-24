@@ -107,9 +107,20 @@ public class PanelSettings extends JPanel {
 		add(comboBox);
 		
 		boolean active = true;
+		try
+		{
+			active = qri.getUserActivity(qri.usr.getUser_id());
+			
+		}
+		catch(Exception e)
+		{
+			
+		}
+
 		JCheckBox activechckbx = new JCheckBox("");
 		activechckbx.setSelected(active);
 		activechckbx.setBounds(138, 234, 28, 23);
+		
 		add(activechckbx);
 		
 		JLabel activestatus = new JLabel("Active Account:");
@@ -121,6 +132,20 @@ public class PanelSettings extends JPanel {
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TO DO :SAVE INFO TO DATABASE,DEN PREPEI NA ALLAZEI EMAIL
+				try
+				{
+					final boolean changed_active = activechckbx.isSelected();;
+					qri.setUserActivity(qri.usr.getUser_id(),changed_active);
+					final String changed_selection = comboBox.getSelectedItem().toString();
+					
+					if(changed_selection.equals("Films"))qri.setUserSub(qri.usr.getUser_id(), "M");
+					else if(changed_selection.equals("Series"))qri.setUserSub(qri.usr.getUser_id(), "S");
+					else qri.setUserSub(qri.usr.getUser_id(), "B");
+				}
+				catch (Exception ex)
+				{
+					ex.printStackTrace();
+				}
 				
 			}
 		});

@@ -121,25 +121,105 @@ public class Query {
 	{
 		boolean activity=true;
 		
-//		try
-//		{
-//			PreparedStatement ps = con.prepareStatement("SELECT subscription_type FROM customer WHERE customer_id = ?;");
-//			ps.setInt(1,user_id);
-//			ResultSet rs = ps.executeQuery();
-//			while(rs.next())
-//			{
-//				sub_type = rs.getString("subscription_type");
-//				
-//			
-//		}
-//		catch(Exception e)
-//		{
-//			
-//		}
-//		
+		try
+		{
+			PreparedStatement ps = con.prepareStatement("SELECT active FROM user INNER JOIN customer ON user_id"
+					+ "= customer_id WHERE user_id = ?;");
+			ps.setInt(1,user_id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				do{
+					activity = rs.getBoolean("active");
+					
+					
+				}while(rs.next());
+				
+			}
+			else
+			{
+				ps = con.prepareStatement("SELECT active FROM user INNER JOIN employee ON user_id"
+						+ "= employee_id WHERE user_id = ?;");
+				ps.setInt(1,user_id);
+				rs = ps.executeQuery();
+				while(rs.next())
+				{
+					activity =rs.getBoolean("active");
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			
+		}
+		
 		
 		return activity;
 	}
+	
+	public void setUserActivity(int user_id,boolean active) throws Exception
+	{
+		
+		try
+		{
+			
+			PreparedStatement ps = con.prepareStatement("UPDATE customer SET  active = ? WHERE customer_id = ?");
+			
+
+            // prepare data for update
+            
+            ps.setBoolean(1, active);
+            ps.setInt(2, user_id);
+
+            int rowAffected = ps.executeUpdate();
+            if(1!=rowAffected) {
+            	ps = con.prepareStatement("UPDATE customer SET  active = ? WHERE employee_id = ?");
+    			
+
+                // prepare data for update
+                
+                ps.setBoolean(1, active);
+                ps.setInt(2, user_id);
+
+            	
+            }
+			
+		}
+		catch(Exception e)
+		{
+			
+		}
+		
+		
+	}
+	
+	
+	public void setUserSub(int user_id,String sub_type) throws Exception
+	{
+		
+		try
+		{
+			
+			PreparedStatement ps = con.prepareStatement("UPDATE customer SET  subscription_type = ? WHERE customer_id = ?");
+			
+
+            // prepare data for update
+            
+            ps.setString(1, sub_type);
+            ps.setInt(2, user_id);
+
+            ps.executeUpdate();
+           			
+		}
+		catch(Exception e)
+		{
+			
+		}
+		
+		
+	}
+	
+	
 	
 	public void showAvailableForRent() throws Exception
 	{
