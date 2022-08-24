@@ -109,7 +109,12 @@ public class CustomerDashboard extends JFrame {
 		panel.add(lblNewLabel);
 		
 		JPanel homepanel = new JPanel();
-		homepanel.addMouseListener(new PanelButtonMouseAdapter(homepanel));
+		homepanel.addMouseListener(new PanelButtonMouseAdapter(homepanel){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelHome);
+			}
+		});
 		homepanel.setBackground(new Color(0, 128, 128));
 		homepanel.setBounds(74, 60, 208, 61);
 		panel.add(homepanel);
@@ -123,7 +128,12 @@ public class CustomerDashboard extends JFrame {
 		homepanel.add(Homelabel);
 		
 		JPanel settingspanel = new JPanel();
-		settingspanel.addMouseListener(new PanelButtonMouseAdapter(settingspanel));
+		settingspanel.addMouseListener(new PanelButtonMouseAdapter(settingspanel){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelSettings);
+			}
+		});
 		settingspanel.setBackground(new Color(0, 128, 128));
 		settingspanel.setBounds(74, 121, 208, 61);
 		panel.add(settingspanel);
@@ -137,7 +147,12 @@ public class CustomerDashboard extends JFrame {
 		settingspanel.add(settingslabel);
 		
 		JPanel showmyrentpanel = new JPanel();
-		showmyrentpanel.addMouseListener(new PanelButtonMouseAdapter(showmyrentpanel));
+		showmyrentpanel.addMouseListener(new PanelButtonMouseAdapter(showmyrentpanel){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelShowMyRents);
+			}
+		});
 		showmyrentpanel.setBackground(new Color(0, 128, 128));
 		showmyrentpanel.setBounds(74, 183, 208, 61);
 		panel.add(showmyrentpanel);
@@ -151,7 +166,12 @@ public class CustomerDashboard extends JFrame {
 		showmyrentpanel.add(myrentslabel);
 		
 		JPanel CataloguePanel = new JPanel();
-		CataloguePanel.addMouseListener(new PanelButtonMouseAdapter(CataloguePanel));
+		CataloguePanel.addMouseListener(new PanelButtonMouseAdapter(CataloguePanel){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelCatalogue);
+			}
+		});
 		CataloguePanel.setBackground(new Color(0, 128, 128));
 		CataloguePanel.setBounds(74, 242, 208, 61);
 		panel.add(CataloguePanel);
@@ -165,7 +185,12 @@ public class CustomerDashboard extends JFrame {
 		CataloguePanel.add(cataloguelabel);
 		
 		JPanel signoutpanel = new JPanel();
-		signoutpanel.addMouseListener(new PanelButtonMouseAdapter(signoutpanel));
+		signoutpanel.addMouseListener(new PanelButtonMouseAdapter(signoutpanel){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//TODO logout and call login again
+			}
+		});
 		signoutpanel.setBackground(new Color(0, 128, 128));
 		signoutpanel.setLayout(null);
 		signoutpanel.setBounds(74, 306, 208, 61);
@@ -179,12 +204,14 @@ public class CustomerDashboard extends JFrame {
 		signoutpanel.add(signoutlabel);
 		
 		JPanel MainPanel = new JPanel();
+		MainPanel.setLayout(null);
 		MainPanel.setBounds(280, 0, 522, 378);
 		contentPanel.add(MainPanel);
 		MainPanel.add(panelCatalogue);
 		MainPanel.add(panelShowMyRents);
 		MainPanel.add(panelSettings);
 		MainPanel.add(panelHome);
+		menuClicked(panelHome);
 	}
 	void menuClicked(JPanel panel) {
 		panelCatalogue.setVisible(false);
