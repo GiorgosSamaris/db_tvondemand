@@ -71,14 +71,13 @@ public class Query {
 			ps.setString(1,email);
 			ResultSet rs = ps.executeQuery();
 			
-			do
+			while(rs.next())
 			{
 				user_id = rs.getInt("user_id");
 				f_name = rs.getString("first_name");
-				System.out.print(f_name);
 				l_name = rs.getString("last_name");
 				
-			}while(rs.next());
+			}
 			
 		}
 		catch(Exception e)
@@ -90,6 +89,55 @@ public class Query {
 		
 
 		
+	}
+	
+	
+	public String getCustomerSub(int customer_id) throws Exception
+	{
+		String sub_type = "";
+		try
+		{
+			PreparedStatement ps = con.prepareStatement("SELECT subscription_type FROM customer WHERE customer_id = ?;");
+			ps.setInt(1,customer_id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				sub_type = rs.getString("subscription_type");
+				
+			}
+			
+		}
+		catch (Exception e)
+		{
+			
+		}
+		
+		return sub_type;
+		
+	}
+	
+	public boolean getUserActivity(int user_id) throws Exception
+	{
+		boolean activity=true;
+		
+//		try
+//		{
+//			PreparedStatement ps = con.prepareStatement("SELECT subscription_type FROM customer WHERE customer_id = ?;");
+//			ps.setInt(1,user_id);
+//			ResultSet rs = ps.executeQuery();
+//			while(rs.next())
+//			{
+//				sub_type = rs.getString("subscription_type");
+//				
+//			
+//		}
+//		catch(Exception e)
+//		{
+//			
+//		}
+//		
+		
+		return activity;
 	}
 	
 	public void showAvailableForRent() throws Exception
