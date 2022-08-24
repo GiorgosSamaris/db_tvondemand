@@ -53,7 +53,7 @@ public class error extends JDialog {
 		lblPleaseConsiderContacting.setBounds(0, 52, 213, 14);
 		getContentPane().add(lblPleaseConsiderContacting);
 		
-		JLabel lblOurAdministratorTo = new JLabel("our administrator to you up!");
+		JLabel lblOurAdministratorTo = new JLabel("our administrator to sign you up!");
 		lblOurAdministratorTo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOurAdministratorTo.setFont(new Font("Serif", Font.BOLD, 12));
 		lblOurAdministratorTo.setBounds(0, 80, 213, 14);

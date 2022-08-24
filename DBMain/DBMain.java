@@ -1,13 +1,15 @@
-package DBMain;
+package dBMain;
 
 
 import loginGUI.LoginFrame;
+import mockFrame.listFrame;
 import queryToDB.*;
 import user.User;
 
 import java.awt.EventQueue;
 import java.sql.Connection;
 
+import content.Film;
 import customerGui.CustomerDashboard;
 
 public class DBMain {
@@ -28,11 +30,16 @@ public class DBMain {
 		}
 
 		Query qri = new Query(con);
-	
+		listFrame.listFrameRun(qri);
 		LoginFrame.initiateLogin(qri);
 		
-		
-		
+		 try {
+			for(Film film : qri.getAvailableFilms()) {
+			        System.out.println(film.getTitle()+film.getDescription());
+			    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
