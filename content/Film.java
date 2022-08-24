@@ -10,7 +10,15 @@ public class Film {
 	private String rating;
 	private String specialFeatures;
 	
-	
+	public Film(int id, String ttl, String desc, int rY, int lgth, String rt, String sF){
+		this.setId(id);
+		this.setDescription(desc);
+		this.setReleaseYear(rY);
+		this.setLength(lgth);
+		this.setRating(rt);
+		this.setSpecialFeatures(sF);
+		this.setTitle(ttl);
+	}
 	/**
 	 * @return the id
 	 */

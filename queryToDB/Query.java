@@ -4,6 +4,7 @@ import user.*;
 import mockFrame.*;
 import java.util.*;
 
+import content.Film;
 import customerGui.CustomerDashboard;
 import loginGUI.LoginFrame;
 import loginGUI.error;
@@ -144,10 +145,10 @@ public class Query {
 	{
 	}
 	
-	public void showFilmsForRent() throws Exception
+	public List<Film> getAvailableFilms() throws Exception
 	{
-		
-		String query = "SELECT title FROM film;";
+		List<Film> list = new ArrayList<>();
+		String query = "SELECT * FROM film INNER JOIN film_inventory USING (film_id);";
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);
 		if (rs.next() == false) 
@@ -157,13 +158,13 @@ public class Query {
 	    } 
 		else 
 		{
-
-			do 
-			{
-		          String data = rs.getString("title");
-		          System.out.println(data);
-	        } while (rs.next());
+			while(rs.next()) {
+				Film tempFilm = new Film(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getInt(4), rs.getInt(7),rs.getString(8) ,rs.getString(9));
+				list.add(tempFilm);
+			}
+			
 		}
+		return list;
 	
 	}
 	public void showSeriesForRent() throws Exception
