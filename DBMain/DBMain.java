@@ -8,6 +8,8 @@ import user.User;
 import java.awt.EventQueue;
 import java.sql.Connection;
 
+import customerGui.CustomerDashboard;
+
 public class DBMain {
 	
 
@@ -34,8 +36,7 @@ public class DBMain {
 //		catch(Exception e)
 //		{
 //			System.out.println(e);
-//		}
-//		
+//		}  	
 		LoginFrame.initiateLogin(qri);
 		
 		

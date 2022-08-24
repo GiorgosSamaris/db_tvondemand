@@ -13,11 +13,14 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JButton;
 
 public class CustomerDashboard extends JFrame {
 	private Query qri = null;
-	private JPanel contentPane;
+	private JPanel contentPanel;
 	private PanelHome panelHome;
 	private PanelSettings panelSettings;
 	private PanelShowMyRents panelShowMyRents;
@@ -51,10 +54,10 @@ public class CustomerDashboard extends JFrame {
 		setTitle("CEID SS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 818, 417);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPanel = new JPanel();
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPanel);
+		contentPanel.setLayout(null);
 		
 		panelHome = new PanelHome();
 		panelSettings = new PanelSettings();
@@ -64,7 +67,7 @@ public class CustomerDashboard extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 128, 128));
 		panel.setBounds(0, 0, 282, 378);
-		contentPane.add(panel);
+		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JLabel ceidlogo = new JLabel("Ceid Image");
@@ -106,6 +109,7 @@ public class CustomerDashboard extends JFrame {
 		panel.add(lblNewLabel);
 		
 		JPanel homepanel = new JPanel();
+		homepanel.addMouseListener(new PanelButtonMouseAdapter(homepanel));
 		homepanel.setBackground(new Color(0, 128, 128));
 		homepanel.setBounds(74, 60, 208, 61);
 		panel.add(homepanel);
@@ -119,6 +123,7 @@ public class CustomerDashboard extends JFrame {
 		homepanel.add(Homelabel);
 		
 		JPanel settingspanel = new JPanel();
+		settingspanel.addMouseListener(new PanelButtonMouseAdapter(settingspanel));
 		settingspanel.setBackground(new Color(0, 128, 128));
 		settingspanel.setBounds(74, 121, 208, 61);
 		panel.add(settingspanel);
@@ -132,6 +137,7 @@ public class CustomerDashboard extends JFrame {
 		settingspanel.add(settingslabel);
 		
 		JPanel showmyrentpanel = new JPanel();
+		showmyrentpanel.addMouseListener(new PanelButtonMouseAdapter(showmyrentpanel));
 		showmyrentpanel.setBackground(new Color(0, 128, 128));
 		showmyrentpanel.setBounds(74, 183, 208, 61);
 		panel.add(showmyrentpanel);
@@ -145,6 +151,7 @@ public class CustomerDashboard extends JFrame {
 		showmyrentpanel.add(myrentslabel);
 		
 		JPanel CataloguePanel = new JPanel();
+		CataloguePanel.addMouseListener(new PanelButtonMouseAdapter(CataloguePanel));
 		CataloguePanel.setBackground(new Color(0, 128, 128));
 		CataloguePanel.setBounds(74, 242, 208, 61);
 		panel.add(CataloguePanel);
@@ -158,6 +165,7 @@ public class CustomerDashboard extends JFrame {
 		CataloguePanel.add(cataloguelabel);
 		
 		JPanel signoutpanel = new JPanel();
+		signoutpanel.addMouseListener(new PanelButtonMouseAdapter(signoutpanel));
 		signoutpanel.setBackground(new Color(0, 128, 128));
 		signoutpanel.setLayout(null);
 		signoutpanel.setBounds(74, 306, 208, 61);
@@ -172,11 +180,42 @@ public class CustomerDashboard extends JFrame {
 		
 		JPanel MainPanel = new JPanel();
 		MainPanel.setBounds(280, 0, 522, 378);
-		contentPane.add(MainPanel);
+		contentPanel.add(MainPanel);
 		MainPanel.add(panelCatalogue);
 		MainPanel.add(panelShowMyRents);
 		MainPanel.add(panelSettings);
 		MainPanel.add(panelHome);
 	}
+	void menuClicked(JPanel panel) {
+		panelCatalogue.setVisible(false);
+		panelSettings.setVisible(false);
+		panelHome.setVisible(false);
+		panelShowMyRents.setVisible(false);
+		panel.setVisible(true);
+	}
 	
+	private class PanelButtonMouseAdapter extends MouseAdapter{
+		JPanel panel;
+		public PanelButtonMouseAdapter(JPanel panel) {
+			this.panel=panel;
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			panel.setBackground(new Color(0,102,102));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			panel.setBackground(new Color(0,128,128));
+		}
+		@Override
+		public void mousePressed(MouseEvent e) {
+			panel.setBackground(new Color(0,51,51));
+		}
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			panel.setBackground(new Color(0,128,128));
+		}
+	}
+
+
 }
