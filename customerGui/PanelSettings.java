@@ -1,10 +1,15 @@
 package customerGui;
 
+import queryToDB.*;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+
+import queryToDB.Query;
+import user.User;
+
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.swing.JMenu;
@@ -18,11 +23,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class PanelSettings extends JPanel {
-
+	
+	private static Query qri = null;
 	/**
 	 * Create the panel.
 	 */
-	public PanelSettings() {
+	public PanelSettings(Query query) {
+		qri = query;
+		System.out.print(qri.usr.getUser_type());
 		setBackground(new Color(112, 128, 144));
 		setBounds(0, 0, 522,378);
 		setLayout(null);
@@ -48,7 +56,7 @@ public class PanelSettings extends JPanel {
 		email.setBounds(10, 152, 79, 20);
 		add(email);
 		
-		JLabel firstname_1 = new JLabel("First Name:");
+		JLabel firstname_1 = new JLabel(qri.usr.getF_name());
 		firstname_1.setFont(new Font("Serif", Font.BOLD, 15));
 		firstname_1.setBounds(99, 68, 79, 20);
 		add(firstname_1);
@@ -58,7 +66,7 @@ public class PanelSettings extends JPanel {
 		lastname_1.setBounds(99, 109, 79, 20);
 		add(lastname_1);
 		
-		JLabel email_1 = new JLabel("Email:");
+		JLabel email_1 = new JLabel(qri.usr.getEmail());
 		email_1.setFont(new Font("Serif", Font.BOLD, 15));
 		email_1.setBounds(99, 152, 79, 20);
 		add(email_1);

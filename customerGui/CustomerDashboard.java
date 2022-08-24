@@ -20,7 +20,7 @@ import javax.swing.ImageIcon;
 
 
 public class CustomerDashboard extends JFrame {
-	private Query qri = null;
+	private static Query qri = null;
 	private JPanel contentPanel;
 	private PanelHome panelHome;
 	private PanelSettings panelSettings;
@@ -28,6 +28,11 @@ public class CustomerDashboard extends JFrame {
 	private PanelCatalogue panelCatalogue;
 
 
+	
+	public static void setQuery(Query query)
+	{
+		qri = query;
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -78,7 +83,7 @@ public class CustomerDashboard extends JFrame {
 		contentPanel.setLayout(null);
 		
 		panelHome = new PanelHome();
-		panelSettings = new PanelSettings();
+		panelSettings = new PanelSettings(qri);
 		panelShowMyRents = new PanelShowMyRents();
 		panelCatalogue = new PanelCatalogue();
 		

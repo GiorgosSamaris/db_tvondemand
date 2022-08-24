@@ -1,4 +1,4 @@
-package dBMain;
+package DBMain;
 
 
 import loginGUI.LoginFrame;
@@ -15,7 +15,7 @@ public class DBMain {
 
 	public static void main(String[] args) 
 	{
-		User usr = null;
+		
 		Connection con = null;
 		EstablishConnection cnct = new EstablishConnection("java","password");
 		try
@@ -28,15 +28,7 @@ public class DBMain {
 		}
 
 		Query qri = new Query(con);
-//		try
-//		{
-//			qri.loginAttempt("VIRGINIA.GREEN@sakilacustomer.org");
-//
-//		}
-//		catch(Exception e)
-//		{
-//			System.out.println(e);
-//		}  	
+	
 		LoginFrame.initiateLogin(qri);
 		
 		

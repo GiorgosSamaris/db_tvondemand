@@ -15,7 +15,7 @@ import java.io.*;
 public class Query {
 	
 	private Connection con;
-	public User usr = null;
+	public static User usr = null;
 	
 	public void setUser(User usr)
 	{
@@ -73,9 +73,10 @@ public class Query {
 			
 			do
 			{
-				f_name = rs.getString("first_name");
-				l_name = rs.getString("last_name");
 				user_id = rs.getInt("user_id");
+				f_name = rs.getString("first_name");
+				System.out.print(f_name);
+				l_name = rs.getString("last_name");
 				
 			}while(rs.next());
 			
