@@ -15,8 +15,8 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 
-import javax.swing.JButton;
 
 public class CustomerDashboard extends JFrame {
 	private Query qri = null;
@@ -43,7 +43,19 @@ public class CustomerDashboard extends JFrame {
 		});
 	}
 
-//	private class PanelButtonMouseAdapter extends MouseAdapter
+	
+	
+	/** Returns an ImageIcon, or null if the path was invalid. */
+	protected ImageIcon createImageIcon(String path,
+	                                           String description) {
+	    java.net.URL imgURL = getClass().getResource(path);
+	    if (imgURL != null) {
+	        return new ImageIcon(imgURL, description);
+	    } else {
+	        System.err.println("Couldn't find file: " + path);
+	        return null;
+	    }
+	}
 	
 	
 	
@@ -51,6 +63,11 @@ public class CustomerDashboard extends JFrame {
 	 * Create the frame.
 	 */
 	public CustomerDashboard(Query qri) {
+		ImageIcon signOutIcon = createImageIcon("images/signout.png", "Sign Out");
+		ImageIcon homeIcon = createImageIcon("images/home.png", "Home");
+		ImageIcon catalogueIcon = createImageIcon("images/film.png", "Catalogue");
+		ImageIcon ceidIcon = createImageIcon("images/ceid52.png", "CEID");
+		ImageIcon settingsIcon = createImageIcon("images/settings.png", "CEID");
 		setTitle("CEID SS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 818, 417);
@@ -70,29 +87,29 @@ public class CustomerDashboard extends JFrame {
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
-		JLabel ceidlogo = new JLabel("Ceid Image");
+		JLabel ceidlogo = new JLabel(ceidIcon);
 		ceidlogo.setForeground(new Color(255, 255, 255));
 		ceidlogo.setFont(new Font("Dialog", Font.BOLD, 15));
-		ceidlogo.setBounds(10, 11, 74, 39);
+		ceidlogo.setBounds(10, 11, 52, 52);
 		panel.add(ceidlogo);
 		
-		JLabel logohome = new JLabel("HomeImg");
+		JLabel logohome = new JLabel(homeIcon);
 		logohome.setBounds(10, 61, 48, 60);
 		panel.add(logohome);
 		
-		JLabel logosettings = new JLabel("SetImg");
-		logosettings.setBounds(10, 122, 48, 60);
+		JLabel logosettings = new JLabel(settingsIcon);
+		logosettings.setBounds(14, 122, 34, 34);
 		panel.add(logosettings);
 		
 		JLabel logorents = new JLabel("RentsImg");
 		logorents.setBounds(10, 183, 48, 60);
 		panel.add(logorents);
 		
-		JLabel logocatalogue = new JLabel("CatalogueImg");
+		JLabel logocatalogue = new JLabel(catalogueIcon);
 		logocatalogue.setBounds(10, 242, 48, 60);
 		panel.add(logocatalogue);
 		
-		JLabel signoutlogo = new JLabel("ImgSign");
+		JLabel signoutlogo = new JLabel(signOutIcon);
 		signoutlogo.setBounds(10, 307, 48, 60);
 		panel.add(signoutlogo);
 		
