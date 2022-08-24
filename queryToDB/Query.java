@@ -165,7 +165,6 @@ public class Query {
 			
 		}
 		return list;
-	
 	}
 	public void showSeriesForRent() throws Exception
 	{
