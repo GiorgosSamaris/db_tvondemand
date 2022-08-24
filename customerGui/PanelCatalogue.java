@@ -24,16 +24,6 @@ public class PanelCatalogue extends JPanel {
 		setLayout(null);
 		
 		
-		JList<Film> list = new JList<Film>();
-		try
-		{
-			list = qri.getAvailableFilms();
-			
-		}
-		catch(Exception e)
-		{
-			
-		}
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 42, 502, 308);
 		add(scrollPane);

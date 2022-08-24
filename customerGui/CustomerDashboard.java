@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import loginGUI.LoginFrame;
+import mockFrame.mockCatalogue;
+import mockFrame.mockCatalogue2;
 import queryToDB.Query;
 
 import javax.swing.JLabel;
@@ -25,7 +27,7 @@ public class CustomerDashboard extends JFrame {
 	private PanelHome panelHome;
 	private PanelSettings panelSettings;
 	private PanelShowMyRents panelShowMyRents;
-	private PanelCatalogue panelCatalogue;
+	private mockCatalogue2 panelCatalogue;
 
 
 	
@@ -86,7 +88,7 @@ public class CustomerDashboard extends JFrame {
 		panelHome = new PanelHome();
 		panelSettings = new PanelSettings(qri);
 		panelShowMyRents = new PanelShowMyRents();
-		panelCatalogue = new PanelCatalogue(qri);
+		panelCatalogue = new mockCatalogue2(qri);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 128, 128));
@@ -237,7 +239,7 @@ public class CustomerDashboard extends JFrame {
 		MainPanel.add(panelShowMyRents);
 		MainPanel.add(panelSettings);
 		MainPanel.add(panelHome);
-		menuClicked(panelHome);
+		menuClicked(panelCatalogue);
 	}
 	void menuClicked(JPanel panel) {
 		panelCatalogue.setVisible(false);

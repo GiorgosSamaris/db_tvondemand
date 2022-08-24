@@ -228,17 +228,11 @@ public class Query {
 	{
 	}
 	
-	public JList<Film> getAvailableFilms() throws Exception
-	{
-		
-		
-		JList<Film> list = new JList<Film>();
-		
-		DefaultListModel<Film> listModel;
-
-		 
-
-		listModel = new DefaultListModel<Film>();
+	
+	
+	public List<Film> getAvailableFilms() throws Exception
+	{				
+		List<Film> list = new ArrayList<Film>();				
 		String query = "SELECT * FROM film INNER JOIN film_inventory USING (film_id);";
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);
@@ -252,14 +246,14 @@ public class Query {
 			do{
 				
 				Film tempFilm = new Film(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getInt(4), rs.getInt(7),rs.getString(8) ,rs.getString(9));
-				listModel.addElement(tempFilm);
-			}while(rs.next());
-			
-			
-			
+				list.add(tempFilm);
+			}while(rs.next());									
 		}
 		return list;
 	}
+	
+	
+	
 	public void showSeriesForRent() throws Exception
 	{
 		
