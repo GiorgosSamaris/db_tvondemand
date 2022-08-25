@@ -15,8 +15,13 @@ import javax.swing.JTabbedPane;
 import javax.swing.ListSelectionModel;
 
 import content.Film;
+import content.Series;
 import queryToDB.Query;
 import javax.swing.JTextArea;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 
 public class mockCatalogue2 extends JPanel {
 
@@ -25,40 +30,89 @@ public class mockCatalogue2 extends JPanel {
 	 * @param qri 
 	 */
 	public mockCatalogue2(Query qri) {
+		setBackground(new Color(112, 128, 144));
 		setBounds(0, 0, 522,378);
 		setLayout(null);
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 522, 212);
+		tabbedPane.setBackground(new Color(112, 128, 144));
 		add(tabbedPane);
-		String[] arr;
+		String[] filmArr;
 		final List<Film> films;
 		try {
 			films = qri.getAvailableFilms();
-			arr = films.stream().map(Film::getTitle).collect(Collectors.toList()).toArray(String[]::new);
+			filmArr = films.stream().map(Film::getTitle).collect(Collectors.toList()).toArray(String[]::new);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		JList list = new JList(arr);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		JScrollPane scrollableList = new JScrollPane(list);
-		scrollableList.setBounds(66, 47, 274, 151);
-		tabbedPane.addTab("New tab", null, scrollableList, null);
+		JList filmList = new JList(filmArr);
+		filmList.setBackground(new Color(119, 136, 153));
+		filmList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JScrollPane filmPanel = new JScrollPane(filmList);
+		filmPanel.setBounds(66, 47, 274, 151);
+		tabbedPane.addTab("Films", null, filmPanel, null);
+		tabbedPane.setBackgroundAt(0, new Color(0, 128, 128));
 		
 		JTextArea textArea = new JTextArea("Choose a film to show description and rent");
-		textArea.setLineWrap(true);
+		textArea.setBackground(new Color(112, 128, 144));
 		textArea.setBounds(10, 223, 304, 144);
+		textArea.setLineWrap(true);
 		add(textArea);
-
-		list.addMouseListener(new PanelButtonMouseAdapter(list){
+		//Mouse adapter for film list selection
+		filmList.addMouseListener(new PanelButtonMouseAdapter(filmList){
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			  textArea.setText(films.get(list.getSelectedIndex()).getDescription());
+			  textArea.setText(films.get(filmList.getSelectedIndex()).getDescription());
 			}
 		});
 		
-		JList list_1 = new JList();
-		tabbedPane.addTab("New tab", null, list_1, null);
 		
+		
+		String[] seriesArr;
+		final List<Series> series;
+		try {
+			series = qri.getAvailableSeries();
+			seriesArr = series.stream().map(Series::getTitle).collect(Collectors.toList()).toArray(String[]::new);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		JList seriesList = new JList(seriesArr);
+		seriesList.setBackground(new Color(112, 128, 144));
+		filmList.setBackground(new Color(112, 128, 144));
+		filmList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JScrollPane seriesPanel = new JScrollPane(seriesList);
+		tabbedPane.addTab("Series", null, seriesPanel, null);
+		tabbedPane.setBackgroundAt(1, new Color(0, 128, 128));
+		
+		JPanel toRentPanel = new JPanel();
+		toRentPanel.setBounds(324, 223, 188, 110);
+		toRentPanel.setBackground(new Color(112, 128, 144));
+		add(toRentPanel);
+		toRentPanel.setLayout(null);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(10, 11, 125, 22);
+		toRentPanel.add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(10, 53, 125, 22);
+		toRentPanel.add(comboBox_1);
+		
+		JLabel episodeLngth = new JLabel("Length: +getlength()");
+		episodeLngth.setBounds(10, 85, 168, 14);
+		toRentPanel.add(episodeLngth);
+		
+		//Mouse adapter for series list selection
+		seriesList.addMouseListener(new PanelButtonMouseAdapter(seriesList){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			  textArea.setText(series.get(seriesList.getSelectedIndex()).getDescription());
+			}
+		});
+		
+		JButton rent = new JButton("Rent");
+		rent.setBounds(423, 344, 89, 23);
+		add(rent);
 		
 	}
 	private class PanelButtonMouseAdapter extends MouseAdapter{

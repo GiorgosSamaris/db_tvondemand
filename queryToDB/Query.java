@@ -5,6 +5,7 @@ import mockFrame.*;
 import java.util.*;
 
 import content.Film;
+import content.Series;
 import customerGui.CustomerDashboard;
 import loginGUI.LoginFrame;
 import loginGUI.error;
@@ -254,25 +255,26 @@ public class Query {
 	
 	
 	
-	public void showSeriesForRent() throws Exception
+	public List<Series> getAvailableSeries() throws Exception
 	{
 		
-		String query = "SELECT title FROM series;";
+		List<Series> list = new ArrayList<Series>();				
+		String query = "SELECT series_id, title, description, rating, seasons, total_episodes FROM series INNER JOIN series_season USING (series_id) INNER JOIN series_episode ON series_season_id = season_id INNER JOIN series_inventory USING (episode_id) GROUP BY series_id;";
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
+
 	    } 
 		else 
 		{
-			do 
-			{
-		          String data = rs.getString("title");
-		          System.out.println(data);
-	        } while (rs.next());
+			do{
+				Series tempSeries = new Series(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
+				list.add(tempSeries);
+			}while(rs.next());									
 		}
-	
+		return list;
 	};
 
 
