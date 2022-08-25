@@ -10,9 +10,9 @@ public class Rent {
 	private Date rentalDate;
 	private String contentType;
 	private String contentTitle;
-	private int price;
+	private Float price;
 	
-	public Rent(int id, Date rentalDate, String contentType, String contentTitle, int price) {
+	public Rent(int id, Date rentalDate, String contentType, String contentTitle, Float price) {
 		this.setId(id);
 		this.setRentalDate(rentalDate);
 		this.setContentType(contentType);
@@ -64,15 +64,15 @@ public class Rent {
 	/**
 	 * @return the price
 	 */
-	public int getPrice() {
+	public Float getPrice() {
 		return price;
 	}
 
 	/**
-	 * @param price the price to set
+	 * @param price2 the price to set
 	 */
-	public void setPrice(int price) {
-		this.price = price;
+	public void setPrice(Float price2) {
+		this.price = price2;
 	}
 	
 	/**

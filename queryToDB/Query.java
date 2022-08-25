@@ -280,10 +280,108 @@ public class Query {
 
 	public List<Rent> getUserRents() throws Exception{
 		List<Rent> list = new ArrayList<Rent>();
-		String getRentInfo =" ";
-		Statement st = con.createStatement();
-		ResultSet r1 = st.executeQuery(getRentInfo);
-		//TODO no idea how to get info needed for rent, yet
+		PreparedStatement st = con.prepareStatement("SELECT rental_id, rental_date, inventory_id FROM rental WHERE customer_id = ?");
+		st.setInt(1, usr.getUser_id());
+		ResultSet rs = st.executeQuery();
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+
+	    } 
+		else 
+		{
+			do{
+				Rent tempSeries = new Rent(rs.getInt(1), rs.getDate(2), this.getContentType(rs.getInt(3)), this.getContentTitle(rs.getInt(3)), this.getContentPrice(rs.getInt(1)));
+				list.add(tempSeries);
+			}while(rs.next());									
+		}
 		return list;
+	};
+	
+	
+	
+	public String getContentType(int invId) {
+		try
+		{
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM film_inventory WHERE film_inventory_id = ?");
+			ps.setInt(1,invId);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return "Film";			
+			}
+
+		}
+		catch(Exception e)
+		{			
+		}
+		try
+		{
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM series_inventory WHERE series_inventory_id = ?");
+			ps.setInt(1,invId);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return "Series Episode";			
+			}
+
+		}
+		catch(Exception e)
+		{			
+		}		
+		return "not found";
+	};
+	
+	
+	public String getContentTitle(int invId) {
+		try
+		{
+			PreparedStatement ps = con.prepareStatement("SELECT title FROM film INNER JOIN film_inventory USING(film_id) WHERE film_inventory_id = ?");
+			ps.setInt(1,invId);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return rs.getString(1);			
+			}
+
+		}
+		catch(Exception e)
+		{			
+		}
+		try
+		{
+			PreparedStatement ps = con.prepareStatement("SELECT title FROM series INNER JOIN series_season USING (series_id) INNER JOIN series_episode ON series_season_id = season_id INNER JOIN series_inventory USING(episode_id) WHERE series_inventory_id = ?");
+			ps.setInt(1,invId);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return rs.getString(1);			
+			}
+
+		}
+		catch(Exception e)
+		{			
+		}		
+		return "not found";
+	};
+	
+	
+	public Float getContentPrice(int rentId) {
+		try
+		{
+			PreparedStatement ps = con.prepareStatement("SELECT amount FROM payment INNER JOIN rental USING(rental_id) WHERE rental_id = ?");
+			ps.setInt(1,rentId);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return rs.getFloat(1);			
+			}
+
+		}
+		catch(Exception e)
+		{			
+		}
+
+		return null;
 	};
 }
