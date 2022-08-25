@@ -7,6 +7,7 @@ import java.util.*;
 import content.Film;
 import content.Series;
 import customerGui.CustomerDashboard;
+import customerGui.Rent;
 import loginGUI.LoginFrame;
 import loginGUI.error;
 import mockFrame.MockMenu;
@@ -275,7 +276,14 @@ public class Query {
 			}while(rs.next());									
 		}
 		return list;
+	}
+
+	public List<Rent> getUserRents() throws Exception{
+		List<Rent> list = new ArrayList<Rent>();
+		String getRentInfo =" ";
+		Statement st = con.createStatement();
+		ResultSet r1 = st.executeQuery(getRentInfo);
+		//TODO no idea how to get info needed for rent, yet
+		return list;
 	};
-
-
 }
