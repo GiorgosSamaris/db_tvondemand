@@ -10,10 +10,16 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class EmployeeDashboard extends JFrame {
 
 	private JPanel contentPane;
+	private PanelEmpHome panelEmpHome;
+	private PanelEmpCusInf panelEmpCusInf;
+	private PanelEmpCusRents panelEmpCusRents;	
+	private PanelEmpEditCat panelEmpEditCat;
+	
 
 	/**
 	 * Launch the application.
@@ -44,25 +50,37 @@ public class EmployeeDashboard extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(112, 128, 144));
 		panel.setBounds(0, 0, 318, 561);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		
+		panelEmpHome = new PanelEmpHome();
+		panelEmpCusInf= new PanelEmpCusInf();
+		panelEmpCusRents = new PanelEmpCusRents();
+		panelEmpEditCat = new PanelEmpEditCat();
+		
+		
+		
 		
 		JLabel ceidimage = new JLabel("Ceid Image");
 		ceidimage.setBounds(93, 11, 105, 31);
 		panel.add(ceidimage);
 		
 		JPanel EmpHome = new JPanel();
+		EmpHome.setBackground(new Color(128, 128, 128));
 		EmpHome.setBounds(75, 106, 243, 68);
 		panel.add(EmpHome);
 		EmpHome.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Home");
+		lblNewLabel.setBackground(new Color(128, 128, 128));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(0, 0, 243, 68);
 		EmpHome.add(lblNewLabel);
 		
 		JPanel EdCusInfo = new JPanel();
+		EdCusInfo.setBackground(new Color(128, 128, 128));
 		EdCusInfo.setBounds(75, 175, 243, 68);
 		panel.add(EdCusInfo);
 		EdCusInfo.setLayout(null);
@@ -73,6 +91,7 @@ public class EmployeeDashboard extends JFrame {
 		EdCusInfo.add(LabelCusEdit);
 		
 		JPanel ShowCusRent = new JPanel();
+		ShowCusRent.setBackground(new Color(128, 128, 128));
 		ShowCusRent.setBounds(75, 243, 243, 68);
 		panel.add(ShowCusRent);
 		ShowCusRent.setLayout(null);
@@ -83,6 +102,7 @@ public class EmployeeDashboard extends JFrame {
 		ShowCusRent.add(LbShowCusRent);
 		
 		JPanel EditCat = new JPanel();
+		EditCat.setBackground(new Color(128, 128, 128));
 		EditCat.setBounds(75, 310, 243, 68);
 		panel.add(EditCat);
 		EditCat.setLayout(null);
@@ -93,6 +113,7 @@ public class EmployeeDashboard extends JFrame {
 		EditCat.add(lbEditCat);
 		
 		JPanel Top5 = new JPanel();
+		Top5.setBackground(new Color(128, 128, 128));
 		Top5.setBounds(75, 378, 243, 68);
 		panel.add(Top5);
 		Top5.setLayout(null);
@@ -103,16 +124,18 @@ public class EmployeeDashboard extends JFrame {
 		Top5.add(lbTop5);
 		
 		JPanel EmpSignOut = new JPanel();
+		EmpSignOut.setBackground(new Color(128, 128, 128));
 		EmpSignOut.setBounds(75, 448, 243, 68);
 		panel.add(EmpSignOut);
 		EmpSignOut.setLayout(null);
 		
 		JLabel lbEmpSignOut = new JLabel("Sign Out");
+		lbEmpSignOut.setBackground(new Color(255, 255, 255));
 		lbEmpSignOut.setHorizontalAlignment(SwingConstants.CENTER);
 		lbEmpSignOut.setBounds(0, 0, 243, 68);
 		EmpSignOut.add(lbEmpSignOut);
 		
-		JPanel EmpMainContent = new JPanel();
+		JPanel EmpMainContent =  new JPanel();
 		EmpMainContent.setBounds(319, 0, 601, 561);
 		contentPane.add(EmpMainContent);
 	}

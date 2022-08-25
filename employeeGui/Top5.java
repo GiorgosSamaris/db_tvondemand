@@ -2,12 +2,14 @@ package employeeGui;
 
 import javax.swing.JPanel;
 
-public class PanelCusSignOut extends JPanel {
+public class Top5 extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelCusSignOut() {
+	public Top5() {
+		setSize(601,561);
+
 
 	}
 
