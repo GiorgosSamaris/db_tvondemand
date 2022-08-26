@@ -381,7 +381,6 @@ public class Query {
 		catch(Exception e)
 		{			
 		}
-
 		return null;
 	};
 }

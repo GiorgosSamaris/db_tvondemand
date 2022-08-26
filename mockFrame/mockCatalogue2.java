@@ -58,6 +58,8 @@ public class mockCatalogue2 extends JPanel {
 		textArea.setBounds(10, 223, 304, 144);
 		textArea.setLineWrap(true);
 		add(textArea);
+		
+		
 		//Mouse adapter for film list selection
 		filmList.addMouseListener(new PanelButtonMouseAdapter(filmList){
 			@Override

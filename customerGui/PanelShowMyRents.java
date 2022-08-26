@@ -4,6 +4,10 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import customerGui.RentsTableModel;
+import queryToDB.Query;
+
 import java.awt.Font;
 import javax.swing.JTabbedPane;
 import javax.swing.JScrollPane;
@@ -15,7 +19,7 @@ public class PanelShowMyRents extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelShowMyRents() {
+	public PanelShowMyRents(Query q) {
 		setBackground(new Color(105, 105, 105));
 		setBounds(0, 0, 522,378);
 		setLayout(null);
@@ -29,8 +33,15 @@ public class PanelShowMyRents extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 59, 522, 232);
 		add(scrollPane);
-		
+		RentsTableModel rents=null;
+		try {
+			rents = new RentsTableModel(q.getUserRents());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		table = new JTable();
+		table.setModel(rents);
 		scrollPane.setViewportView(table);
 		
 		JLabel lblEurosSpentOn = new JLabel("Euros spent on rents:");
@@ -39,7 +50,7 @@ public class PanelShowMyRents extends JPanel {
 		lblEurosSpentOn.setBounds(0, 313, 295, 37);
 		add(lblEurosSpentOn);
 		
-		JLabel Sum = new JLabel("Sum");
+		JLabel Sum = new JLabel(rents.getRentSum().toString()+" €");
 		Sum.setFont(new Font("Dialog", Font.BOLD, 15));
 		Sum.setBounds(305, 313, 102, 37);
 		add(Sum);

@@ -88,42 +88,4 @@ public class Rent {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	class RentsTableModel extends AbstractTableModel{
-		private String[] columnNames= {"Content Type","Title","Price","Date"};
-		private List<Rent> rents;
-		
-		public RentsTableModel(List<Rent> r) {
-			rents = r;
-		}
-		@Override
-		public int getRowCount() {
-			// TODO Auto-generated method stub
-			return  rents.size();
-		}
-
-		@Override
-		public int getColumnCount() {
-			// TODO Auto-generated method stub
-			return columnNames.length;
-		}
-		
-		@Override
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			Rent tempRent = rents.get(rowIndex);
-			switch(columnIndex) {
-			case 1:
-				return tempRent.getContentType();
-			case 2:
-				return tempRent.getContentTitle();
-			case 3:
-				return tempRent.getPrice();
-			case 4:
-				return tempRent.getRentalDate();
-			}
-			
-			return tempRent.getContentTitle();
-		}
-		
-	}
 }
