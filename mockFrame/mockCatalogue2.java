@@ -54,7 +54,8 @@ public class mockCatalogue2 extends JPanel {
 		tabbedPane.addTab("Films", null, filmPanel, null);
 		tabbedPane.setBackgroundAt(0, new Color(0, 128, 128));
 		
-		JTextArea textArea = new JTextArea("Choose a film to show description and rent");
+		JTextArea textArea = new JTextArea("");
+		textArea.setEditable(false);
 		textArea.setBackground(new Color(112, 128, 144));
 		textArea.setBounds(10, 223, 304, 144);
 		textArea.setLineWrap(true);
@@ -116,9 +117,16 @@ public class mockCatalogue2 extends JPanel {
 		JButton rent = new JButton("Rent");
 		rent.setBounds(423, 344, 89, 23);
 		add(rent);
+		
+		
 		try {
-			if(qri.getCustomerSub(Query.usr.getUser_id()).equals("S"))tabbedPane.setEnabledAt(0, false);
-			else if(qri.getCustomerSub(Query.usr.getUser_id()).equals("M"))tabbedPane.setEnabledAt(1, false);
+			if(!qri.getUserActivity(Query.usr.getUser_id())) {
+				tabbedPane.remove(seriesPanel);
+				tabbedPane.remove(filmPanel);
+				textArea.setText(" You need to have an active account in order to rent a film or an episode.");
+			}
+			else if(qri.getCustomerSub(Query.usr.getUser_id()).equals("S"))tabbedPane.remove(filmPanel);
+			else if(qri.getCustomerSub(Query.usr.getUser_id()).equals("M"))tabbedPane.remove(seriesPanel); 
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

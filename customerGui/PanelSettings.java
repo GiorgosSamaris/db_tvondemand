@@ -2,6 +2,7 @@ package customerGui;
 
 import queryToDB.*;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
@@ -128,6 +129,13 @@ public class PanelSettings extends JPanel {
 		activestatus.setBounds(10, 233, 106, 20);
 		add(activestatus);
 		
+		JTextArea textArea = new JTextArea("Changes will take effect on next log in.");
+		textArea.setBackground(new Color(112, 128, 144));
+		textArea.setBounds(250, 313, 250, 100);
+		textArea.setLineWrap(true);
+		textArea.setVisible(false);
+		add(textArea);
+		
 		JButton save = new JButton("Save");
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -135,12 +143,13 @@ public class PanelSettings extends JPanel {
 				try
 				{
 					final boolean changed_active = activechckbx.isSelected();;
-					qri.setUserActivity(qri.usr.getUser_id(),changed_active);
+					qri.setUserActivity(Query.usr.getUser_id(),changed_active);
 					final String changed_selection = comboBox.getSelectedItem().toString();
 					
-					if(changed_selection.equals("Films"))qri.setUserSub(qri.usr.getUser_id(), "M");
-					else if(changed_selection.equals("Series"))qri.setUserSub(qri.usr.getUser_id(), "S");
-					else qri.setUserSub(qri.usr.getUser_id(), "B");
+					if(changed_selection.equals("Films"))qri.setUserSub(Query.usr.getUser_id(), "M");
+					else if(changed_selection.equals("Series"))qri.setUserSub(Query.usr.getUser_id(), "S");
+					else qri.setUserSub(Query.usr.getUser_id(), "B");
+					textArea.setVisible(true);
 				}
 				catch (Exception ex)
 				{
@@ -153,5 +162,7 @@ public class PanelSettings extends JPanel {
 		save.setFont(new Font("Serif", Font.BOLD, 15));
 		save.setBounds(89, 313, 89, 23);
 		add(save);
+		
+
 	}
 }
