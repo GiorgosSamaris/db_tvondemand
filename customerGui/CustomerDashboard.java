@@ -8,9 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import loginGUI.LoginFrame;
-import mockFrame.mockCatalogue;
 import mockFrame.mockCatalogue2;
-import mockFrame.mockRental;
 import queryToDB.Query;
 
 import javax.swing.JLabel;
@@ -23,7 +21,6 @@ import javax.swing.ImageIcon;
 
 
 public class CustomerDashboard extends JFrame {
-	private static Query qri = null;
 	private JPanel contentPanel;
 	private PanelHome panelHome;
 	private PanelSettings panelSettings;
@@ -31,11 +28,7 @@ public class CustomerDashboard extends JFrame {
 	private mockCatalogue2 panelCatalogue;
 
 
-	
-	public static void setQuery(Query query)
-	{
-		qri = query;
-	}
+
 	/**
 	 * Launch the application.
 	 */
