@@ -8,6 +8,7 @@ import content.Film;
 import content.Series;
 import customerGui.CustomerDashboard;
 import customerGui.Rent;
+import employeeGui.EmployeeDashboard;
 import loginGUI.LoginFrame;
 import loginGUI.error;
 import mockFrame.MockMenu;
@@ -54,7 +55,7 @@ public class Query {
 		user_type = usr.getUser_type();
 		System.out.println(user_type);
 		if(user_type.equals("customer"))CustomerDashboard.initiateCustomerDashboard(this); //starts customer GUI
-		else if (user_type.equals("employee")) MockMenu.show(this);							//TODO employee GUI
+		else if (user_type.equals("employee")) EmployeeDashboard.initiateEmployeeDashBoard(this);
 		else if (user_type.equals("admin"))	MockMenu.show(this);							//TODO Administrator GUI
 		else {
 			LoginFrame.initiateLogin(this);													//Recall login window 
@@ -383,4 +384,7 @@ public class Query {
 		}
 		return null;
 	};
+
+
+
 }

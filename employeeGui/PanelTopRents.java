@@ -14,14 +14,14 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTree;
 import javax.swing.JTable;
 
-public class Top5 extends JPanel {
+public class PanelTopRents extends JPanel {
 	private JTable table_Films;
 	private JTable table_Series;
 
 	/**
 	 * Create the panel.
 	 */
-	public Top5() {
+	public PanelTopRents() {
 		setBackground(new Color(112, 128, 144));
 		setForeground(new Color(255, 255, 255));
 		setSize(601,561);

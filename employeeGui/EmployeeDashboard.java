@@ -2,10 +2,15 @@ package employeeGui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import loginGUI.LoginFrame;
+import queryToDB.Query;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,16 +24,17 @@ public class EmployeeDashboard extends JFrame {
 	private PanelEmpCusInf panelEmpCusInf;
 	private PanelEmpCusRents panelEmpCusRents;	
 	private PanelEmpEditCat panelEmpEditCat;
+	private PanelTopRents panelTopRents;
 	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void initiateEmployeeDashBoard(Query qri) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EmployeeDashboard frame = new EmployeeDashboard();
+					EmployeeDashboard frame = new EmployeeDashboard(qri);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,8 +45,10 @@ public class EmployeeDashboard extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param qri 
 	 */
-	public EmployeeDashboard() {
+	public EmployeeDashboard(Query qri) {
+		ImageIcon ceidIcon = createImageIcon("images/ceid74.png", "CEID");
 		setTitle("CEID SS EMPLOYEE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 936, 600);
@@ -59,15 +67,22 @@ public class EmployeeDashboard extends JFrame {
 		panelEmpCusInf= new PanelEmpCusInf();
 		panelEmpCusRents = new PanelEmpCusRents();
 		panelEmpEditCat = new PanelEmpEditCat();
+		panelTopRents = new PanelTopRents();
 		
 		
 		
 		
-		JLabel ceidimage = new JLabel("Ceid Image");
-		ceidimage.setBounds(93, 11, 105, 31);
+		JLabel ceidimage = new JLabel(ceidIcon);
+		ceidimage.setBounds(40, 11, 74, 74);
 		panel.add(ceidimage);
 		
 		JPanel EmpHome = new JPanel();
+		EmpHome.addMouseListener(new PanelButtonMouseAdapter(EmpHome){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelEmpHome);
+			}
+		});
 		EmpHome.setBackground(new Color(128, 128, 128));
 		EmpHome.setBounds(75, 106, 243, 68);
 		panel.add(EmpHome);
@@ -80,6 +95,12 @@ public class EmployeeDashboard extends JFrame {
 		EmpHome.add(lblNewLabel);
 		
 		JPanel EdCusInfo = new JPanel();
+		EdCusInfo.addMouseListener(new PanelButtonMouseAdapter(EdCusInfo){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelEmpCusInf);
+			}
+		});
 		EdCusInfo.setBackground(new Color(128, 128, 128));
 		EdCusInfo.setBounds(75, 175, 243, 68);
 		panel.add(EdCusInfo);
@@ -91,6 +112,12 @@ public class EmployeeDashboard extends JFrame {
 		EdCusInfo.add(LabelCusEdit);
 		
 		JPanel ShowCusRent = new JPanel();
+		ShowCusRent.addMouseListener(new PanelButtonMouseAdapter(ShowCusRent){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelEmpCusRents);
+			}
+		});
 		ShowCusRent.setBackground(new Color(128, 128, 128));
 		ShowCusRent.setBounds(75, 243, 243, 68);
 		panel.add(ShowCusRent);
@@ -102,6 +129,12 @@ public class EmployeeDashboard extends JFrame {
 		ShowCusRent.add(LbShowCusRent);
 		
 		JPanel EditCat = new JPanel();
+		EditCat.addMouseListener(new PanelButtonMouseAdapter(EditCat){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelEmpEditCat);
+			}
+		});
 		EditCat.setBackground(new Color(128, 128, 128));
 		EditCat.setBounds(75, 310, 243, 68);
 		panel.add(EditCat);
@@ -112,18 +145,32 @@ public class EmployeeDashboard extends JFrame {
 		lbEditCat.setBounds(0, 0, 243, 68);
 		EditCat.add(lbEditCat);
 		
-		JPanel Top5 = new JPanel();
-		Top5.setBackground(new Color(128, 128, 128));
-		Top5.setBounds(75, 378, 243, 68);
-		panel.add(Top5);
-		Top5.setLayout(null);
+		JPanel ShowTopRents = new JPanel();
+		ShowTopRents.addMouseListener(new PanelButtonMouseAdapter(ShowTopRents){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelTopRents);
+			}
+		});
+		ShowTopRents.setBackground(new Color(128, 128, 128));
+		ShowTopRents.setBounds(75, 378, 243, 68);
+		panel.add(ShowTopRents);
+		ShowTopRents.setLayout(null);
 		
 		JLabel lbTop5 = new JLabel("Top5");
 		lbTop5.setHorizontalAlignment(SwingConstants.CENTER);
 		lbTop5.setBounds(0, 0, 243, 68);
-		Top5.add(lbTop5);
+		ShowTopRents.add(lbTop5);
 		
 		JPanel EmpSignOut = new JPanel();
+		EmpSignOut.addMouseListener(new PanelButtonMouseAdapter(EmpSignOut){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//TODO logout and call login again
+				dispose();
+				LoginFrame.initiateLogin(qri);
+			}
+		});
 		EmpSignOut.setBackground(new Color(128, 128, 128));
 		EmpSignOut.setBounds(75, 448, 243, 68);
 		panel.add(EmpSignOut);
@@ -138,5 +185,56 @@ public class EmployeeDashboard extends JFrame {
 		JPanel EmpMainContent =  new JPanel();
 		EmpMainContent.setBounds(319, 0, 601, 561);
 		contentPane.add(EmpMainContent);
+		EmpMainContent.add(panelEmpCusInf);
+		EmpMainContent.add(panelEmpCusRents);
+		EmpMainContent.add(panelEmpEditCat);
+		EmpMainContent.add(panelEmpHome);
+		EmpMainContent.add(panelTopRents);
+		EmpMainContent.setLayout(null);
+		menuClicked(panelEmpHome);
 	}
+	
+	void menuClicked(JPanel panel) {
+		panelEmpCusInf.setVisible(false);
+		panelEmpCusRents.setVisible(false);
+		panelEmpEditCat.setVisible(false);
+		panelEmpHome.setVisible(false);
+		panelTopRents.setVisible(false);
+		panel.setVisible(true);
+	}
+	
+	protected ImageIcon createImageIcon(String path, String description) {
+		java.net.URL imgURL = getClass().getResource(path);
+		if (imgURL != null) {
+			return new ImageIcon(imgURL, description);
+		} 
+		else {
+			System.err.println("Couldn't find file: " + path);
+			return null;
+		}
+	}
+	
+	private class PanelButtonMouseAdapter extends MouseAdapter{
+		JPanel panel;
+		public PanelButtonMouseAdapter(JPanel panel) {
+			this.panel=panel;
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			panel.setBackground(new Color(91,91,91));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			panel.setBackground(new Color(128, 128, 128));
+		}
+		@Override
+		public void mousePressed(MouseEvent e) {
+			panel.setBackground(new Color(70,70,70));
+		}
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			panel.setBackground(new Color(128, 129, 128));
+		}
+	}
+	
 }

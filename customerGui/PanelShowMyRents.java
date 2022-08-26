@@ -37,7 +37,6 @@ public class PanelShowMyRents extends JPanel {
 		try {
 			rents = new RentsTableModel(q.getUserRents());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		table = new JTable();
