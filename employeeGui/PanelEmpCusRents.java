@@ -31,9 +31,6 @@ public class PanelEmpCusRents extends JPanel {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		JButton btnNewButton = new JButton("Exit");
-		btnNewButton.setBounds(266, 509, 89, 23);
-		add(btnNewButton);
 
 
 	}
