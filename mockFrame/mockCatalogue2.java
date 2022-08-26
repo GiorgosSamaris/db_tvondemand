@@ -37,6 +37,7 @@ public class mockCatalogue2 extends JPanel {
 		tabbedPane.setBounds(0, 0, 522, 212);
 		tabbedPane.setBackground(new Color(112, 128, 144));
 		add(tabbedPane);
+
 		String[] filmArr;
 		final List<Film> films;
 		try {
@@ -115,8 +116,17 @@ public class mockCatalogue2 extends JPanel {
 		JButton rent = new JButton("Rent");
 		rent.setBounds(423, 344, 89, 23);
 		add(rent);
-		
+		try {
+			if(qri.getCustomerSub(Query.usr.getUser_id()).equals("S"))tabbedPane.setEnabledAt(0, false);
+			else if(qri.getCustomerSub(Query.usr.getUser_id()).equals("M"))tabbedPane.setEnabledAt(1, false);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	
+	
+	
 	}
+	
 	private class PanelButtonMouseAdapter extends MouseAdapter{
 		JList  panel;
 		public PanelButtonMouseAdapter(JList  panel) {
