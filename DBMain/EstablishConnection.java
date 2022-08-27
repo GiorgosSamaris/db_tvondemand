@@ -26,7 +26,7 @@ public class EstablishConnection
 		Connection con = DriverManager.getConnection(
 				db_url,usrname,password);
 		
-//		System.out.println("Connection Established Successfully!");
+		System.out.println("Connection Established Successfully!");
 		return con;
 		
 	}

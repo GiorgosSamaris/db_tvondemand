@@ -87,13 +87,6 @@ public class PanelEmpCusInf extends JPanel {
 		CusActive.setBounds(119, 520, 21, 20);
 		add(CusActive);
 		
-		JTextArea CustomerAd = new JTextArea();
-		CustomerAd.setFont(new Font("Serif", Font.PLAIN, 11));
-		CustomerAd.setText("diefth");
-		CustomerAd.setBackground(Color.LIGHT_GRAY);
-		CustomerAd.setBounds(371, 405, 189, 64);
-		add(CustomerAd);
-		
 		CusFirstName = new JTextField();
 		CusFirstName.setFont(new Font("Serif", Font.PLAIN, 15));
 		CusFirstName.setColumns(10);
@@ -133,6 +126,14 @@ public class PanelEmpCusInf extends JPanel {
 		JList list = new JList();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		ScrollableList.setViewportView(list);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(439, 375, 122, 15);
+		add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setBounds(376, 401, 122, 15);
+		add(lblNewLabel_1);
 
 
 	}
