@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.Font;
 
 public class EmployeeDashboard extends JFrame {
 
@@ -181,6 +182,11 @@ public class EmployeeDashboard extends JFrame {
 		lbEmpSignOut.setHorizontalAlignment(SwingConstants.CENTER);
 		lbEmpSignOut.setBounds(0, 0, 243, 68);
 		EmpSignOut.add(lbEmpSignOut);
+		
+		JLabel lblNewLabel_1 = new JLabel("Welcome Employee");
+		lblNewLabel_1.setFont(new Font("Serif", Font.BOLD, 17));
+		lblNewLabel_1.setBounds(143, 24, 165, 46);
+		panel.add(lblNewLabel_1);
 		
 		JPanel EmpMainContent =  new JPanel();
 		EmpMainContent.setBounds(319, 0, 601, 561);

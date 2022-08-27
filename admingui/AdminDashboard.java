@@ -16,8 +16,8 @@ import javax.swing.JTextArea;
 public class AdminDashboard extends JFrame {
 
 	private JPanel contentPane;
-	private PanelAdminAddCus panelAdminAddCus;
-	private PanelAdminAddEmp panelAdminAddEmp;
+	
+	private PanelAdminAdd panelAdminAddEmp;
 	private PanelAdminDelete panelAdminDelete;
 	private PanelAdminRevert panelAdminRevert;
 	private PanelRentInc panelRentInc;
@@ -50,8 +50,8 @@ public class AdminDashboard extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		panelAdminAddCus = new PanelAdminAddCus(); 
-		panelAdminAddEmp = new PanelAdminAddEmp();
+	
+		panelAdminAddEmp = new PanelAdminAdd();
 		panelAdminDelete = new PanelAdminDelete();
 		panelAdminRevert = new PanelAdminRevert();
 		panelRentInc = new PanelRentInc();
@@ -75,95 +75,80 @@ public class AdminDashboard extends JFrame {
 		lblNewLabel.setBounds(10, 11, 82, 37);
 		panel.add(lblNewLabel);
 		
-		JPanel panelAddCustomer = new JPanel();
-		panelAddCustomer.setBackground(new Color(105, 105, 105));
-		panelAddCustomer.setBounds(78, 60, 166, 37);
-		panel.add(panelAddCustomer);
-		panelAddCustomer.setLayout(null);
+		JPanel panelAddType = new JPanel();
+		panelAddType.setBackground(new Color(105, 105, 105));
+		panelAddType.setBounds(78, 80, 166, 60);
+		panel.add(panelAddType);
+		panelAddType.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Add Customer");
+		JLabel lblNewLabel_1 = new JLabel("Add Customer/Employee");
+		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel_1.setBounds(0, 0, 166, 37);
-		panelAddCustomer.add(lblNewLabel_1);
+		lblNewLabel_1.setBounds(0, 0, 166, 60);
+		panelAddType.add(lblNewLabel_1);
 		
-		JPanel panelAddEmployee_1 = new JPanel();
-		panelAddEmployee_1.setLayout(null);
-		panelAddEmployee_1.setBackground(SystemColor.controlDkShadow);
-		panelAddEmployee_1.setBounds(78, 120, 166, 37);
-		panel.add(panelAddEmployee_1);
+		JPanel PanelDelete = new JPanel();
+		PanelDelete.setLayout(null);
+		PanelDelete.setBackground(SystemColor.controlDkShadow);
+		PanelDelete.setBounds(78, 150, 166, 60);
+		panel.add(PanelDelete);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Add Employee");
+		JLabel lblNewLabel_1_1 = new JLabel("Delete Customer/Employee");
+		lblNewLabel_1_1.setFont(new Font("Dialog", Font.BOLD, 11));
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel_1_1.setBounds(0, 0, 166, 37);
-		panelAddEmployee_1.add(lblNewLabel_1_1);
+		lblNewLabel_1_1.setBounds(0, 0, 166, 60);
+		PanelDelete.add(lblNewLabel_1_1);
 		
-		JPanel panelDelete = new JPanel();
-		panelDelete.setLayout(null);
-		panelDelete.setBackground(SystemColor.controlDkShadow);
-		panelDelete.setBounds(78, 180, 166, 37);
-		panel.add(panelDelete);
+		JPanel PanelRevert = new JPanel();
+		PanelRevert.setLayout(null);
+		PanelRevert.setBackground(SystemColor.controlDkShadow);
+		PanelRevert.setBounds(78, 220, 166, 60);
+		panel.add(PanelRevert);
 		
-		JTextArea DeleteRole = new JTextArea();
-		DeleteRole.setEditable(false);
-		DeleteRole.setFont(new Font("Dialog", Font.BOLD, 12));
-		DeleteRole.setText("Delete Customer/Employee");
-		DeleteRole.setBackground(new Color(105, 105, 105));
-		DeleteRole.setBounds(0, 0, 166, 37);
-		panelDelete.add(DeleteRole);
+		JLabel lblNewLabel_1_2 = new JLabel("Change Role");
+		lblNewLabel_1_2.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_2.setBounds(0, 0, 166, 60);
+		PanelRevert.add(lblNewLabel_1_2);
 		
-		JPanel panelRevertRole_1 = new JPanel();
-		panelRevertRole_1.setLayout(null);
-		panelRevertRole_1.setBackground(SystemColor.controlDkShadow);
-		panelRevertRole_1.setBounds(78, 240, 166, 37);
-		panel.add(panelRevertRole_1);
+		JPanel panelIncomeRents = new JPanel();
+		panelIncomeRents.setLayout(null);
+		panelIncomeRents.setBackground(SystemColor.controlDkShadow);
+		panelIncomeRents.setBounds(78, 290, 166, 60);
+		panel.add(panelIncomeRents);
 		
-		JLabel lbRR = new JLabel("Revert Role");
-		lbRR.setHorizontalAlignment(SwingConstants.CENTER);
-		lbRR.setFont(new Font("Dialog", Font.BOLD, 15));
-		lbRR.setBounds(0, 0, 166, 37);
-		panelRevertRole_1.add(lbRR);
+		JLabel lblNewLabel_1_3 = new JLabel("Rents Income");
+		lblNewLabel_1_3.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblNewLabel_1_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_3.setBounds(0, 0, 166, 60);
+		panelIncomeRents.add(lblNewLabel_1_3);
 		
-		JPanel panelChangePricing1 = new JPanel();
-		panelChangePricing1.setLayout(null);
-		panelChangePricing1.setBackground(SystemColor.controlDkShadow);
-		panelChangePricing1.setBounds(78, 300, 166, 37);
-		panel.add(panelChangePricing1);
+		JPanel panelChangePricing = new JPanel();
+		panelChangePricing.setLayout(null);
+		panelChangePricing.setBackground(SystemColor.controlDkShadow);
+		panelChangePricing.setBounds(78, 360, 166, 60);
+		panel.add(panelChangePricing);
 		
-		JLabel lbChPr = new JLabel("Change Pricing");
-		lbChPr.setHorizontalAlignment(SwingConstants.CENTER);
-		lbChPr.setFont(new Font("Dialog", Font.BOLD, 15));
-		lbChPr.setBounds(0, 0, 166, 37);
-		panelChangePricing1.add(lbChPr);
+		JLabel lblNewLabel_1_4 = new JLabel("Change Pricing");
+		lblNewLabel_1_4.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblNewLabel_1_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_4.setBounds(0, 0, 166, 60);
+		panelChangePricing.add(lblNewLabel_1_4);
 		
-		JPanel PanelRentsIncome1 = new JPanel();
-		PanelRentsIncome1.setLayout(null);
-		PanelRentsIncome1.setBackground(SystemColor.controlDkShadow);
-		PanelRentsIncome1.setBounds(78, 360, 166, 37);
-		panel.add(PanelRentsIncome1);
+		JPanel panelSignOut = new JPanel();
+		panelSignOut.setLayout(null);
+		panelSignOut.setBackground(SystemColor.controlDkShadow);
+		panelSignOut.setBounds(78, 430, 166, 60);
+		panel.add(panelSignOut);
 		
-		JLabel lbRentsInc = new JLabel("Rents Income");
-		lbRentsInc.setHorizontalAlignment(SwingConstants.CENTER);
-		lbRentsInc.setFont(new Font("Dialog", Font.BOLD, 15));
-		lbRentsInc.setBounds(0, 0, 166, 37);
-		PanelRentsIncome1.add(lbRentsInc);
-		
-		JPanel panelRentsIncome = new JPanel();
-		panelRentsIncome.setLayout(null);
-		panelRentsIncome.setBackground(SystemColor.controlDkShadow);
-		panelRentsIncome.setBounds(78, 420, 166, 37);
-		panel.add(panelRentsIncome);
-		
-		JLabel lblSignout = new JLabel("SignOut");
-		lblSignout.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSignout.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblSignout.setBounds(0, 0, 166, 37);
-		panelRentsIncome.add(lblSignout);
+		JLabel lblNewLabel_1_5 = new JLabel("Sign out");
+		lblNewLabel_1_5.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblNewLabel_1_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_5.setBounds(0, 0, 166, 60);
+		panelSignOut.add(lblNewLabel_1_5);
 		
 		JPanel panelMainContent = new JPanel();
 		panelMainContent.setBounds(255, 0, 595, 503);
 		contentPane.add(panelMainContent);
 	}
-
 }
