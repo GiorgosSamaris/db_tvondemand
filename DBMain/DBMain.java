@@ -31,6 +31,7 @@ public class DBMain {
 		}
 
 		Query qri = new Query(con);
+<<<<<<< Updated upstream
 		LoginFrame.initiateLogin(qri);
 		
 //		 try {
@@ -49,5 +50,11 @@ public class DBMain {
 //			e.printStackTrace();
 //		}
 		//System.out.println(qri.getContentTitle(6066));
+=======
+	
+		LoginFrame.initiateLogin(qri);
+		
+		 
+>>>>>>> Stashed changes
 	}
 }
