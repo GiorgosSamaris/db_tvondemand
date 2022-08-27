@@ -9,10 +9,12 @@ import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.DefaultComboBoxModel;
 
 public class PanelAdminDelete extends JPanel {
-	private JTable tableEmployee;
-	private JTable tableCustomer;
+	private JTable tableDelete;
 
 	/**
 	 * Create the panel.
@@ -22,29 +24,29 @@ public class PanelAdminDelete extends JPanel {
 		setSize(593,503);
 		setLayout(null);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 562, 407);
-		add(tabbedPane);
-		
-		JScrollPane scrollCustomer = new JScrollPane();
-		tabbedPane.addTab("Customer", null, scrollCustomer, null);
-		
-		tableCustomer = new JTable();
-		tableCustomer.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollCustomer.setViewportView(tableCustomer);
-		
-		JScrollPane scrollEmployee = new JScrollPane();
-		tabbedPane.addTab("Employee", null, scrollEmployee, null);
-		
-		tableEmployee = new JTable();
-		tableEmployee.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollEmployee.setViewportView(tableEmployee);
-		
-		JButton btnDelete = new JButton("Delete");
+		JButton btnDelete = new JButton("Delete User");
 		btnDelete.setForeground(new Color(255, 127, 80));
 		btnDelete.setFont(new Font("Dialog", Font.BOLD, 15));
-		btnDelete.setBounds(228, 449, 89, 23);
+		btnDelete.setBounds(225, 458, 131, 23);
 		add(btnDelete);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 62, 559, 377);
+		add(panel);
+		
+		tableDelete = new JTable();
+		panel.add(tableDelete);
+		
+		JLabel lblNewLabel_7 = new JLabel("Choose Role:");
+		lblNewLabel_7.setFont(new Font("Serif", Font.BOLD, 20));
+		lblNewLabel_7.setBounds(16, 25, 125, 23);
+		add(lblNewLabel_7);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Customer", "Employee"}));
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBox.setBounds(151, 27, 89, 22);
+		add(comboBox);
 
 
 	}

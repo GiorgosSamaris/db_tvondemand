@@ -22,10 +22,17 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class PanelSettings extends JPanel {
 	
 	private static Query qri = null;
+	private JTextField Address_1;
+	private JTextField City_1;
+	private JTextField Country_1;
+	private JTextField District_1;
+	private JTextField Phone_1;
+	private JTextField Postal_1;
 	/**
 	 * Create the panel.
 	 */
@@ -69,7 +76,7 @@ public class PanelSettings extends JPanel {
 		
 		JLabel email_1 = new JLabel(qri.usr.getEmail());
 		email_1.setFont(new Font("Serif", Font.BOLD, 15));
-		email_1.setBounds(99, 152, 300, 20);
+		email_1.setBounds(99, 152, 168, 20);
 		add(email_1);
 		
 		JLabel lblSubscriptionType = new JLabel("Subscription type:");
@@ -131,7 +138,7 @@ public class PanelSettings extends JPanel {
 		
 		JTextArea textArea = new JTextArea("Changes will take effect on next log in.");
 		textArea.setBackground(new Color(112, 128, 144));
-		textArea.setBounds(250, 313, 250, 100);
+		textArea.setBounds(250, 313, 250, 39);
 		textArea.setLineWrap(true);
 		textArea.setVisible(false);
 		add(textArea);
@@ -162,6 +169,66 @@ public class PanelSettings extends JPanel {
 		save.setFont(new Font("Serif", Font.BOLD, 15));
 		save.setBounds(89, 313, 89, 23);
 		add(save);
+		
+		JLabel lblAddress = new JLabel("Address:");
+		lblAddress.setFont(new Font("Serif", Font.BOLD, 15));
+		lblAddress.setBounds(291, 68, 70, 20);
+		add(lblAddress);
+		
+		JLabel firstname_2_1 = new JLabel("City:");
+		firstname_2_1.setFont(new Font("Serif", Font.BOLD, 15));
+		firstname_2_1.setBounds(291, 109, 64, 20);
+		add(firstname_2_1);
+		
+		JLabel firstname_2_2 = new JLabel("Country:");
+		firstname_2_2.setFont(new Font("Serif", Font.BOLD, 15));
+		firstname_2_2.setBounds(291, 152, 70, 20);
+		add(firstname_2_2);
+		
+		JLabel firstname_2_3 = new JLabel("District:");
+		firstname_2_3.setFont(new Font("Serif", Font.BOLD, 15));
+		firstname_2_3.setBounds(291, 197, 70, 20);
+		add(firstname_2_3);
+		
+		JLabel firstname_2_4 = new JLabel("Phone:");
+		firstname_2_4.setFont(new Font("Serif", Font.BOLD, 15));
+		firstname_2_4.setBounds(291, 238, 70, 20);
+		add(firstname_2_4);
+		
+		Address_1 = new JTextField();
+		Address_1.setBounds(366, 70, 96, 20);
+		add(Address_1);
+		Address_1.setColumns(10);
+		
+		City_1 = new JTextField();
+		City_1.setColumns(10);
+		City_1.setBounds(366, 111, 96, 20);
+		add(City_1);
+		
+		Country_1 = new JTextField();
+		Country_1.setColumns(10);
+		Country_1.setBounds(366, 154, 96, 20);
+		add(Country_1);
+		
+		District_1 = new JTextField();
+		District_1.setColumns(10);
+		District_1.setBounds(366, 194, 96, 20);
+		add(District_1);
+		
+		Phone_1 = new JTextField();
+		Phone_1.setColumns(10);
+		Phone_1.setBounds(366, 237, 96, 20);
+		add(Phone_1);
+		
+		JLabel firstname_2_4_1 = new JLabel("Postal Code:");
+		firstname_2_4_1.setFont(new Font("Serif", Font.BOLD, 15));
+		firstname_2_4_1.setBounds(272, 271, 89, 20);
+		add(firstname_2_4_1);
+		
+		Postal_1 = new JTextField();
+		Postal_1.setBounds(366, 273, 96, 20);
+		add(Postal_1);
+		Postal_1.setColumns(10);
 		
 
 	}

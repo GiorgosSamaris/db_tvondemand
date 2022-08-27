@@ -13,10 +13,12 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTree;
 import javax.swing.JTable;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelTopRents extends JPanel {
-	private JTable table_Films;
-	private JTable table_Series;
+	private JTable table_1;
 
 	/**
 	 * Create the panel.
@@ -26,22 +28,6 @@ public class PanelTopRents extends JPanel {
 		setForeground(new Color(255, 255, 255));
 		setSize(601,561);
 		setLayout(null);
-		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(33, 285, 468, 239);
-		add(tabbedPane);
-		
-		JScrollPane scrollPaneFilm = new JScrollPane();
-		tabbedPane.addTab("Films", null, scrollPaneFilm, null);
-		
-		table_Films = new JTable();
-		scrollPaneFilm.setViewportView(table_Films);
-		
-		JScrollPane scrollPanelSeries = new JScrollPane();
-		tabbedPane.addTab("Series", null, scrollPanelSeries, null);
-		
-		table_Series = new JTable();
-		scrollPanelSeries.setViewportView(table_Series);
 		
 		JLabel lblNewLabel = new JLabel("Most Rented Films & Series");
 		lblNewLabel.setFont(new Font("Serif", Font.PLAIN, 20));
@@ -65,7 +51,7 @@ public class PanelTopRents extends JPanel {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(130, 155, 38, 20);
 		add(comboBox);
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 		comboBox.setMaximumRowCount(30);
 		
 		JComboBox comboBox_1 = new JComboBox();
@@ -75,7 +61,7 @@ public class PanelTopRents extends JPanel {
 		add(comboBox_1);
 		
 		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950"}));
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000"}));
 		comboBox_2.setBounds(425, 155, 60, 20);
 		add(comboBox_2);
 		
@@ -90,6 +76,32 @@ public class PanelTopRents extends JPanel {
 		lblNewLabel_2_2.setFont(new Font("Serif", Font.BOLD, 13));
 		lblNewLabel_2_2.setBounds(359, 151, 73, 27);
 		add(lblNewLabel_2_2);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 280, 581, 270);
+		add(panel);
+		
+		table_1 = new JTable();
+		panel.add(table_1);
+		
+		JButton btnNewButton = new JButton("Get");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO get
+			}
+		});
+		btnNewButton.setBounds(396, 212, 89, 23);
+		add(btnNewButton);
+		
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"Series", "Films"}));
+		comboBox_3.setBounds(166, 212, 60, 22);
+		add(comboBox_3);
+		
+		JLabel lblNewLabel_3 = new JLabel("Choose Genre:");
+		lblNewLabel_3.setFont(new Font("Serif", Font.BOLD, 15));
+		lblNewLabel_3.setBounds(58, 214, 98, 14);
+		add(lblNewLabel_3);
 
 
 	}
