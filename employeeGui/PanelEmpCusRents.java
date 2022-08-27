@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 import content.RentsTableModel;
 import queryToDB.Query;
@@ -41,6 +42,7 @@ public class PanelEmpCusRents extends JPanel {
 		table = new JTable();
 		table.setModel(rents);
 		scrollPane.setViewportView(table);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
 
 }

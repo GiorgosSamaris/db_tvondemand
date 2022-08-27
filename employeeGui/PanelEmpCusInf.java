@@ -3,15 +3,27 @@ package employeeGui;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import content.RentsTableModel;
+import queryToDB.Query;
+import user.Customer;
+import user.CustomerTableModel;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JList;
 import java.awt.Font;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JTree;
 import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
@@ -22,66 +34,145 @@ public class PanelEmpCusInf extends JPanel {
 	private JTextField CusLastName;
 	private JTextField CusID;
 	private JTextField CusRegDate;
-
+	private JTextField address;
+	private JTextField city;
+	private JTextField country;
+	private JTextField district;
+	private JTextField postal;
+	private JTextField phone;
+	private JTable table;
 	/**
 	 * Create the panel.
 	 */
-	public PanelEmpCusInf() {
+	public PanelEmpCusInf(Query q) {
 		setBackground(new Color(112, 128, 144));
 		setBounds(0,0,601,561);
 		setLayout(null);
 		
-		JLabel lblNewLabel_4 = new JLabel("Address:");
-		lblNewLabel_4.setFont(new Font("Serif", Font.BOLD, 15));
-		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setBounds(340, 370, 129, 20);
-		add(lblNewLabel_4);
+		JLabel addressLabel = new JLabel("Address:");
+		addressLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		addressLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		addressLabel.setBounds(300, 370, 129, 20);
+		add(addressLabel);
 		
-		JButton btnNewButton = new JButton("Save Customer Info");
-		btnNewButton.setForeground(new Color(255, 99, 71));
-		btnNewButton.addActionListener(new ActionListener() {
+		address = new JTextField();
+		address.setFont(new Font("Serif", Font.PLAIN, 15));
+		address.setColumns(10);
+		address.setBounds(400, 370, 137, 20);
+		add(address);
+		
+		JLabel cityLabel = new JLabel("City:");
+		cityLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		cityLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		cityLabel.setBounds(300, 390, 129, 20);
+		add(cityLabel);
+		
+		city = new JTextField();
+		city.setFont(new Font("Serif", Font.PLAIN, 15));
+		city.setColumns(10);
+		city.setBounds(400, 390, 137, 20);
+		add(city);
+		
+		JLabel countryLabel = new JLabel("Country:");
+		countryLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		countryLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		countryLabel.setBounds(300, 410, 129, 20);
+		add(countryLabel);
+		
+		country = new JTextField();
+		country.setFont(new Font("Serif", Font.PLAIN, 15));
+		country.setColumns(10);
+		country.setBounds(400, 410, 137, 20);
+		add(country);
+		
+		JLabel districtLabel = new JLabel("District:");
+		districtLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		districtLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		districtLabel.setBounds(300, 430, 129, 20);
+		add(districtLabel);
+		
+		district = new JTextField();
+		district.setFont(new Font("Serif", Font.PLAIN, 15));
+		district.setColumns(10);
+		district.setBounds(400, 430, 137, 20);
+		add(district);
+		
+		JLabel postalLabel = new JLabel("Postal:");
+		postalLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		postalLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		postalLabel.setBounds(300, 450, 129, 20);
+		add(postalLabel);
+		
+		postal = new JTextField();
+		postal.setFont(new Font("Serif", Font.PLAIN, 15));
+		postal.setColumns(10);
+		postal.setBounds(400, 450, 137, 20);
+		add(postal);
+		
+		JLabel phoneLabel = new JLabel("Phone:");
+		phoneLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		phoneLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		phoneLabel.setBounds(300, 470, 129, 20);
+		add(phoneLabel);
+		
+		phone = new JTextField();
+		phone.setFont(new Font("Serif", Font.PLAIN, 15));
+		phone.setColumns(10);
+		phone.setBounds(400, 470, 137, 20);
+		add(phone);
+		
+		JButton save = new JButton("Save Customer Info");
+		save.setForeground(new Color(255, 99, 71));
+		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TO DO: SAVE CUSTOMER INFO
+				// TODO: SAVE CUSTOMER INFO
 			}
 		});
-		btnNewButton.setBounds(420, 480, 132, 54);
-		add(btnNewButton);
+		save.setBounds(420, 495, 150, 38);
+		add(save);
 		
-		JLabel lblNewLabel_4_1 = new JLabel("Registration Date:");
-		lblNewLabel_4_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4_1.setFont(new Font("Serif", Font.BOLD, 15));
-		lblNewLabel_4_1.setBounds(10, 490, 129, 20);
-		add(lblNewLabel_4_1);
+
+		JLabel idLabel = new JLabel("Customer ID");
+		idLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		idLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		idLabel.setBounds(10, 460, 129, 20);
+		add(idLabel);
 		
-		JLabel lblNewLabel_4_2 = new JLabel("Customer ID");
-		lblNewLabel_4_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4_2.setFont(new Font("Serif", Font.BOLD, 15));
-		lblNewLabel_4_2.setBounds(10, 460, 129, 20);
-		add(lblNewLabel_4_2);
+		JLabel lastNameLabel = new JLabel("Last Name:");
+		lastNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lastNameLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		lastNameLabel.setBounds(10, 430, 129, 20);
+		add(lastNameLabel);
 		
-		JLabel lblNewLabel_4_3 = new JLabel("Last Name:");
-		lblNewLabel_4_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4_3.setFont(new Font("Serif", Font.BOLD, 15));
-		lblNewLabel_4_3.setBounds(10, 430, 129, 20);
-		add(lblNewLabel_4_3);
+		JLabel firstNameLabel = new JLabel("First Name:");
+		firstNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		firstNameLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		firstNameLabel.setBounds(10, 400, 129, 20);
+		add(firstNameLabel);
 		
-		JLabel lblNewLabel_4_4 = new JLabel("First Name:");
-		lblNewLabel_4_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4_4.setFont(new Font("Serif", Font.BOLD, 15));
-		lblNewLabel_4_4.setBounds(10, 400, 129, 20);
-		add(lblNewLabel_4_4);
+		JLabel emailLabel = new JLabel("Email:");
+		emailLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		emailLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		emailLabel.setBounds(10, 370, 129, 20);
+		add(emailLabel);
 		
-		JLabel LbEmail = new JLabel("Email:");
-		LbEmail.setHorizontalAlignment(SwingConstants.CENTER);
-		LbEmail.setFont(new Font("Serif", Font.BOLD, 15));
-		LbEmail.setBounds(10, 370, 129, 20);
-		add(LbEmail);
+		JLabel subTypeLbl = new JLabel("Subscription type:");
+		subTypeLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		subTypeLbl.setFont(new Font("Serif", Font.BOLD, 15));
+		subTypeLbl.setBounds(10, 490, 150, 20);
+		add(subTypeLbl);
 		
-		JLabel lblNewLabel_4_4_2 = new JLabel("Active:");
-		lblNewLabel_4_4_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4_4_2.setFont(new Font("Serif", Font.BOLD, 15));
-		lblNewLabel_4_4_2.setBounds(10, 520, 129, 20);
-		add(lblNewLabel_4_4_2);
+		JComboBox comboBox = new JComboBox();
+		String[] types = {"Films","Series", "Both"};
+		comboBox.setModel(new DefaultComboBoxModel(types));
+		comboBox.setBounds(165, 490, 82, 22);
+		add(comboBox);
+		
+		JLabel activeLabel = new JLabel("Active:");
+		activeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		activeLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		activeLabel.setBounds(10, 520, 129, 20);
+		add(activeLabel);
 		
 		JCheckBox CusActive = new JCheckBox("");
 		CusActive.setBounds(119, 520, 21, 20);
@@ -105,36 +196,60 @@ public class PanelEmpCusInf extends JPanel {
 		CusID.setBounds(134, 459, 137, 20);
 		add(CusID);
 		
-		CusRegDate = new JTextField();
-		CusRegDate.setFont(new Font("Serif", Font.PLAIN, 15));
-		CusRegDate.setColumns(10);
-		CusRegDate.setBounds(149, 492, 122, 20);
-		add(CusRegDate);
+
 		
 		JLabel CusEmail = new JLabel("Cant change");
 		CusEmail.setFont(new Font("Serif", Font.BOLD, 15));
 		CusEmail.setBounds(134, 375, 132, 15);
 		add(CusEmail);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 581, 328);
-		add(tabbedPane);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 11, 581, 328);
+		add(scrollPane);
+		CustomerTableModel customersTable=null;
+		final List<Customer> customers;
+		try {
+			customers = q.getAllCustomers();
+			customersTable = new CustomerTableModel(customers);
+		} catch (Exception e2) {
+			throw new RuntimeException(e2);
+		}
+		table = new JTable();
+		table.setModel(customersTable);
+		table.removeColumn(table.getColumnModel().getColumn(4));
+		scrollPane.setViewportView(table);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		JScrollPane ScrollableList = new JScrollPane();
-		tabbedPane.addTab("Customer", null, ScrollableList, null);
+		table.addMouseListener(new MouseAdapter() {
+			 public void mouseClicked(MouseEvent e){
+				 try {
+//						private JTextField CusFirstName;
+//						private JTextField CusLastName;
+//						private JTextField CusID;
+//						private JTextField CusRegDate;
+//						private JTextField address;
+//						private JTextField city;
+//						private JTextField country;
+//						private JTextField district;
+//						private JTextField postal;
+//						private JTextField phone;
+					 CusLastName.setText(customers.get(table.getSelectedRow()).getLastname());
+					 CusID.setText(Integer.toString(customers.get(table.getSelectedRow()).getId()));
+					 address.setText(customers.get(table.getSelectedRow()).getAddress());
+					 city.setText(customers.get(table.getSelectedRow()).getCity());
+					 country.setText(customers.get(table.getSelectedRow()).getCountry());
+					 district.setText(customers.get(table.getSelectedRow()).getDistrict());
+					 postal.setText(customers.get(table.getSelectedRow()).getPostal());
+					 phone.setText(customers.get(table.getSelectedRow()).getPhone());
+					 CusActive.setSelected(customers.get(table.getSelectedRow()).isActive());
+					 CusFirstName.setText(customers.get(table.getSelectedRow()).getName());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			 }
+		});
 		
-		JList list = new JList();
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		ScrollableList.setViewportView(list);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(439, 375, 122, 15);
-		add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(376, 401, 122, 15);
-		add(lblNewLabel_1);
-
 
 	}
 }

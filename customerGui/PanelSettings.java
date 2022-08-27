@@ -36,11 +36,11 @@ public class PanelSettings extends JPanel {
 		setBounds(0, 0, 522,378);
 		setLayout(null);
 		
-		JLabel lblNewLabel_5 = new JLabel("Customer info:");
-		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_5.setBounds(138, 11, 190, 61);
-		lblNewLabel_5.setFont(new Font("Serif", Font.BOLD, 25));
-		add(lblNewLabel_5);
+		JLabel infoLabel = new JLabel("Customer info:");
+		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		infoLabel.setBounds(138, 11, 190, 61);
+		infoLabel.setFont(new Font("Serif", Font.BOLD, 25));
+		add(infoLabel);
 		
 		JLabel firstname = new JLabel("First Name:");
 		firstname.setFont(new Font("Serif", Font.BOLD, 15));

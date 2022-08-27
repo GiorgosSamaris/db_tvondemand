@@ -426,5 +426,47 @@ public class Query {
 		}
 		return sum;
 	}
+	
+	public void newAddress(int uID, String address, String city, String country, String district, String postal, String phone) throws Exception {
+		int addrId=0;
+		CallableStatement cs = con.prepareCall("CALL newAddress(?,?,?,?,?,?);");
+		cs.setString(1,address);
+		cs.setString(2, city);
+		cs.setString(3, country);
+		cs.setString(4, district);
+		cs.setString(5, postal);
+		cs.setString(6, phone);
+		ResultSet rs = cs.executeQuery();
+		if (rs.next()) 
+		{
+			addrId = rs.getInt(1);
+	    } 
+		cs.close();
+		PreparedStatement ps = con.prepareStatement("UPDATE user SET  address_id = ? WHERE user_id = ?");
+        ps.setInt(1, addrId);
+        ps.setInt(2, uID);
+        ps.execute();
+	}
+	
+	public List<Customer> getAllCustomers() throws Exception{
+		List<Customer> customers=new ArrayList<Customer>();
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("select user_id, first_name, last_name, email, address,city, country, district, postal_code, phone,subscription_type,active\r\n"
+				+ "FROM user INNER JOIN address USING(address_id) INNER JOIN city USING(city_id) INNER JOIN country USING(country_id) INNER JOIN customer ON customer_id = user_id;");
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
 
+	    } 
+		else 
+		{
+			do{
+				Customer tempCustomer = new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),
+						rs.getString(9),rs.getString(10),rs.getString(11), rs.getBoolean(12));
+				customers.add(tempCustomer);
+			}while(rs.next());									
+		}
+		return customers;
+	}
+	
 }

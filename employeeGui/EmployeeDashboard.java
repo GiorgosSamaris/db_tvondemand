@@ -64,7 +64,7 @@ public class EmployeeDashboard extends JFrame {
 		panel.setLayout(null);
 		
 		panelEmpHome = new PanelEmpHome(qri);
-		panelEmpCusInf= new PanelEmpCusInf();
+		panelEmpCusInf= new PanelEmpCusInf(qri);
 		panelEmpCusRents = new PanelEmpCusRents(qri);
 		panelEmpEditCat = new PanelEmpEditCat();
 		panelTopRents = new PanelTopRents();
@@ -236,5 +236,4 @@ public class EmployeeDashboard extends JFrame {
 			panel.setBackground(new Color(128, 129, 128));
 		}
 	}
-	
 }
