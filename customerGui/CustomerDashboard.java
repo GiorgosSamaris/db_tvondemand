@@ -79,7 +79,7 @@ public class CustomerDashboard extends JFrame {
 		setContentPane(contentPanel);
 		contentPanel.setLayout(null);
 		
-		panelHome = new PanelHome();
+		panelHome = new PanelHome(qri);
 		panelSettings = new PanelSettings(qri);
 		panelShowMyRents = new PanelShowMyRents(qri);
 		panelCatalogue = new mockCatalogue2(qri);

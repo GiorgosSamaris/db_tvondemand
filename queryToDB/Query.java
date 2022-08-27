@@ -92,10 +92,7 @@ public class Query {
 			
 		}
 		User usr = new User(user_id,user_type,email,f_name,l_name);
-		this.setUser(usr);
-		
-
-		
+		this.setUser(usr);				
 	}
 	
 	
@@ -223,12 +220,6 @@ public class Query {
 		}
 		
 		
-	}
-	
-	
-	
-	public void showAvailableForRent() throws Exception
-	{
 	}
 	
 	
@@ -404,6 +395,36 @@ public class Query {
 		return null;
 	};
 	
+	public int getSumofFilms() throws SQLException {
+		int sum = 0;
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("SELECT count(*) FROM film_inventory");
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
 
+	    } 
+		else 
+		{
+			sum = rs.getInt(1);								
+		}
+		return sum;
+	}
+
+	public int getSumofSeries() throws SQLException {
+		int sum = 0;
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("SELECT count(*) FROM series_inventory");
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+
+	    } 
+		else 
+		{
+			sum = rs.getInt(1);								
+		}
+		return sum;
+	}
 
 }

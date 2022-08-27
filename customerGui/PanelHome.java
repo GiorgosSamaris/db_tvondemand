@@ -4,14 +4,18 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JTextArea;
+
+import queryToDB.Query;
+
 import java.awt.Font;
+import java.sql.SQLException;
 
 public class PanelHome extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelHome() {
+	public PanelHome(Query q) {
 		setBackground(new Color(112, 128, 144));
 		setForeground(new Color(255, 255, 255));
 		setBounds(0, 0, 522,378);
@@ -59,7 +63,12 @@ public class PanelHome extends JPanel {
 		
 		JTextArea seriesnum = new JTextArea();
 		seriesnum.setWrapStyleWord(true);
-		seriesnum.setText("seires arithmos");
+		try {
+			seriesnum.setText(Integer.toString(q.getSumofSeries()));
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		seriesnum.setLineWrap(true);
 		seriesnum.setFont(new Font("Serif", Font.BOLD, 30));
 		seriesnum.setEditable(false);
@@ -69,7 +78,12 @@ public class PanelHome extends JPanel {
 		
 		JTextArea filmsnum = new JTextArea();
 		filmsnum.setWrapStyleWord(true);
-		filmsnum.setText("movies arithmos");
+		try {
+			filmsnum.setText(Integer.toString(q.getSumofFilms()));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		filmsnum.setLineWrap(true);
 		filmsnum.setFont(new Font("Serif", Font.BOLD, 30));
 		filmsnum.setEditable(false);

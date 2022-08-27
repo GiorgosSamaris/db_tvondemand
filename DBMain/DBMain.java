@@ -31,30 +31,8 @@ public class DBMain {
 		}
 
 		Query qri = new Query(con);
-<<<<<<< Updated upstream
+
 		LoginFrame.initiateLogin(qri);
 		
-//		 try {
-//			for(Series series : qri.getAvailableSeries()) {
-//			        System.out.println(series.getTitle()+" "+series.getDescription());
-//			    }
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		 
-//		 try {
-//			for(Film films : qri.getAvailableFilms()) {
-//			        System.out.println(films.getTitle()+" "+films.getDescription());
-//			    }
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		//System.out.println(qri.getContentTitle(6066));
-=======
-	
-		LoginFrame.initiateLogin(qri);
-		
-		 
->>>>>>> Stashed changes
 	}
 }
