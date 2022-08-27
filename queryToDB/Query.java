@@ -5,9 +5,9 @@ import mockFrame.*;
 import java.util.*;
 
 import content.Film;
+import content.Rent;
 import content.Series;
 import customerGui.CustomerDashboard;
-import customerGui.Rent;
 import employeeGui.EmployeeDashboard;
 import loginGUI.LoginFrame;
 import loginGUI.error;
@@ -299,6 +299,25 @@ public class Query {
 		return list;
 	};
 	
+	public List<Rent> getAllRents() throws Exception{
+		List<Rent> list = new ArrayList<Rent>();
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("SELECT rental_id, rental_date, inventory_id, customer_id FROM rental");
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+
+	    } 
+		else 
+		{
+			do{
+				Rent tempSeries = new Rent(rs.getInt(1), rs.getDate(2), this.getContentType(rs.getInt(3)), this.getContentTitle(rs.getInt(3)), this.getContentPrice(rs.getInt(1)));
+				tempSeries.setCustomerId(rs.getInt(4));
+				list.add(tempSeries);
+			}while(rs.next());									
+		}
+		return list;
+	};
 	
 	
 	public String getContentType(int invId) {
@@ -384,7 +403,7 @@ public class Query {
 		}
 		return null;
 	};
-
+	
 
 
 }

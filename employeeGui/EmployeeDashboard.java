@@ -65,7 +65,7 @@ public class EmployeeDashboard extends JFrame {
 		
 		panelEmpHome = new PanelEmpHome();
 		panelEmpCusInf= new PanelEmpCusInf();
-		panelEmpCusRents = new PanelEmpCusRents();
+		panelEmpCusRents = new PanelEmpCusRents(qri);
 		panelEmpEditCat = new PanelEmpEditCat();
 		panelTopRents = new PanelTopRents();
 		

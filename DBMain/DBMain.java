@@ -10,6 +10,7 @@ import java.awt.EventQueue;
 import java.sql.Connection;
 
 import content.Film;
+import content.Series;
 import customerGui.CustomerDashboard;
 
 public class DBMain {
@@ -30,16 +31,23 @@ public class DBMain {
 		}
 
 		Query qri = new Query(con);
-		listFrame.listFrameRun(qri);
 		LoginFrame.initiateLogin(qri);
 		
-		 try {
-			for(Film film : qri.getAvailableFilms()) {
-			        System.out.println(film.getTitle()+film.getDescription());
-			    }
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		 try {
+//			for(Series series : qri.getAvailableSeries()) {
+//			        System.out.println(series.getTitle()+" "+series.getDescription());
+//			    }
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		 
+//		 try {
+//			for(Film films : qri.getAvailableFilms()) {
+//			        System.out.println(films.getTitle()+" "+films.getDescription());
+//			    }
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		//System.out.println(qri.getContentTitle(6066));
 	}
-
 }

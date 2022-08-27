@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import customerGui.RentsTableModel;
+import content.RentsTableModel;
 import queryToDB.Query;
 
 import java.awt.Font;
@@ -41,6 +41,7 @@ public class PanelShowMyRents extends JPanel {
 		}
 		table = new JTable();
 		table.setModel(rents);
+		table.removeColumn(table.getColumnModel().getColumn(4));
 		scrollPane.setViewportView(table);
 		
 		JLabel lblEurosSpentOn = new JLabel("Euros spent on rents:");

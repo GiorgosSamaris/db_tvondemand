@@ -1,4 +1,4 @@
-package customerGui;
+package content;
 
 import java.sql.Date;
 import java.util.List;
@@ -11,6 +11,7 @@ public class Rent {
 	private String contentType;
 	private String contentTitle;
 	private Float price;
+	private int customerId;
 	
 	public Rent(int id, Date rentalDate, String contentType, String contentTitle, Float price) {
 		this.setId(id);
@@ -87,5 +88,17 @@ public class Rent {
 	 */
 	public void setId(int id) {
 		this.id = id;
+	}
+	/**
+	 * @return the customerId
+	 */
+	public int getCustomerId() {
+		return customerId;
+	}
+	/**
+	 * @param customerId the customerId to set
+	 */
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 }

@@ -34,17 +34,12 @@ public class LoginFrame extends JFrame {
 	 * Launch the application.
 	 */
 	public static void initiateLogin(Query query){
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
 				try {
 					LoginFrame frame = new LoginFrame(query);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-//			}
-//		});
-
 	}
 
 	/**
@@ -80,9 +75,6 @@ public class LoginFrame extends JFrame {
 		JButton btnNewButton = new JButton("Sign In");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*TO DO: check if email exists
-				 * An den brei email error.java(thelei kai ekei kodika) or access
-				 */
 				try {
 					qri.loginAttempt(LoginFrame.getTextField());
 				} catch (Exception e1) {

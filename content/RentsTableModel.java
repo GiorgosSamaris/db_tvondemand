@@ -1,11 +1,11 @@
-package customerGui;
+package content;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 public class RentsTableModel extends AbstractTableModel{
-		private String[] columnNames= { "Content Type", "Title", "Price", "Date" };
+		private String[] columnNames= { "Content Type", "Title", "Price", "Date", "Customer ID" };
 		private List<Rent> rents;
 		
 		public RentsTableModel(List<Rent> r) {
@@ -38,6 +38,8 @@ public class RentsTableModel extends AbstractTableModel{
 				return tempRent.getPrice();
 			case 3:
 				return tempRent.getRentalDate();
+			case 4:
+				return tempRent.getCustomerId();
 			}
 			
 			return tempRent.getContentTitle();

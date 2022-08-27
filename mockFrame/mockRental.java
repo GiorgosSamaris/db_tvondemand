@@ -7,7 +7,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-import customerGui.RentsTableModel;
+import content.RentsTableModel;
 import queryToDB.Query;
 
 import javax.swing.JScrollPane;
