@@ -102,7 +102,7 @@ public class PanelSettings extends JPanel {
 		}
 		catch(Exception e)
 		{
-			
+			throw new RuntimeException(e);
 		}
 		System.out.print(sub_type);
 		if(sub_type.equals("M")) current = films;
@@ -122,7 +122,7 @@ public class PanelSettings extends JPanel {
 		}
 		catch(Exception e)
 		{
-			
+			throw new RuntimeException(e);
 		}
 
 		JCheckBox activechckbx = new JCheckBox("");
@@ -146,7 +146,7 @@ public class PanelSettings extends JPanel {
 		JButton save = new JButton("Save");
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TO DO :SAVE INFO TO DATABASE,DEN PREPEI NA ALLAZEI EMAIL
+				//TODO :ADD fields to change address
 				try
 				{
 					final boolean changed_active = activechckbx.isSelected();;
@@ -160,7 +160,7 @@ public class PanelSettings extends JPanel {
 				}
 				catch (Exception ex)
 				{
-					ex.printStackTrace();
+					throw new RuntimeException(ex);
 				}
 				
 			}

@@ -54,15 +54,16 @@ public class Query {
 		createUserObject(email);
 		user_type = usr.getUser_type();
 		System.out.println(user_type);
-		if(user_type.equals("customer"))CustomerDashboard.initiateCustomerDashboard(this); //starts customer GUI
-		else if (user_type.equals("employee")) EmployeeDashboard.initiateEmployeeDashBoard(this);
-		else if (user_type.equals("admin"))	MockMenu.show(this);							//TODO Administrator GUI
+		if(user_type.equals("customer"))CustomerDashboard.initiateCustomerDashboard(this); 			//starts customer GUI
+		else if (user_type.equals("employee")) EmployeeDashboard.initiateEmployeeDashBoard(this);	//starts employee GUI
+		else if (user_type.equals("admin"))	MockMenu.show(this);	//TODO Administrator GUI
 		else {
-			LoginFrame.initiateLogin(this);													//Recall login window 
-			error.invokeError();															//display error dialog				
+			LoginFrame.initiateLogin(this);		//Recall login window 
+			error.invokeError();				//display error dialog				
 		}
 	}
 	
+
 	public void createUserObject(String email) throws Exception
 	{
 		String user_type="";
@@ -71,31 +72,26 @@ public class Query {
 		String l_name="";
 		try
 		{
-			
-			user_type = checkTypeOfUser(email); 	//TODO try catch block? checkTypeOfUser throws exception!!!
-			
+			user_type = checkTypeOfUser(email);
 			PreparedStatement ps = con.prepareStatement("SELECT user_id,first_name,last_name FROM user WHERE email = ?;");
 			ps.setString(1,email);
 			ResultSet rs = ps.executeQuery();
-			
 			while(rs.next())
 			{
 				user_id = rs.getInt("user_id");
 				f_name = rs.getString("first_name");
 				l_name = rs.getString("last_name");
-				
 			}
-			
 		}
 		catch(Exception e)
 		{
-			
+			throw new RuntimeException(e);
 		}
 		User usr = new User(user_id,user_type,email,f_name,l_name);
 		this.setUser(usr);				
 	}
 	
-	
+	//get subscription type of selected customer
 	public String getCustomerSub(int customer_id) throws Exception
 	{
 		String sub_type = "";
@@ -107,23 +103,19 @@ public class Query {
 			while(rs.next())
 			{
 				sub_type = rs.getString("subscription_type");
-				
 			}
-			
 		}
 		catch (Exception e)
 		{
-			
+			throw new RuntimeException(e);
 		}
-		
 		return sub_type;
-		
 	}
 	
+	//get active field of selected user
 	public boolean getUserActivity(int user_id) throws Exception
 	{
 		boolean activity=true;
-		
 		try
 		{
 			PreparedStatement ps = con.prepareStatement("SELECT active FROM user INNER JOIN customer ON user_id"
@@ -134,8 +126,6 @@ public class Query {
 			{
 				do{
 					activity = rs.getBoolean("active");
-					
-					
 				}while(rs.next());
 				
 			}
@@ -153,77 +143,54 @@ public class Query {
 		}
 		catch(Exception e)
 		{
-			
+			throw new RuntimeException(e);
 		}
-		
-		
 		return activity;
 	}
 	
+	//set active field for selected user
 	public void setUserActivity(int user_id,boolean active) throws Exception
 	{
-		
 		try
 		{
-			
 			PreparedStatement ps = con.prepareStatement("UPDATE customer SET  active = ? WHERE customer_id = ?");
-			
-
             // prepare data for update
-            
             ps.setBoolean(1, active);
             ps.setInt(2, user_id);
 
             int rowAffected = ps.executeUpdate();
             if(1!=rowAffected) {
             	ps = con.prepareStatement("UPDATE customer SET  active = ? WHERE employee_id = ?");
-    			
-
                 // prepare data for update
-                
                 ps.setBoolean(1, active);
                 ps.setInt(2, user_id);
-
-            	
             }
-			
 		}
 		catch(Exception e)
 		{
-			
+			throw new RuntimeException(e);
 		}
-		
-		
 	}
 	
-	
+	//set subscription type of selected customer
 	public void setUserSub(int user_id,String sub_type) throws Exception
-	{
-		
+	{		
 		try
 		{
-			
 			PreparedStatement ps = con.prepareStatement("UPDATE customer SET  subscription_type = ? WHERE customer_id = ?");
-			
-
             // prepare data for update
-            
             ps.setString(1, sub_type);
             ps.setInt(2, user_id);
-
             ps.executeUpdate();
-           			
 		}
 		catch(Exception e)
 		{
-			
+			throw new RuntimeException(e);
 		}
-		
-		
 	}
 	
 	
-	
+	//get all films in inventory
 	public List<Film> getAvailableFilms() throws Exception
 	{				
 		List<Film> list = new ArrayList<Film>();				
@@ -247,7 +214,7 @@ public class Query {
 	}
 	
 	
-	
+	//get all series in inventory
 	public List<Series> getAvailableSeries() throws Exception
 	{
 		
@@ -269,7 +236,8 @@ public class Query {
 		}
 		return list;
 	}
-
+	
+	//get all rents of current user
 	public List<Rent> getUserRents() throws Exception{
 		List<Rent> list = new ArrayList<Rent>();
 		PreparedStatement st = con.prepareStatement("SELECT rental_id, rental_date, inventory_id FROM rental WHERE customer_id = ?");
@@ -290,6 +258,7 @@ public class Query {
 		return list;
 	};
 	
+	//get a list of all rents in database
 	public List<Rent> getAllRents() throws Exception{
 		List<Rent> list = new ArrayList<Rent>();
 		Statement st = con.createStatement();
@@ -310,7 +279,7 @@ public class Query {
 		return list;
 	};
 	
-	
+	//get type of content in inventory
 	public String getContentType(int invId) {
 		try
 		{
@@ -338,12 +307,13 @@ public class Query {
 
 		}
 		catch(Exception e)
-		{			
+		{	
+			throw new RuntimeException(e);
 		}		
 		return "not found";
 	};
 	
-	
+	//get title of selected content in inventory
 	public String getContentTitle(int invId) {
 		try
 		{
@@ -372,11 +342,12 @@ public class Query {
 		}
 		catch(Exception e)
 		{			
+			throw new RuntimeException(e);
 		}		
 		return "not found";
 	};
 	
-	
+	//get price of selected rent
 	public Float getContentPrice(int rentId) {
 		try
 		{
@@ -390,11 +361,13 @@ public class Query {
 
 		}
 		catch(Exception e)
-		{			
+		{		
+			throw new RuntimeException(e);
 		}
 		return null;
 	};
 	
+	//get number of films in inventory
 	public int getSumofFilms() throws SQLException {
 		int sum = 0;
 		Statement st = con.createStatement();
@@ -411,6 +384,7 @@ public class Query {
 		return sum;
 	}
 
+	//get number of series in inventory
 	public int getSumofSeries() throws SQLException {
 		int sum = 0;
 		Statement st = con.createStatement();
@@ -427,6 +401,8 @@ public class Query {
 		return sum;
 	}
 	
+	
+	//updates user's address with a new one
 	public void newAddress(int uID, String address, String city, String country, String district, String postal, String phone) throws Exception {
 		int addrId=0;
 		CallableStatement cs = con.prepareCall("CALL newAddress(?,?,?,?,?,?);");
@@ -442,12 +418,32 @@ public class Query {
 			addrId = rs.getInt(1);
 	    } 
 		cs.close();
-		PreparedStatement ps = con.prepareStatement("UPDATE user SET  address_id = ? WHERE user_id = ?");
+		PreparedStatement ps = con.prepareStatement("UPDATE user SET  address_id = ? WHERE user_id = ?;");
         ps.setInt(1, addrId);
         ps.setInt(2, uID);
         ps.execute();
 	}
 	
+	public void updateUserInfo(int uID, int newId, String name, String lastName, String subType, Boolean active) throws Exception {
+		int act;
+		if(active) act=1;
+		else act =0;
+		PreparedStatement ps = con.prepareStatement("UPDATE user SET  user_id = ?, first_name = ?, last_name = ? WHERE user_id = ?;");
+        ps.setInt(1, newId);
+        ps.setString(2, name);
+        ps.setString(3, lastName);
+        ps.setInt(4, uID);
+        ps.execute();
+        ps.close();
+        ps = con.prepareStatement("UPDATE customer SET  subscription_type = ?, active = ? WHERE customer_id = ?;");
+        ps.setString(1, subType);
+        ps.setInt(2, act);
+        ps.setInt(3, newId);
+        ps.execute();
+        ps.close();
+	}
+	
+	//get all customers registered in database
 	public List<Customer> getAllCustomers() throws Exception{
 		List<Customer> customers=new ArrayList<Customer>();
 		Statement st = con.createStatement();
@@ -468,5 +464,12 @@ public class Query {
 		}
 		return customers;
 	}
-	
+
+	public Boolean idValid(int id) throws Exception {
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE user_id = ?");
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+		if(!rs.next()) return true;
+		else return false;
+	}
 }

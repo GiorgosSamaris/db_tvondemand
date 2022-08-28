@@ -121,17 +121,6 @@ public class PanelEmpCusInf extends JPanel {
 		phone.setBounds(400, 470, 137, 20);
 		add(phone);
 		
-		JButton save = new JButton("Save Customer Info");
-		save.setForeground(new Color(255, 99, 71));
-		save.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO: SAVE CUSTOMER INFO
-			}
-		});
-		save.setBounds(420, 495, 150, 38);
-		add(save);
-		
-
 		JLabel idLabel = new JLabel("Customer ID");
 		idLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		idLabel.setFont(new Font("Serif", Font.BOLD, 15));
@@ -206,14 +195,9 @@ public class PanelEmpCusInf extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 581, 328);
 		add(scrollPane);
-		CustomerTableModel customersTable=null;
-		final List<Customer> customers;
-		try {
-			customers = q.getAllCustomers();
-			customersTable = new CustomerTableModel(customers);
-		} catch (Exception e2) {
-			throw new RuntimeException(e2);
-		}
+		
+		List<Customer> customers=updateCustomerList(q);
+		CustomerTableModel customersTable=updateCustomerTable(q);
 		table = new JTable();
 		table.setModel(customersTable);
 		table.removeColumn(table.getColumnModel().getColumn(4));
@@ -223,16 +207,7 @@ public class PanelEmpCusInf extends JPanel {
 		table.addMouseListener(new MouseAdapter() {
 			 public void mouseClicked(MouseEvent e){
 				 try {
-//						private JTextField CusFirstName;
-//						private JTextField CusLastName;
-//						private JTextField CusID;
-//						private JTextField CusRegDate;
-//						private JTextField address;
-//						private JTextField city;
-//						private JTextField country;
-//						private JTextField district;
-//						private JTextField postal;
-//						private JTextField phone;
+					 comboBox.setModel(new DefaultComboBoxModel(setComboBox(customers.get(table.getSelectedRow()).getSubType())));
 					 CusLastName.setText(customers.get(table.getSelectedRow()).getLastname());
 					 CusID.setText(Integer.toString(customers.get(table.getSelectedRow()).getId()));
 					 address.setText(customers.get(table.getSelectedRow()).getAddress());
@@ -250,6 +225,81 @@ public class PanelEmpCusInf extends JPanel {
 			 }
 		});
 		
-
+		JButton saveInfo = new JButton("Save Customer Info");
+		saveInfo.setForeground(new Color(255, 99, 71));
+		saveInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String subType;
+					final String changed_selection = comboBox.getSelectedItem().toString();
+					if(changed_selection.equals("Films")) subType = "M";
+					else if(changed_selection.equals("Series")) subType = "S";
+					else subType = "B";
+					if(q.idValid(customers.get(table.getSelectedRow()).getId()) || customers.get(table.getSelectedRow()).getId()==Integer.parseInt(CusID.getText())) {
+						q.updateUserInfo(customers.get(table.getSelectedRow()).getId(), Integer.parseInt(CusID.getText()), CusFirstName.getText(), CusLastName.getText(), subType, CusActive.isSelected());
+						List<Customer> customers=updateCustomerList(q);
+						CustomerTableModel customersTable=updateCustomerTable(q);
+						table.setModel(customersTable);
+					}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					throw new RuntimeException(e1);
+				}
+			}
+		});
+		
+		saveInfo.setBounds(250, 495, 150, 38);
+		add(saveInfo);
+		
+		JButton saveAddress = new JButton("Save New Address");
+		saveAddress.setForeground(new Color(255, 99, 71));
+		saveAddress.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					q.newAddress(customers.get(table.getSelectedRow()).getId(), address.getText(), city.getText(), country.getText(), district.getText(), postal.getText(), phone.getText());
+					List<Customer> customers=updateCustomerList(q);
+					CustomerTableModel customersTable=updateCustomerTable(q);
+					table.setModel(customersTable);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					throw new RuntimeException(e1);
+				}
+			}
+		});
+		
+		saveAddress.setBounds(420, 495, 150, 38);
+		add(saveAddress);
 	}
+	
+	private List<Customer> updateCustomerList(Query q) {
+		List<Customer> customers = null;
+		try {
+			customers = q.getAllCustomers();
+		} catch (Exception e2) {
+			throw new RuntimeException(e2);
+		}
+		return customers;
+	}
+
+	private CustomerTableModel updateCustomerTable(Query q) {
+		CustomerTableModel customersTable=null;
+		List<Customer> customers;
+		try {
+			customers = q.getAllCustomers();
+			customersTable = new CustomerTableModel(customers);
+		} catch (Exception e2) {
+			throw new RuntimeException(e2);
+		}
+		return customersTable;
+	}
+	
+	private String[] setComboBox(String subType) {
+		String films [] =  {"Films","Series", "Both"};
+		String series [] =  {"Series", "Films","Both"};
+		String both [] =  {"Both","Films","Series" };
+		if(subType.equals("S")) return series;
+		else if(subType.equals("M")) return films;
+		else return both;
+	}
+	
 }
