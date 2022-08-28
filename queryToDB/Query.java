@@ -7,6 +7,7 @@ import java.util.*;
 import content.Film;
 import content.Rent;
 import content.Series;
+import content.TopContent;
 import customerGui.CustomerDashboard;
 import employeeGui.EmployeeDashboard;
 import loginGUI.LoginFrame;
@@ -17,6 +18,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 import java.sql.*;
+import java.sql.Date;
 import java.io.*;
 
 public class Query {
@@ -472,4 +474,52 @@ public class Query {
 		if(!rs.next()) return true;
 		else return false;
 	}
+	//get all series in inventory
+	public List<TopContent> getTopContent(int contentChoice, Date early, Date late) throws Exception
+	{
+		List<TopContent> list = new ArrayList<TopContent>();
+		if(contentChoice==0) {
+			CallableStatement cs = con.prepareCall("CALL most_rentals(?,5,?,?);");
+			cs.setString(1,"s");
+			cs.setDate(2, early);
+			cs.setDate(3, late);
+			ResultSet rs = cs.executeQuery();
+			if (rs.next() == false) 
+			{
+		        System.out.println("ResultSet in empty in Java");
+
+		    } 
+			else 
+			{
+				do{
+					TopContent tempSeries = new TopContent(rs.getInt(1), rs.getString(2), rs.getInt(3));
+					list.add(tempSeries);
+				}while(rs.next());									
+			}
+
+		}
+		else {
+			CallableStatement cs = con.prepareCall("CALL most_rentals(?,5,?,?);");
+			cs.setString(1,"m");
+			cs.setDate(2, early);
+			cs.setDate(3, late);
+			ResultSet rs = cs.executeQuery();
+			if (rs.next() == false) 
+			{
+		        System.out.println("ResultSet in empty in Java");
+
+		    } 
+			else 
+			{
+				do{
+					TopContent tempSeries = new TopContent(rs.getInt(1), rs.getString(2), rs.getInt(3));
+					list.add(tempSeries);
+				}while(rs.next());									
+			}
+		}
+			
+				return list;
+	}
+	
+
 }

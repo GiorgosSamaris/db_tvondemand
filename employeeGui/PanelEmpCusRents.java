@@ -36,8 +36,7 @@ public class PanelEmpCusRents extends JPanel {
 		try {
 			rents = new RentsTableModel(q.getAllRents());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		table = new JTable();
 		table.setModel(rents);
