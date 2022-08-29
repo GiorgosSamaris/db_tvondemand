@@ -17,6 +17,8 @@ import mockFrame.MockMenu;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
+import admingui.AdminDashboard;
+
 import java.sql.*;
 import java.sql.Date;
 import java.io.*;
@@ -58,7 +60,7 @@ public class Query {
 		System.out.println(user_type);
 		if(user_type.equals("customer"))CustomerDashboard.initiateCustomerDashboard(this); 			//starts customer GUI
 		else if (user_type.equals("employee")) EmployeeDashboard.initiateEmployeeDashBoard(this);	//starts employee GUI
-		else if (user_type.equals("admin"))	MockMenu.show(this);	//TODO Administrator GUI
+		else if (user_type.equals("admin"))	AdminDashboard.initiateAdminDashboard(this);	//TODO Administrator GUI
 		else {
 			LoginFrame.initiateLogin(this);		//Recall login window 
 			error.invokeError();				//display error dialog				
@@ -467,6 +469,27 @@ public class Query {
 		return customers;
 	}
 
+	//get all employees registered in database
+	public List<Employee> getAllEmployees() throws Exception{
+		List<Employee> employee=new ArrayList<Employee>();
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("select user_id, first_name, last_name, email, active\r\n"
+				+ "FROM user INNER JOIN employee ON employee_id = user_id;");
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+
+	    } 
+		else 
+		{
+			do{
+				Employee tmpEmployee = new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBoolean(5));
+				employee.add(tmpEmployee);
+			}while(rs.next());									
+		}
+		return employee;
+	}
+	
 	public Boolean idValid(int id) throws Exception {
 		PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE user_id = ?");
 		ps.setInt(1, id);
@@ -521,5 +544,13 @@ public class Query {
 				return list;
 	}
 	
-
+	public void deleteUser(String type, int id) throws Exception {
+		PreparedStatement ps;
+		if(type.equals("e")) ps = con.prepareStatement("DELETE user, employee FROM employee INNER JOIN user where employee_id=? AND user_id = ?;");
+		else ps = con.prepareStatement("DELETE user, customer FROM customer INNER JOIN user where customer_id=? AND user_id = ?;");
+		ps.setInt(1, id);
+        ps.setInt(2, id);
+        ps.execute();
+        ps.close();
+	}
 }

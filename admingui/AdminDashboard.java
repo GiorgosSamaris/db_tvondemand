@@ -3,14 +3,22 @@ package admingui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import loginGUI.LoginFrame;
+import queryToDB.Query;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JTextArea;
 
 public class AdminDashboard extends JFrame {
@@ -25,11 +33,11 @@ public class AdminDashboard extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void initiateAdminDashboard(Query q) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminDashboard frame = new AdminDashboard();
+					AdminDashboard frame = new AdminDashboard(q);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +49,7 @@ public class AdminDashboard extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AdminDashboard() {
+	public AdminDashboard(Query q) {
 		setTitle("CEID SS ADMIN");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 866, 542);
@@ -50,14 +58,10 @@ public class AdminDashboard extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-	
 		panelAdminAddEmp = new PanelAdminAdd();
-		panelAdminDelete = new PanelAdminDelete();
+		panelAdminDelete = new PanelAdminDelete(q);
 		panelAdminRevert = new PanelAdminRevert();
 		panelRentInc = new PanelRentInc();
-		
-		
-		
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(112, 128, 144));
@@ -70,85 +74,163 @@ public class AdminDashboard extends JFrame {
 		Admin.setBounds(102, 11, 121, 37);
 		panel.add(Admin);
 		
-		JLabel lblNewLabel = new JLabel("Welcome");
-		lblNewLabel.setFont(new Font("Serif", Font.BOLD, 20));
-		lblNewLabel.setBounds(10, 11, 82, 37);
-		panel.add(lblNewLabel);
+		JLabel welcomeLbl = new JLabel("Welcome");
+		welcomeLbl.setFont(new Font("Serif", Font.BOLD, 20));
+		welcomeLbl.setBounds(10, 11, 82, 37);
+		panel.add(welcomeLbl);
 		
-		JPanel panelAddType = new JPanel();
-		panelAddType.setBackground(new Color(105, 105, 105));
-		panelAddType.setBounds(78, 80, 166, 60);
-		panel.add(panelAddType);
-		panelAddType.setLayout(null);
+		JPanel panelAddUser = new JPanel();
+		panelAddUser.setBackground(new Color(128, 128, 128));
+		panelAddUser.setBounds(78, 80, 166, 60);
+		panel.add(panelAddUser);
+		panelAddUser.setLayout(null);
+		panelAddUser.addMouseListener(new PanelButtonMouseAdapter(panelAddUser){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelAdminAddEmp);
+			}
+		});
 		
-		JLabel lblNewLabel_1 = new JLabel("Add Customer/Employee");
-		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(0, 0, 166, 60);
-		panelAddType.add(lblNewLabel_1);
 		
-		JPanel PanelDelete = new JPanel();
-		PanelDelete.setLayout(null);
-		PanelDelete.setBackground(SystemColor.controlDkShadow);
-		PanelDelete.setBounds(78, 150, 166, 60);
-		panel.add(PanelDelete);
+		JLabel addLbl = new JLabel("Add Customer/Employee");
+		addLbl.setFont(new Font("Dialog", Font.BOLD, 12));
+		addLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		addLbl.setBounds(0, 0, 166, 60);
+		panelAddUser.add(addLbl);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Delete Customer/Employee");
-		lblNewLabel_1_1.setFont(new Font("Dialog", Font.BOLD, 11));
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1.setBounds(0, 0, 166, 60);
-		PanelDelete.add(lblNewLabel_1_1);
+		JPanel panelDelete = new JPanel();
+		panelDelete.setLayout(null);
+		panelDelete.setBackground(new Color(128, 128, 128));
+		panelDelete.setBounds(78, 150, 166, 60);
+		panel.add(panelDelete);
+		panelDelete.addMouseListener(new PanelButtonMouseAdapter(panelDelete){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelAdminDelete);
+			}
+		});
 		
-		JPanel PanelRevert = new JPanel();
-		PanelRevert.setLayout(null);
-		PanelRevert.setBackground(SystemColor.controlDkShadow);
-		PanelRevert.setBounds(78, 220, 166, 60);
-		panel.add(PanelRevert);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("Change Role");
-		lblNewLabel_1_2.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_2.setBounds(0, 0, 166, 60);
-		PanelRevert.add(lblNewLabel_1_2);
+		JLabel deleteLbl = new JLabel("Delete Customer/Employee");
+		deleteLbl.setFont(new Font("Dialog", Font.BOLD, 11));
+		deleteLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		deleteLbl.setBounds(0, 0, 166, 60);
+		panelDelete.add(deleteLbl);
+		
+		JPanel panelRevert = new JPanel();
+		panelRevert.setLayout(null);
+		panelRevert.setBackground(new Color(128, 128, 128));
+		panelRevert.setBounds(78, 220, 166, 60);
+		panel.add(panelRevert);
+		panelRevert.addMouseListener(new PanelButtonMouseAdapter(panelRevert){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelAdminRevert);
+			}
+		});
+		
+		
+		JLabel changeRoleLbl = new JLabel("Change Role");
+		changeRoleLbl.setFont(new Font("Dialog", Font.BOLD, 15));
+		changeRoleLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		changeRoleLbl.setBounds(0, 0, 166, 60);
+		panelRevert.add(changeRoleLbl);
 		
 		JPanel panelIncomeRents = new JPanel();
 		panelIncomeRents.setLayout(null);
-		panelIncomeRents.setBackground(SystemColor.controlDkShadow);
+		panelIncomeRents.setBackground(new Color(128, 128, 128));
 		panelIncomeRents.setBounds(78, 290, 166, 60);
 		panel.add(panelIncomeRents);
+		panelIncomeRents.addMouseListener(new PanelButtonMouseAdapter(panelIncomeRents){
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuClicked(panelRentInc);
+			}
+		});
 		
-		JLabel lblNewLabel_1_3 = new JLabel("Rents Income");
-		lblNewLabel_1_3.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel_1_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_3.setBounds(0, 0, 166, 60);
-		panelIncomeRents.add(lblNewLabel_1_3);
+		
+		JLabel changeRentsLbl = new JLabel("Rents Income");
+		changeRentsLbl.setFont(new Font("Dialog", Font.BOLD, 15));
+		changeRentsLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		changeRentsLbl.setBounds(0, 0, 166, 60);
+		panelIncomeRents.add(changeRentsLbl);
 		
 		JPanel panelChangePricing = new JPanel();
 		panelChangePricing.setLayout(null);
-		panelChangePricing.setBackground(SystemColor.controlDkShadow);
+		panelChangePricing.setBackground(new Color(128, 128, 128));
 		panelChangePricing.setBounds(78, 360, 166, 60);
 		panel.add(panelChangePricing);
+		panelChangePricing.addMouseListener(new PanelButtonMouseAdapter(panelChangePricing){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+//				menuClicked(pane); //TODO call change pricing
+			}
+		});
 		
-		JLabel lblNewLabel_1_4 = new JLabel("Change Pricing");
-		lblNewLabel_1_4.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel_1_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_4.setBounds(0, 0, 166, 60);
-		panelChangePricing.add(lblNewLabel_1_4);
+		
+		JLabel changePricingLbl = new JLabel("Change Pricing");
+		changePricingLbl.setFont(new Font("Dialog", Font.BOLD, 15));
+		changePricingLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		changePricingLbl.setBounds(0, 0, 166, 60);
+		panelChangePricing.add(changePricingLbl);
 		
 		JPanel panelSignOut = new JPanel();
 		panelSignOut.setLayout(null);
-		panelSignOut.setBackground(SystemColor.controlDkShadow);
+		panelSignOut.setBackground(new Color(128, 128, 128));
 		panelSignOut.setBounds(78, 430, 166, 60);
 		panel.add(panelSignOut);
+		panelSignOut.addMouseListener(new PanelButtonMouseAdapter(panelSignOut){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+				LoginFrame.initiateLogin(q);
+			}
+		});
 		
-		JLabel lblNewLabel_1_5 = new JLabel("Sign out");
-		lblNewLabel_1_5.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel_1_5.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_5.setBounds(0, 0, 166, 60);
-		panelSignOut.add(lblNewLabel_1_5);
+		JLabel signOutLbl = new JLabel("Sign out");
+		signOutLbl.setFont(new Font("Dialog", Font.BOLD, 15));
+		signOutLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		signOutLbl.setBounds(0, 0, 166, 60);
+		panelSignOut.add(signOutLbl);
 		
 		JPanel panelMainContent = new JPanel();
 		panelMainContent.setBounds(255, 0, 595, 503);
+		panelMainContent.setLayout(null);
 		contentPane.add(panelMainContent);
+		panelMainContent.add(panelAdminAddEmp);
+		panelMainContent.add(panelAdminDelete);
+		panelMainContent.add(panelAdminRevert);
+		panelMainContent.add(panelRentInc);
+	}
+	void menuClicked(JPanel panel) {
+		panelAdminAddEmp.setVisible(false);
+		panelAdminDelete.setVisible(false);
+		panelAdminRevert.setVisible(false);
+		panelRentInc.setVisible(false);
+		panel.setVisible(true);
+	}
+	
+	private class PanelButtonMouseAdapter extends MouseAdapter{
+		JPanel panel;
+		public PanelButtonMouseAdapter(JPanel panel) {
+			this.panel=panel;
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			panel.setBackground(new Color(91,91,91));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			panel.setBackground(new Color(128, 128, 128));
+		}
+		@Override
+		public void mousePressed(MouseEvent e) {
+			panel.setBackground(new Color(70,70,70));
+		}
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			panel.setBackground(new Color(128, 129, 128));
+		}
 	}
 }
