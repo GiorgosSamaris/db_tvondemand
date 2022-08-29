@@ -9,8 +9,9 @@ public class Film {
 	private int length;
 	private String rating;
 	private String specialFeatures;
+	private Float price;
 	
-	public Film(int id, String ttl, String desc, int rY, int lgth, String rt, String sF){
+	public Film(int id, String ttl, String desc, int rY, int lgth, String rt, String sF, Float price){
 		this.setId(id);
 		this.setDescription(desc);
 		this.setReleaseYear(rY);
@@ -18,6 +19,7 @@ public class Film {
 		this.setRating(rt);
 		this.setSpecialFeatures(sF);
 		this.setTitle(ttl);
+		this.setPrice(price);
 	}
 	/**
 	 * @return the id
@@ -114,5 +116,17 @@ public class Film {
 	 */
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
+	}
+	/**
+	 * @return the price
+	 */
+	public Float getPrice() {
+		return price;
+	}
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(Float price) {
+		this.price = price;
 	}
 }

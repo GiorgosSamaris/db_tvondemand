@@ -82,8 +82,8 @@ public class mockCatalogue2 extends JPanel {
 		}
 		JList seriesList = new JList(seriesArr);
 		seriesList.setBackground(new Color(112, 128, 144));
-		filmList.setBackground(new Color(112, 128, 144));
-		filmList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		seriesList.setBackground(new Color(112, 128, 144));
+		seriesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane seriesPanel = new JScrollPane(seriesList);
 		tabbedPane.addTab("Series", null, seriesPanel, null);
 		tabbedPane.setBackgroundAt(1, new Color(0, 128, 128));

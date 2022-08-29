@@ -210,7 +210,7 @@ public class Query {
 		{
 			do{
 				
-				Film tempFilm = new Film(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getInt(4), rs.getInt(7),rs.getString(8) ,rs.getString(9));
+				Film tempFilm = new Film(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getInt(4), rs.getInt(7),rs.getString(8) ,rs.getString(9), rs.getFloat(10));
 				list.add(tempFilm);
 			}while(rs.next());									
 		}
@@ -223,7 +223,7 @@ public class Query {
 	{
 		
 		List<Series> list = new ArrayList<Series>();				
-		String query = "SELECT series_id, title, description, rating, seasons, total_episodes FROM series INNER JOIN series_season USING (series_id) INNER JOIN series_episode ON series_season_id = season_id INNER JOIN series_inventory USING (episode_id) GROUP BY series_id;";
+		String query = "SELECT series_id, title, description, rating, seasons, total_episodes, price FROM series INNER JOIN series_season USING (series_id) INNER JOIN series_episode ON series_season_id = season_id INNER JOIN series_inventory USING (episode_id) GROUP BY series_id;";
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);
 		if (rs.next() == false) 
@@ -234,7 +234,7 @@ public class Query {
 		else 
 		{
 			do{
-				Series tempSeries = new Series(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
+				Series tempSeries = new Series(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getFloat(7));
 				list.add(tempSeries);
 			}while(rs.next());									
 		}
@@ -522,7 +522,7 @@ public class Query {
 					list.add(tempSeries);
 				}while(rs.next());									
 			}
-
+			cs.close();
 		}
 		else {
 			CallableStatement cs = con.prepareCall("CALL most_rentals(?,5,?,?);");
@@ -542,6 +542,7 @@ public class Query {
 					list.add(tempSeries);
 				}while(rs.next());									
 			}
+			cs.close();
 		}
 			
 				return list;
@@ -585,6 +586,19 @@ public class Query {
 		{
 			id = rs.getInt(1);								
 		}
+		getLastInsertedId.close();
 		return id;
+		
+	}
+	
+	
+	public void updateContentPrice(String content, int id, Float newPrice) throws Exception {
+		PreparedStatement ps ;
+		if(content.equals("series")) ps = con.prepareStatement("UPDATE series SET  price = ? WHERE series_id = ?;");
+		else  ps = con.prepareStatement("UPDATE film SET  price = ? WHERE film_id = ?;");
+        ps.setFloat(1, newPrice);
+        ps.setInt(2, id);
+        ps.execute();
+        ps.close();
 	}
 }

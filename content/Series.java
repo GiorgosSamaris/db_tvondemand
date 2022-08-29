@@ -7,14 +7,16 @@ public class Series {
 	private String rating;
 	private int seasons;
 	private int totalEpisodes;
+	private Float price;
 	
-	public Series(int id, String title, String descString, String rateString, int seas, int ttlEp ){
+	public Series(int id, String title, String descString, String rateString, int seas, int ttlEp, Float price ){
 		this.setDescription(descString);
 		this.setId(id);
 		this.setRating(rateString);
 		this.setSeasons(seas);
 		this.setTitle(title);
 		this.setTotalEpisodes(ttlEp);
+		this.setPrice(price);
 	}
 	
 	
@@ -90,5 +92,23 @@ public class Series {
 	 */
 	public void setTotalEpisodes(int totalEpisodes) {
 		this.totalEpisodes = totalEpisodes;
+	}
+
+
+
+	/**
+	 * @return the price
+	 */
+	public Float getPrice() {
+		return price;
+	}
+
+
+
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(Float price) {
+		this.price = price;
 	}
 }
