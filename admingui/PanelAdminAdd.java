@@ -17,17 +17,19 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 public class PanelAdminAdd extends JPanel {
-	private JTextField textFieldFN;
-	private JTextField textFieldLN;
-	private JTextField textField_email;
-	private JTextField textField_address;
-	private JTextField textField_city;
-	private JTextField textField_country;
-	private JTextField textField_district;
-	private JTextField textField_phone;
+	private JTextField textFieldEmail;
+	private JTextField textField_FirstName;
+	private JTextField textField_LastName;
+	private JTextField textField_ID;
+	private JTextField textField_Address;
+	private JTextField textField_City;
+	private JTextField textField_Country;
 	private JTextField textField_Postal;
+	private JTextField textField_Phone;
+	private JTextField textField_District;
 
 	/**
 	 * Create the panel.
@@ -37,117 +39,15 @@ public class PanelAdminAdd extends JPanel {
 		setSize(593,503);
 		setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 48, 573, 272);
-		add(panel);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
-		
-		JLabel firstname = new JLabel("First Name:");
-		firstname.setFont(new Font("Serif", Font.BOLD, 15));
-		panel.add(firstname, "2, 2, right, default");
-		
-		textFieldFN = new JTextField();
-		textFieldFN.setColumns(10);
-		panel.add(textFieldFN, "4, 2, fill, default");
-		
-		JLabel lastname = new JLabel("Last Name:");
-		lastname.setFont(new Font("Serif", Font.BOLD, 15));
-		panel.add(lastname, "2, 4, right, default");
-		
-		textFieldLN = new JTextField();
-		textFieldLN.setColumns(10);
-		panel.add(textFieldLN, "4, 4, fill, default");
-		
-		JLabel email = new JLabel("Email:");
-		email.setFont(new Font("Serif", Font.BOLD, 15));
-		panel.add(email, "2, 6, right, default");
-		
-		textField_email = new JTextField();
-		textField_email.setColumns(10);
-		panel.add(textField_email, "4, 6, fill, default");
-		
-		JLabel lblAddress = new JLabel("Address:");
-		lblAddress.setFont(new Font("Serif", Font.BOLD, 15));
-		panel.add(lblAddress, "2, 8, right, default");
-		
-		textField_address = new JTextField();
-		textField_address.setColumns(10);
-		panel.add(textField_address, "4, 8, fill, default");
-		
-		JLabel firstname_2_1 = new JLabel("City:");
-		firstname_2_1.setFont(new Font("Serif", Font.BOLD, 15));
-		panel.add(firstname_2_1, "2, 10, right, default");
-		
-		textField_city = new JTextField();
-		textField_city.setColumns(10);
-		panel.add(textField_city, "4, 10, fill, default");
-		
-		JLabel firstname_2_2 = new JLabel("Country:");
-		firstname_2_2.setFont(new Font("Serif", Font.BOLD, 15));
-		panel.add(firstname_2_2, "2, 12, right, default");
-		
-		textField_country = new JTextField();
-		textField_country.setColumns(10);
-		panel.add(textField_country, "4, 12, fill, default");
-		
-		JLabel firstname_2_3 = new JLabel("District:");
-		firstname_2_3.setFont(new Font("Serif", Font.BOLD, 15));
-		panel.add(firstname_2_3, "2, 14, right, default");
-		
-		textField_district = new JTextField();
-		textField_district.setColumns(10);
-		panel.add(textField_district, "4, 14, fill, default");
-		
-		JLabel firstname_2_4 = new JLabel("Phone:");
-		firstname_2_4.setFont(new Font("Serif", Font.BOLD, 15));
-		panel.add(firstname_2_4, "2, 16, right, default");
-		
-		textField_phone = new JTextField();
-		textField_phone.setColumns(10);
-		panel.add(textField_phone, "4, 16, fill, default");
-		
-		JLabel firstname_2_4_1 = new JLabel("Postal Code:");
-		firstname_2_4_1.setFont(new Font("Serif", Font.BOLD, 15));
-		panel.add(firstname_2_4_1, "2, 18, right, default");
-		
-		textField_Postal = new JTextField();
-		textField_Postal.setColumns(10);
-		panel.add(textField_Postal, "4, 18, fill, default");
-		
-		JButton btnNewButton = new JButton("Add User");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnADDUSER = new JButton("Add User");
+		btnADDUSER.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO NA EMFANIZEI SUCCEFUL MINIMA
 			}
 		});
-		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 15));
-		btnNewButton.setBounds(221, 362, 134, 23);
-		add(btnNewButton);
+		btnADDUSER.setFont(new Font("Dialog", Font.BOLD, 15));
+		btnADDUSER.setBounds(221, 362, 134, 23);
+		add(btnADDUSER);
 		
 		JLabel lblNewLabel_7 = new JLabel("Choose Role:");
 		lblNewLabel_7.setFont(new Font("Serif", Font.BOLD, 20));
@@ -166,6 +66,129 @@ public class PanelAdminAdd extends JPanel {
 		txtrtheNewlyRegistered.setText("*The newly registered Customer has a type \"Both\" default setting as Subcription     type.Also be aware that the new user will be seen from the next login.");
 		txtrtheNewlyRegistered.setBounds(10, 424, 557, 53);
 		add(txtrtheNewlyRegistered);
+		
+		JLabel lastNameLabel = new JLabel("Last Name:");
+		lastNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lastNameLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		lastNameLabel.setBounds(10, 124, 114, 20);
+		add(lastNameLabel);
+		
+		JLabel firstNameLabel = new JLabel("First Name:");
+		firstNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		firstNameLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		firstNameLabel.setBounds(10, 94, 114, 20);
+		add(firstNameLabel);
+		
+		JLabel emailLabel = new JLabel("Email:");
+		emailLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		emailLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		emailLabel.setBounds(10, 64, 114, 20);
+		add(emailLabel);
+		
+		JLabel lblCustomerId = new JLabel("ID:");
+		lblCustomerId.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCustomerId.setFont(new Font("Serif", Font.BOLD, 15));
+		lblCustomerId.setBounds(10, 154, 121, 20);
+		add(lblCustomerId);
+		
+		JLabel phoneLabel = new JLabel("Phone:");
+		phoneLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		phoneLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		phoneLabel.setBounds(300, 185, 129, 20);
+		add(phoneLabel);
+		
+		JLabel postalLabel = new JLabel("Postal:");
+		postalLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		postalLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		postalLabel.setBounds(300, 154, 129, 20);
+		add(postalLabel);
+		
+		JLabel districtLabel = new JLabel("District:");
+		districtLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		districtLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		districtLabel.setBounds(310, 216, 121, 20);
+		add(districtLabel);
+		
+		JLabel countryLabel = new JLabel("Country:");
+		countryLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		countryLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		countryLabel.setBounds(300, 124, 129, 20);
+		add(countryLabel);
+		
+		JLabel cityLabel = new JLabel("City:");
+		cityLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		cityLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		cityLabel.setBounds(300, 94, 129, 20);
+		add(cityLabel);
+		
+		JLabel addressLabel = new JLabel("Address:");
+		addressLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		addressLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		addressLabel.setBounds(300, 64, 129, 20);
+		add(addressLabel);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(105, 105, 105));
+		panel.setBounds(10, 196, 196, 37);
+		add(panel);
+		
+		JLabel subTypeLbl_1 = new JLabel("Subscription type:");
+		subTypeLbl_1.setHorizontalAlignment(SwingConstants.CENTER);
+		subTypeLbl_1.setFont(new Font("Serif", Font.BOLD, 15));
+		panel.add(subTypeLbl_1);
+		
+		JComboBox comboBox_SubType = new JComboBox();
+		panel.add(comboBox_SubType);
+		
+		textFieldEmail = new JTextField();
+		textFieldEmail.setBounds(130, 66, 125, 20);
+		add(textFieldEmail);
+		textFieldEmail.setColumns(10);
+		
+		textField_FirstName = new JTextField();
+		textField_FirstName.setColumns(10);
+		textField_FirstName.setBounds(130, 93, 125, 20);
+		add(textField_FirstName);
+		
+		textField_LastName = new JTextField();
+		textField_LastName.setColumns(10);
+		textField_LastName.setBounds(134, 126, 121, 20);
+		add(textField_LastName);
+		
+		textField_ID = new JTextField();
+		textField_ID.setColumns(10);
+		textField_ID.setBounds(134, 155, 121, 20);
+		add(textField_ID);
+		
+		textField_Address = new JTextField();
+		textField_Address.setColumns(10);
+		textField_Address.setBounds(432, 66, 121, 20);
+		add(textField_Address);
+		
+		textField_City = new JTextField();
+		textField_City.setColumns(10);
+		textField_City.setBounds(432, 96, 121, 20);
+		add(textField_City);
+		
+		textField_Country = new JTextField();
+		textField_Country.setColumns(10);
+		textField_Country.setBounds(432, 126, 121, 20);
+		add(textField_Country);
+		
+		textField_Postal = new JTextField();
+		textField_Postal.setColumns(10);
+		textField_Postal.setBounds(432, 156, 121, 20);
+		add(textField_Postal);
+		
+		textField_Phone = new JTextField();
+		textField_Phone.setColumns(10);
+		textField_Phone.setBounds(432, 187, 121, 20);
+		add(textField_Phone);
+		
+		textField_District = new JTextField();
+		textField_District.setColumns(10);
+		textField_District.setBounds(432, 218, 121, 20);
+		add(textField_District);
 
 	}
 }
