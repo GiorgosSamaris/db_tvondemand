@@ -29,6 +29,7 @@ public class AdminDashboard extends JFrame {
 	private PanelAdminDelete panelAdminDelete;
 	private PanelAdminRevert panelAdminRevert;
 	private PanelRentInc panelRentInc;
+	private PanelChangePrc panelChangePrice;
 
 	/**
 	 * Launch the application.
@@ -61,7 +62,8 @@ public class AdminDashboard extends JFrame {
 		panelAdminAddEmp = new PanelAdminAdd(q);
 		panelAdminDelete = new PanelAdminDelete(q);
 		panelAdminRevert = new PanelAdminRevert();
-		panelRentInc = new PanelRentInc();
+		panelRentInc = new PanelRentInc(q);
+		panelChangePrice = new PanelChangePrc(q);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(112, 128, 144));
@@ -164,7 +166,7 @@ public class AdminDashboard extends JFrame {
 		panelChangePricing.addMouseListener(new PanelButtonMouseAdapter(panelChangePricing){
 			@Override
 			public void mouseClicked(MouseEvent e) {
-//				menuClicked(pane); //TODO call change pricing
+				menuClicked(panelChangePrice); 
 			}
 		});
 		
@@ -202,6 +204,7 @@ public class AdminDashboard extends JFrame {
 		panelMainContent.add(panelAdminDelete);
 		panelMainContent.add(panelAdminRevert);
 		panelMainContent.add(panelRentInc);
+		panelMainContent.add(panelChangePrice);
 		menuClicked(panelAdminAddEmp);
 	}
 	void menuClicked(JPanel panel) {
@@ -209,6 +212,7 @@ public class AdminDashboard extends JFrame {
 		panelAdminDelete.setVisible(false);
 		panelAdminRevert.setVisible(false);
 		panelRentInc.setVisible(false);
+		panelChangePrice.setVisible(false);
 		panel.setVisible(true);
 	}
 	

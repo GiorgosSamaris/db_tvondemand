@@ -5,6 +5,9 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import queryToDB.Query;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
@@ -16,8 +19,9 @@ public class PanelRentInc extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param q 
 	 */
-	public PanelRentInc() {
+	public PanelRentInc(Query q) {
 		setBackground(new Color(105, 105, 105));
 		setSize(593,503);
 		setLayout(null);

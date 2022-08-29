@@ -13,13 +13,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
+import queryToDB.Query;
+
 public class PanelChangePrc extends JPanel {
 	private JTextField textFieldPrice;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelChangePrc() {
+	public PanelChangePrc(Query q) {
 		setBackground(new Color(105, 105, 105));
 		setSize(593,503);
 		setLayout(null);

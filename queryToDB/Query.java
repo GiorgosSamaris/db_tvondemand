@@ -550,7 +550,7 @@ public class Query {
 	public void deleteUser(String type, int id) throws Exception {
 		PreparedStatement ps;
 		if(type.equals("e")) ps = con.prepareStatement("DELETE user, employee FROM employee INNER JOIN user where employee_id=? AND user_id = ?;");
-		else ps = con.prepareStatement("DELETE user, customer FROM customer INNER JOIN user where customer_id=? AND user_id = ?;");
+		else ps = con.prepareStatement("DELETE user,customer from customer inner join user where customer_id=? AND user_id = ?;");
 		ps.setInt(1, id);
         ps.setInt(2, id);
         ps.execute();
