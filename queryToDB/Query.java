@@ -298,6 +298,7 @@ public class Query {
 		}
 		catch(Exception e)
 		{			
+			throw new RuntimeException(e);
 		}
 		try
 		{
@@ -332,6 +333,7 @@ public class Query {
 		}
 		catch(Exception e)
 		{			
+			throw new RuntimeException(e);
 		}
 		try
 		{
@@ -497,6 +499,7 @@ public class Query {
 		if(!rs.next()) return true;
 		else return false;
 	}
+	
 	//get all series in inventory
 	public List<TopContent> getTopContent(int contentChoice, Date early, Date late) throws Exception
 	{
@@ -552,5 +555,36 @@ public class Query {
         ps.setInt(2, id);
         ps.execute();
         ps.close();
+	}
+	
+	public int addUser(String type, String name, String lastName, String email, String subType) throws Exception {
+		int id=0;
+		PreparedStatement insertUser;
+		PreparedStatement insertType;
+		insertUser = con.prepareStatement("insert into user(`first_name`, `last_name`, `email`, `address_id`) values(?,?,?,7);");
+		insertUser.setString(1, name);
+		insertUser.setString(2, lastName);
+		insertUser.setString(3, email);
+		if(type.equals("e")) insertType = con.prepareStatement("insert into employee(`employee_id`, `create_date`, `active`) values(LAST_INSERT_ID(),now(),1);");
+		else { 
+			insertType = con.prepareStatement("insert into customer(`customer_id`, `create_date`, `active`,`subscription_type`) values(LAST_INSERT_ID(),now(),1,?);");
+			insertType.setString(1, subType);
+		}
+		insertUser.execute();
+		insertType.execute();
+		insertUser.close();
+		insertType.close();
+		Statement getLastInsertedId = con.createStatement();
+		ResultSet rs = getLastInsertedId.executeQuery("SELECT LAST_INSERT_ID();");
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+
+	    } 
+		else 
+		{
+			id = rs.getInt(1);								
+		}
+		return id;
 	}
 }

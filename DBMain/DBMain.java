@@ -27,7 +27,7 @@ public class DBMain {
 		}
 		catch (Exception e)
 		{
-			System.out.println(e);
+			throw new RuntimeException(e);
 		}
 
 		Query qri = new Query(con);

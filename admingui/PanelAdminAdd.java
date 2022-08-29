@@ -11,57 +11,46 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+import queryToDB.Query;
+
+
 public class PanelAdminAdd extends JPanel {
-	private JTextField textFieldEmail;
-	private JTextField textField_FirstName;
-	private JTextField textField_LastName;
-	private JTextField textField_ID;
-	private JTextField textField_Address;
-	private JTextField textField_City;
-	private JTextField textField_Country;
-	private JTextField textField_Postal;
-	private JTextField textField_Phone;
-	private JTextField textField_District;
+	private JTextField emailTxtFld;
+	private JTextField nameTxtFld;
+	private JTextField lNameTxtFld;
+	private JTextField addressTxtFld;
+	private JTextField cityTxtFld;
+	private JTextField countryTxtFld;
+	private JTextField postalTxtFld;
+	private JTextField phoneFldTxt;
+	private JTextField districtFldTxt;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelAdminAdd() {
+	public PanelAdminAdd(Query q) {
 		setBackground(new Color(105, 105, 105));
 		setSize(593,503);
 		setLayout(null);
 		
-		JButton btnADDUSER = new JButton("Add User");
-		btnADDUSER.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO NA EMFANIZEI SUCCEFUL MINIMA
-			}
-		});
-		btnADDUSER.setFont(new Font("Dialog", Font.BOLD, 15));
-		btnADDUSER.setBounds(221, 362, 134, 23);
-		add(btnADDUSER);
+		JLabel titleLbl = new JLabel("Choose Role:");
+		titleLbl.setFont(new Font("Serif", Font.BOLD, 20));
+		titleLbl.setBounds(10, 11, 125, 23);
+		add(titleLbl);
 		
-		JLabel lblNewLabel_7 = new JLabel("Choose Role:");
-		lblNewLabel_7.setFont(new Font("Serif", Font.BOLD, 20));
-		lblNewLabel_7.setBounds(10, 11, 125, 23);
-		add(lblNewLabel_7);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Customer", "Employee"}));
-		comboBox.setBounds(134, 15, 92, 22);
-		add(comboBox);
-		
-		JTextArea txtrtheNewlyRegistered = new JTextArea();
-		txtrtheNewlyRegistered.setBackground(new Color(0, 128, 128));
-		txtrtheNewlyRegistered.setFont(new Font("Serif", Font.BOLD, 15));
-		txtrtheNewlyRegistered.setLineWrap(true);
-		txtrtheNewlyRegistered.setText("*The newly registered Customer has a type \"Both\" default setting as Subcription     type.Also be aware that the new user will be seen from the next login.");
-		txtrtheNewlyRegistered.setBounds(10, 424, 557, 53);
-		add(txtrtheNewlyRegistered);
+		JTextArea infoTxt = new JTextArea();
+		infoTxt.setBackground(new Color(105, 105, 105));
+		infoTxt.setFont(new Font("Serif", Font.BOLD, 15));
+		infoTxt.setLineWrap(true);
+		infoTxt.setText("Added user will appear in next log in.");
+		infoTxt.setBounds(10, 424, 557, 53);
+		add(infoTxt);
 		
 		JLabel lastNameLabel = new JLabel("Last Name:");
 		lastNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -80,12 +69,6 @@ public class PanelAdminAdd extends JPanel {
 		emailLabel.setFont(new Font("Serif", Font.BOLD, 15));
 		emailLabel.setBounds(10, 64, 114, 20);
 		add(emailLabel);
-		
-		JLabel lblCustomerId = new JLabel("ID:");
-		lblCustomerId.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCustomerId.setFont(new Font("Serif", Font.BOLD, 15));
-		lblCustomerId.setBounds(10, 154, 121, 20);
-		add(lblCustomerId);
 		
 		JLabel phoneLabel = new JLabel("Phone:");
 		phoneLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -128,63 +111,88 @@ public class PanelAdminAdd extends JPanel {
 		panel.setBounds(10, 196, 196, 37);
 		add(panel);
 		
-		JLabel subTypeLbl_1 = new JLabel("Subscription type:");
-		subTypeLbl_1.setHorizontalAlignment(SwingConstants.CENTER);
-		subTypeLbl_1.setFont(new Font("Serif", Font.BOLD, 15));
-		panel.add(subTypeLbl_1);
+		JLabel subTypeLbl = new JLabel("Subscription type:");
+		subTypeLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		subTypeLbl.setFont(new Font("Serif", Font.BOLD, 15));
+		panel.add(subTypeLbl);
 		
-		JComboBox comboBox_SubType = new JComboBox();
-		panel.add(comboBox_SubType);
+		JComboBox subTypeCmbBx = new JComboBox();
+		subTypeCmbBx.setBounds(134, 15, 92, 22);
+		subTypeCmbBx.setModel(new DefaultComboBoxModel(new String[] {"Films", "Series","Both"}));
+		panel.add(subTypeCmbBx);
 		
-		textFieldEmail = new JTextField();
-		textFieldEmail.setBounds(130, 66, 125, 20);
-		add(textFieldEmail);
-		textFieldEmail.setColumns(10);
+		JComboBox userTypeCmbBx = new JComboBox();
+		userTypeCmbBx.setModel(new DefaultComboBoxModel(new String[] {"Customer", "Employee"}));
+		userTypeCmbBx.setBounds(134, 15, 92, 22);
+		add(userTypeCmbBx);
 		
-		textField_FirstName = new JTextField();
-		textField_FirstName.setColumns(10);
-		textField_FirstName.setBounds(130, 93, 125, 20);
-		add(textField_FirstName);
+		emailTxtFld = new JTextField();
+		emailTxtFld.setBounds(130, 66, 125, 20);
+		add(emailTxtFld);
+		emailTxtFld.setColumns(10);
 		
-		textField_LastName = new JTextField();
-		textField_LastName.setColumns(10);
-		textField_LastName.setBounds(134, 126, 121, 20);
-		add(textField_LastName);
+		nameTxtFld = new JTextField();
+		nameTxtFld.setColumns(10);
+		nameTxtFld.setBounds(130, 93, 125, 20);
+		add(nameTxtFld);
 		
-		textField_ID = new JTextField();
-		textField_ID.setColumns(10);
-		textField_ID.setBounds(134, 155, 121, 20);
-		add(textField_ID);
+		lNameTxtFld = new JTextField();
+		lNameTxtFld.setColumns(10);
+		lNameTxtFld.setBounds(134, 126, 121, 20);
+		add(lNameTxtFld);
 		
-		textField_Address = new JTextField();
-		textField_Address.setColumns(10);
-		textField_Address.setBounds(432, 66, 121, 20);
-		add(textField_Address);
+		addressTxtFld = new JTextField();
+		addressTxtFld.setColumns(10);
+		addressTxtFld.setBounds(432, 66, 121, 20);
+		add(addressTxtFld);
 		
-		textField_City = new JTextField();
-		textField_City.setColumns(10);
-		textField_City.setBounds(432, 96, 121, 20);
-		add(textField_City);
+		cityTxtFld = new JTextField();
+		cityTxtFld.setColumns(10);
+		cityTxtFld.setBounds(432, 96, 121, 20);
+		add(cityTxtFld);
 		
-		textField_Country = new JTextField();
-		textField_Country.setColumns(10);
-		textField_Country.setBounds(432, 126, 121, 20);
-		add(textField_Country);
+		countryTxtFld = new JTextField();
+		countryTxtFld.setColumns(10);
+		countryTxtFld.setBounds(432, 126, 121, 20);
+		add(countryTxtFld);
 		
-		textField_Postal = new JTextField();
-		textField_Postal.setColumns(10);
-		textField_Postal.setBounds(432, 156, 121, 20);
-		add(textField_Postal);
+		postalTxtFld = new JTextField();
+		postalTxtFld.setColumns(10);
+		postalTxtFld.setBounds(432, 156, 121, 20);
+		add(postalTxtFld);
 		
-		textField_Phone = new JTextField();
-		textField_Phone.setColumns(10);
-		textField_Phone.setBounds(432, 187, 121, 20);
-		add(textField_Phone);
+		phoneFldTxt = new JTextField();
+		phoneFldTxt.setColumns(10);
+		phoneFldTxt.setBounds(432, 187, 121, 20);
+		add(phoneFldTxt);
 		
-		textField_District = new JTextField();
-		textField_District.setColumns(10);
-		textField_District.setBounds(432, 218, 121, 20);
-		add(textField_District);
+		districtFldTxt = new JTextField();
+		districtFldTxt.setColumns(10);
+		districtFldTxt.setBounds(432, 218, 121, 20);
+		add(districtFldTxt);
 
+		JButton addBtn = new JButton("Add User");
+		addBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int newId;
+				String subType;
+				if(subTypeCmbBx.getSelectedIndex()==0) subType="M";
+				else if(subTypeCmbBx.getSelectedIndex()==1) subType="S";
+				else subType = "B";
+				try {
+					if(userTypeCmbBx.getSelectedIndex()==1) newId = q.addUser("e", nameTxtFld.getText(), lNameTxtFld.getText(), emailTxtFld.getText(), subType);
+					else newId = q.addUser("c", nameTxtFld.getText(), lNameTxtFld.getText(), emailTxtFld.getText(), subType);
+					System.out.println(newId);
+					q.newAddress(newId, addressTxtFld.getText(), cityTxtFld.getText(), countryTxtFld.getText(), districtFldTxt.getText(), postalTxtFld.getText(), phoneFldTxt.getText());
+				} catch (Exception e1) {
+					throw new RuntimeException(e1);
+				}
+			}
+		});
+		addBtn.setFont(new Font("Dialog", Font.BOLD, 15));
+		addBtn.setBounds(221, 362, 134, 23);
+		add(addBtn);
+		
 	}
+
 }

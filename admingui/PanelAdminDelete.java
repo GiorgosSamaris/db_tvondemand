@@ -67,16 +67,23 @@ public class PanelAdminDelete extends JPanel {
 		scrollPane.setViewportView(table);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
+		JLabel infoLbl = new JLabel("Changes will appear on next log in");
+		infoLbl.setFont(new Font("Serif", Font.BOLD, 12));
+		infoLbl.setBounds(340, 458, 200, 23);
+		add(infoLbl);
+		infoLbl.setVisible(false);
+		
 		JButton btnDelete = new JButton("Delete User");
 		btnDelete.setForeground(new Color(255, 127, 80));
 		btnDelete.setFont(new Font("Dialog", Font.BOLD, 15));
-		btnDelete.setBounds(225, 458, 131, 23);
+		btnDelete.setBounds(200, 458, 131, 23);
 		add(btnDelete);
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(comboBox.getSelectedIndex()==0)q.deleteUser("c", customers.get(table.getSelectedRow()).getId());
 					else q.deleteUser("e", employees.get(table.getSelectedRow()).getId());
+					infoLbl.setVisible(true);
 				} catch (Exception e1) {
 					throw new RuntimeException(e1);
 				}

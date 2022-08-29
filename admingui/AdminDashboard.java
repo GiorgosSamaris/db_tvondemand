@@ -58,7 +58,7 @@ public class AdminDashboard extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		panelAdminAddEmp = new PanelAdminAdd();
+		panelAdminAddEmp = new PanelAdminAdd(q);
 		panelAdminDelete = new PanelAdminDelete(q);
 		panelAdminRevert = new PanelAdminRevert();
 		panelRentInc = new PanelRentInc();
@@ -202,6 +202,7 @@ public class AdminDashboard extends JFrame {
 		panelMainContent.add(panelAdminDelete);
 		panelMainContent.add(panelAdminRevert);
 		panelMainContent.add(panelRentInc);
+		menuClicked(panelAdminAddEmp);
 	}
 	void menuClicked(JPanel panel) {
 		panelAdminAddEmp.setVisible(false);
