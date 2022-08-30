@@ -5,8 +5,10 @@ import mockFrame.*;
 import java.util.*;
 
 import content.Film;
+import content.FilmIncome;
 import content.Rent;
 import content.Series;
+import content.SeriesIncome;
 import content.TopContent;
 import customerGui.CustomerDashboard;
 import employeeGui.EmployeeDashboard;
@@ -616,6 +618,43 @@ public class Query {
 			return new String[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)};									
 		}
 		return new String[] {"empty"};
-		
+	}
+	
+	public List<SeriesIncome> getSeriesPayment() throws Exception {
+		List<SeriesIncome> list= new ArrayList<SeriesIncome>();
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("CALL monthly_payment('s')");
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+
+	    } 
+		else 
+		{
+			do{
+				SeriesIncome tmpList = new SeriesIncome(rs.getFloat(1), rs.getInt(2), rs.getInt(3));
+				list.add(tmpList);
+			}while(rs.next());									
+		}
+		return list;
+	}
+	
+	public List<FilmIncome> getFilmsPayment() throws Exception {
+		List<FilmIncome> list= new ArrayList<FilmIncome>();
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("CALL monthly_payment('s')");
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+
+	    } 
+		else 
+		{
+			do{
+				FilmIncome tmpList = new FilmIncome(rs.getFloat(1), rs.getInt(2), rs.getInt(3));
+				list.add(tmpList);
+			}while(rs.next());									
+		}
+		return list;
 	}
 }
