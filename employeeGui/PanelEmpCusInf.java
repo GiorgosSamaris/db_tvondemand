@@ -236,7 +236,7 @@ public class PanelEmpCusInf extends JPanel {
 					else if(changed_selection.equals("Series")) subType = "S";
 					else subType = "B";
 					if(q.idValid(customers.get(table.getSelectedRow()).getId()) || customers.get(table.getSelectedRow()).getId()==Integer.parseInt(CusID.getText())) {
-						q.updateUserInfo(customers.get(table.getSelectedRow()).getId(), Integer.parseInt(CusID.getText()), CusFirstName.getText(), CusLastName.getText(), subType, CusActive.isSelected());
+						q.updateCustomerInfo(customers.get(table.getSelectedRow()).getId(), Integer.parseInt(CusID.getText()), CusFirstName.getText(), CusLastName.getText(), subType, CusActive.isSelected());
 						List<Customer> customers=updateCustomerList(q);
 						CustomerTableModel customersTable=updateCustomerTable(q);
 						table.setModel(customersTable);

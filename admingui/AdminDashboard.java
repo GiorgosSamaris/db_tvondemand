@@ -27,7 +27,7 @@ public class AdminDashboard extends JFrame {
 	
 	private PanelAdminAdd panelAdminAddEmp;
 	private PanelAdminDelete panelAdminDelete;
-	private PanelAdminRevert panelAdminRevert;
+	private PanelAdminSwapRoles panelAdminRevert;
 	private PanelRentInc panelRentInc;
 	private PanelChangePrc panelChangePrice;
 
@@ -61,7 +61,7 @@ public class AdminDashboard extends JFrame {
 		
 		panelAdminAddEmp = new PanelAdminAdd(q);
 		panelAdminDelete = new PanelAdminDelete(q);
-		panelAdminRevert = new PanelAdminRevert();
+		panelAdminRevert = new PanelAdminSwapRoles(q);
 		panelRentInc = new PanelRentInc(q);
 		panelChangePrice = new PanelChangePrc(q);
 		
@@ -132,11 +132,11 @@ public class AdminDashboard extends JFrame {
 		});
 		
 		
-		JLabel changeRoleLbl = new JLabel("Change Role");
-		changeRoleLbl.setFont(new Font("Dialog", Font.BOLD, 15));
-		changeRoleLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		changeRoleLbl.setBounds(0, 0, 166, 60);
-		panelRevert.add(changeRoleLbl);
+		JLabel swapRoleLbl = new JLabel("Swap Role");
+		swapRoleLbl.setFont(new Font("Dialog", Font.BOLD, 15));
+		swapRoleLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		swapRoleLbl.setBounds(0, 0, 166, 60);
+		panelRevert.add(swapRoleLbl);
 		
 		JPanel panelIncomeRents = new JPanel();
 		panelIncomeRents.setLayout(null);

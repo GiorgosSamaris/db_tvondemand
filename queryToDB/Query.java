@@ -62,7 +62,7 @@ public class Query {
 		System.out.println(user_type);
 		if(user_type.equals("customer"))CustomerDashboard.initiateCustomerDashboard(this); 			//starts customer GUI
 		else if (user_type.equals("employee")) EmployeeDashboard.initiateEmployeeDashBoard(this);	//starts employee GUI
-		else if (user_type.equals("admin"))	AdminDashboard.initiateAdminDashboard(this);	//TODO Administrator GUI
+		else if (user_type.equals("admin"))	AdminDashboard.initiateAdminDashboard(this);			//stars Administrator GUI
 		else {
 			LoginFrame.initiateLogin(this);		//Recall login window 
 			error.invokeError();				//display error dialog				
@@ -206,7 +206,6 @@ public class Query {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-
 	    } 
 		else 
 		{
@@ -231,7 +230,6 @@ public class Query {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-
 	    } 
 		else 
 		{
@@ -252,7 +250,6 @@ public class Query {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-
 	    } 
 		else 
 		{
@@ -272,7 +269,6 @@ public class Query {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-
 	    } 
 		else 
 		{
@@ -296,7 +292,6 @@ public class Query {
 			{
 				return "Film";			
 			}
-
 		}
 		catch(Exception e)
 		{			
@@ -311,7 +306,6 @@ public class Query {
 			{
 				return "Series Episode";			
 			}
-
 		}
 		catch(Exception e)
 		{	
@@ -331,7 +325,6 @@ public class Query {
 			{
 				return rs.getString(1);			
 			}
-
 		}
 		catch(Exception e)
 		{			
@@ -346,7 +339,6 @@ public class Query {
 			{
 				return rs.getString(1);			
 			}
-
 		}
 		catch(Exception e)
 		{			
@@ -366,7 +358,6 @@ public class Query {
 			{
 				return rs.getFloat(1);			
 			}
-
 		}
 		catch(Exception e)
 		{		
@@ -383,7 +374,6 @@ public class Query {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-
 	    } 
 		else 
 		{
@@ -400,7 +390,6 @@ public class Query {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-
 	    } 
 		else 
 		{
@@ -432,7 +421,8 @@ public class Query {
         ps.execute();
 	}
 	
-	public void updateUserInfo(int uID, int newId, String name, String lastName, String subType, Boolean active) throws Exception {
+	//update customer info
+	public void updateCustomerInfo(int uID, int newId, String name, String lastName, String subType, Boolean active) throws Exception {
 		int act;
 		if(active) act=1;
 		else act =0;
@@ -460,7 +450,6 @@ public class Query {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-
 	    } 
 		else 
 		{
@@ -482,7 +471,6 @@ public class Query {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-
 	    } 
 		else 
 		{
@@ -494,6 +482,27 @@ public class Query {
 		return employee;
 	}
 	
+	//get all administrators registered in database
+	public List<Admin> getAllAdmins() throws Exception{
+		List<Admin> admins=new ArrayList<Admin>();
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("select user_id, first_name, last_name, email\r\n"
+				+ "FROM user INNER JOIN administrator ON administrator_id = user_id;");
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+	    } 
+		else 
+		{
+			do{
+				Admin tmpAdmin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+				admins.add(tmpAdmin);
+			}while(rs.next());									
+		}
+		return admins;
+	}
+	
+	//returns true if ID set is available
 	public Boolean idValid(int id) throws Exception {
 		PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE user_id = ?");
 		ps.setInt(1, id);
@@ -515,7 +524,6 @@ public class Query {
 			if (rs.next() == false) 
 			{
 		        System.out.println("ResultSet in empty in Java");
-
 		    } 
 			else 
 			{
@@ -535,7 +543,6 @@ public class Query {
 			if (rs.next() == false) 
 			{
 		        System.out.println("ResultSet in empty in Java");
-
 		    } 
 			else 
 			{
@@ -546,10 +553,10 @@ public class Query {
 			}
 			cs.close();
 		}
-			
 				return list;
 	}
 	
+	//delete employee or customer
 	public void deleteUser(String type, int id) throws Exception {
 		PreparedStatement ps;
 		if(type.equals("e")) ps = con.prepareStatement("DELETE user, employee FROM employee INNER JOIN user where employee_id=? AND user_id = ?;");
@@ -560,6 +567,28 @@ public class Query {
         ps.close();
 	}
 	
+	//Demote admin to employee or promote employee to admin
+	public void swapAdminEmployee(String typeBeforeSwap,int id) throws Exception {
+		PreparedStatement delete;
+		PreparedStatement insert;
+		if(typeBeforeSwap.equals("a")){
+			delete = con.prepareStatement("DELETE administrator FROM administrator where administrator_id=?;");
+			insert = con.prepareStatement("INSERT INTO `employee` (`employee_id`, `active`, `create_date`) VALUES (?, 1, now());");
+		}
+		else {
+			delete = con.prepareStatement("DELETE employee FROM employee where employee_id=?;");
+			insert = con.prepareStatement("INSERT INTO `administrator` (`administrator_id`, `create_date`) VALUES (?, now());");
+
+		}
+		delete.setInt(1, id);
+        delete.execute();
+        delete.close();
+        insert.setInt(1, id);
+        insert.execute();
+        insert.close();
+	}
+	
+	//register a customer or employee
 	public int addUser(String type, String name, String lastName, String email, String subType) throws Exception {
 		int id=0;
 		PreparedStatement insertUser;
@@ -582,7 +611,6 @@ public class Query {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-
 	    } 
 		else 
 		{
@@ -590,10 +618,9 @@ public class Query {
 		}
 		getLastInsertedId.close();
 		return id;
-		
 	}
 	
-	
+	//updates the price of content in database
 	public void updateContentPrice(String content, int id, Float newPrice) throws Exception {
 		PreparedStatement ps ;
 		if(content.equals("series")) ps = con.prepareStatement("UPDATE series SET  price = ? WHERE series_id = ?;");
@@ -604,6 +631,7 @@ public class Query {
         ps.close();
 	}
 	
+	//returns full address of given user
 	public String[] getUserAddres(int id) throws Exception {
 		PreparedStatement ps = con.prepareStatement("select address, city, country,district,postal_code,phone from user INNER JOIN address USING(address_id) inner join city USING(city_id) INNER JOIN country USING(country_id) WHERE user_id = ? ;");
 		ps.setInt(1, id);
@@ -611,7 +639,6 @@ public class Query {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-
 	    } 
 		else 
 		{
@@ -620,6 +647,7 @@ public class Query {
 		return new String[] {"empty"};
 	}
 	
+	//returns income from series per month
 	public List<SeriesIncome> getSeriesPayment() throws Exception {
 		List<SeriesIncome> list= new ArrayList<SeriesIncome>();
 		Statement st = con.createStatement();
@@ -627,7 +655,6 @@ public class Query {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-
 	    } 
 		else 
 		{
@@ -639,6 +666,7 @@ public class Query {
 		return list;
 	}
 	
+	//returns income from films per month
 	public List<FilmIncome> getFilmsPayment() throws Exception {
 		List<FilmIncome> list= new ArrayList<FilmIncome>();
 		Statement st = con.createStatement();
@@ -646,7 +674,6 @@ public class Query {
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");
-
 	    } 
 		else 
 		{
@@ -657,4 +684,6 @@ public class Query {
 		}
 		return list;
 	}
+	
+	
 }
