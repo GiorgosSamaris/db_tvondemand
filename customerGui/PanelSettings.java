@@ -27,18 +27,24 @@ import javax.swing.JTextField;
 public class PanelSettings extends JPanel {
 	
 	private static Query qri = null;
-	private JTextField Address_1;
-	private JTextField City_1;
-	private JTextField Country_1;
-	private JTextField District_1;
-	private JTextField Phone_1;
-	private JTextField Postal_1;
+	private JTextField addressTxtFld;
+	private JTextField cityTxtFld;
+	private JTextField countryTxtFld;
+	private JTextField districtTxtFld;
+	private JTextField phoneTxtFld;
+	private JTextField postalTxtFld;
 	/**
 	 * Create the panel.
 	 */
 	public PanelSettings(Query query) {
 		qri = query;
-		
+		String[] Address = {"Address"};
+		try {
+			Address = qri.getUserAddres(qri.usr.getUser_id());
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		setBackground(new Color(112, 128, 144));
 		setBounds(0, 0, 522,378);
 		setLayout(null);
@@ -143,10 +149,9 @@ public class PanelSettings extends JPanel {
 		textArea.setVisible(false);
 		add(textArea);
 		
-		JButton save = new JButton("Save");
+		JButton save = new JButton("Save Info");
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO :ADD fields to change address
 				try
 				{
 					final boolean changed_active = activechckbx.isSelected();;
@@ -167,68 +172,95 @@ public class PanelSettings extends JPanel {
 		});
 		save.setForeground(new Color(139, 69, 19));
 		save.setFont(new Font("Serif", Font.BOLD, 15));
-		save.setBounds(89, 313, 89, 23);
+		save.setBounds(89, 313, 95, 23);
 		add(save);
 		
-		JLabel lblAddress = new JLabel("Address:");
-		lblAddress.setFont(new Font("Serif", Font.BOLD, 15));
-		lblAddress.setBounds(291, 68, 70, 20);
-		add(lblAddress);
+		JLabel addressLbl = new JLabel("Address:");
+		addressLbl.setFont(new Font("Serif", Font.BOLD, 15));
+		addressLbl.setBounds(291, 68, 70, 20);
+		add(addressLbl);
 		
-		JLabel firstname_2_1 = new JLabel("City:");
-		firstname_2_1.setFont(new Font("Serif", Font.BOLD, 15));
-		firstname_2_1.setBounds(291, 109, 64, 20);
-		add(firstname_2_1);
+		JLabel cityLbl = new JLabel("City:");
+		cityLbl.setFont(new Font("Serif", Font.BOLD, 15));
+		cityLbl.setBounds(291, 109, 64, 20);
+		add(cityLbl);
 		
-		JLabel firstname_2_2 = new JLabel("Country:");
-		firstname_2_2.setFont(new Font("Serif", Font.BOLD, 15));
-		firstname_2_2.setBounds(291, 152, 70, 20);
-		add(firstname_2_2);
+		JLabel countryLbl = new JLabel("Country:");
+		countryLbl.setFont(new Font("Serif", Font.BOLD, 15));
+		countryLbl.setBounds(291, 152, 70, 20);
+		add(countryLbl);
 		
-		JLabel firstname_2_3 = new JLabel("District:");
-		firstname_2_3.setFont(new Font("Serif", Font.BOLD, 15));
-		firstname_2_3.setBounds(291, 197, 70, 20);
-		add(firstname_2_3);
+		JLabel districtLbl = new JLabel("District:");
+		districtLbl.setFont(new Font("Serif", Font.BOLD, 15));
+		districtLbl.setBounds(291, 197, 70, 20);
+		add(districtLbl);
 		
-		JLabel firstname_2_4 = new JLabel("Phone:");
-		firstname_2_4.setFont(new Font("Serif", Font.BOLD, 15));
-		firstname_2_4.setBounds(291, 238, 70, 20);
-		add(firstname_2_4);
+		JLabel phoneLbl = new JLabel("Phone:");
+		phoneLbl.setFont(new Font("Serif", Font.BOLD, 15));
+		phoneLbl.setBounds(291, 238, 70, 20);
+		add(phoneLbl);
 		
-		Address_1 = new JTextField();
-		Address_1.setBounds(366, 70, 96, 20);
-		add(Address_1);
-		Address_1.setColumns(10);
+		addressTxtFld = new JTextField();
+		addressTxtFld.setBounds(366, 70, 96, 20);
+		add(addressTxtFld);
+		addressTxtFld.setColumns(10);
 		
-		City_1 = new JTextField();
-		City_1.setColumns(10);
-		City_1.setBounds(366, 111, 96, 20);
-		add(City_1);
+		cityTxtFld = new JTextField();
+		cityTxtFld.setColumns(10);
+		cityTxtFld.setBounds(366, 111, 96, 20);
+		add(cityTxtFld);
 		
-		Country_1 = new JTextField();
-		Country_1.setColumns(10);
-		Country_1.setBounds(366, 154, 96, 20);
-		add(Country_1);
+		countryTxtFld = new JTextField();
+		countryTxtFld.setColumns(10);
+		countryTxtFld.setBounds(366, 154, 96, 20);
+		add(countryTxtFld);
 		
-		District_1 = new JTextField();
-		District_1.setColumns(10);
-		District_1.setBounds(366, 194, 96, 20);
-		add(District_1);
+		districtTxtFld = new JTextField();
+		districtTxtFld.setColumns(10);
+		districtTxtFld.setBounds(366, 194, 96, 20);
+		add(districtTxtFld);
 		
-		Phone_1 = new JTextField();
-		Phone_1.setColumns(10);
-		Phone_1.setBounds(366, 237, 96, 20);
-		add(Phone_1);
+		phoneTxtFld = new JTextField();
+		phoneTxtFld.setColumns(10);
+		phoneTxtFld.setBounds(366, 237, 96, 20);
+		add(phoneTxtFld);
 		
-		JLabel firstname_2_4_1 = new JLabel("Postal Code:");
-		firstname_2_4_1.setFont(new Font("Serif", Font.BOLD, 15));
-		firstname_2_4_1.setBounds(272, 271, 89, 20);
-		add(firstname_2_4_1);
+		JLabel postalLbl = new JLabel("Postal Code:");
+		postalLbl.setFont(new Font("Serif", Font.BOLD, 15));
+		postalLbl.setBounds(272, 271, 89, 20);
+		add(postalLbl);
 		
-		Postal_1 = new JTextField();
-		Postal_1.setBounds(366, 273, 96, 20);
-		add(Postal_1);
-		Postal_1.setColumns(10);
+		postalTxtFld = new JTextField();
+		postalTxtFld.setBounds(366, 273, 96, 20);
+		add(postalTxtFld);
+		postalTxtFld.setColumns(10);
+		
+		addressTxtFld.setText(Address[0]);
+		cityTxtFld.setText(Address[1]);
+		countryTxtFld.setText(Address[2]);
+		districtTxtFld.setText(Address[3]);
+		postalTxtFld.setText(Address[4]);
+		phoneTxtFld.setText(Address[5]);
+		
+		JButton saveAddress= new JButton("Save Address");
+		saveAddress.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try
+				{
+					qri.newAddress(qri.usr.getUser_id(), addressTxtFld.getText(), cityTxtFld.getText(), countryTxtFld.getText(), districtTxtFld.getText(), postalTxtFld.getText(), phoneTxtFld.getText());
+					textArea.setVisible(true);
+				}
+				catch (Exception ex)
+				{
+					throw new RuntimeException(ex);
+				}
+				
+			}
+		});
+		saveAddress.setForeground(new Color(139, 69, 19));
+		saveAddress.setFont(new Font("Serif", Font.BOLD, 15));
+		saveAddress.setBounds(270, 313, 150, 23);
+		add(saveAddress);
 		
 
 	}

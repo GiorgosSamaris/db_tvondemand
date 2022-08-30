@@ -601,4 +601,21 @@ public class Query {
         ps.execute();
         ps.close();
 	}
+	
+	public String[] getUserAddres(int id) throws Exception {
+		PreparedStatement ps = con.prepareStatement("select address, city, country,district,postal_code,phone from user INNER JOIN address USING(address_id) inner join city USING(city_id) INNER JOIN country USING(country_id) WHERE user_id = ? ;");
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+
+	    } 
+		else 
+		{
+			return new String[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)};									
+		}
+		return new String[] {"empty"};
+		
+	}
 }
