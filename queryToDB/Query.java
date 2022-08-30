@@ -4,6 +4,8 @@ import user.*;
 import mockFrame.*;
 import java.util.*;
 
+import content.Seasons;
+import content.Episode;
 import content.Film;
 import content.FilmIncome;
 import content.Rent;
@@ -240,6 +242,74 @@ public class Query {
 		}
 		return list;
 	}
+	
+	
+	
+	//Gets the number of seasons in a series based on series id
+	public List<Episode> getSeasonsEpisodes(int episode_id)throws Exception
+	{
+		String episode;
+		List<Episode> list = new ArrayList<Episode>();
+		PreparedStatement st = con.prepareStatement("SELECT season_id,episode_id,length FROM series_episode  WHERE season_id = ? ORDER BY episode_id ASC");
+		st.setInt(1, episode_id);
+		ResultSet rs = st.executeQuery();
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+
+	    } 
+		else 
+		{
+			int episode_number = 1;
+			do{
+				episode = "Episode" + String.valueOf(episode_number);
+				
+				Episode tempEpisodes = new Episode(rs.getInt(1), rs.getInt(2), episode,rs.getInt(3));
+				list.add(tempEpisodes);
+				episode_number++;
+			}while(rs.next());									
+		}
+		return list;
+	}
+	
+	//does exactly what is says
+	public void dadadirladada(int episode_id)throws Exception
+	{
+		CallableStatement cs = con.prepareCall("CALL episodeForRent(?,?);");
+		cs.setInt(1, episode_id);
+		cs.setInt(2, usr.getUser_id());
+		ResultSet rs = cs.executeQuery();
+	}
+	
+	//Gets number of episodes in a season of a series based on season id
+	public List<Seasons> getSeriesSeasons(int series_id)throws Exception
+	{
+		String season;
+		List<Seasons> list = new ArrayList<Seasons>();
+		PreparedStatement st = con.prepareStatement("SELECT series_id, series_season_id FROM series_season  WHERE series_id = ? ORDER BY series_season_id ASC");
+		st.setInt(1, series_id);
+		ResultSet rs = st.executeQuery();
+		if (rs.next() == false) 
+		{
+	        System.out.println("ResultSet in empty in Java");
+
+	    } 
+		else 
+		{
+			int season_number = 1;
+			do{
+				season = "Season" + String.valueOf(season_number);
+				System.out.print(season);
+				Seasons tempSeasons = new Seasons(rs.getInt(1), rs.getInt(2), season);
+				list.add(tempSeasons);
+				season_number++;
+			}while(rs.next());									
+		}
+		return list;
+	}
+
+	
+	
 	
 	//get all rents of current user
 	public List<Rent> getUserRents() throws Exception{
