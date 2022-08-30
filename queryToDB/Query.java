@@ -670,7 +670,7 @@ public class Query {
 	public List<FilmIncome> getFilmsPayment() throws Exception {
 		List<FilmIncome> list= new ArrayList<FilmIncome>();
 		Statement st = con.createStatement();
-		ResultSet rs = st.executeQuery("CALL monthly_payment('s')");
+		ResultSet rs = st.executeQuery("CALL monthly_payment('m')");
 		if (rs.next() == false) 
 		{
 	        System.out.println("ResultSet in empty in Java");

@@ -30,7 +30,6 @@ public class PanelRentInc extends JPanel {
 		setBounds(0, 0, 595, 503);
 		
 		JLabel SelectDate = new JLabel("Income per Month");
-		SelectDate.setToolTipText("This tool calculates the 5 most rented films/series based on the prior moth from the date you have inserted.");
 		SelectDate.setHorizontalAlignment(SwingConstants.CENTER);
 		SelectDate.setFont(new Font("Serif", Font.BOLD, 15));
 		SelectDate.setBounds(181, 11, 200, 27);

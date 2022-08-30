@@ -8,6 +8,7 @@ import user.User;
 
 import java.awt.EventQueue;
 import java.sql.Connection;
+import java.util.Arrays;
 
 import content.Film;
 import content.Series;
@@ -31,8 +32,7 @@ public class DBMain {
 		}
 
 		Query qri = new Query(con);
-
 		LoginFrame.initiateLogin(qri);
-		
+
 	}
 }
