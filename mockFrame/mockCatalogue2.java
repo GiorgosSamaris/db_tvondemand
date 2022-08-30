@@ -36,6 +36,8 @@ public class mockCatalogue2 extends JPanel {
 	 * @param qri 
 	 */
 	private int episode_id;
+	private int film_id;
+	private int tab_sel;
 	public mockCatalogue2(Query qri) {
 		setBackground(new Color(112, 128, 144));
 		setBounds(0, 0, 522,378);
@@ -45,6 +47,24 @@ public class mockCatalogue2 extends JPanel {
 		tabbedPane.setBackground(new Color(112, 128, 144));
 		add(tabbedPane);
 
+		JPanel toRentPanel = new JPanel();
+		toRentPanel.setBounds(324, 223, 188, 110);
+		toRentPanel.setBackground(new Color(112, 128, 144));
+		add(toRentPanel);
+		toRentPanel.setVisible(false);
+		toRentPanel.setLayout(null);
+		JComboBox<Seasons> comboBox = new JComboBox<>();
+		comboBox.setBounds(10, 11, 125, 22);
+		toRentPanel.add(comboBox);
+		
+		JComboBox<Episode> comboBox_1 = new JComboBox<>();
+		comboBox_1.setBounds(10, 53, 125, 22);
+		toRentPanel.add(comboBox_1);
+		
+		JLabel episodeLngth = new JLabel("Length: ");
+		episodeLngth.setBounds(10, 85, 168, 14);
+		toRentPanel.add(episodeLngth);
+		
 		String[] filmArr;
 		final List<Film> films;
 		try {
@@ -73,7 +93,16 @@ public class mockCatalogue2 extends JPanel {
 		filmList.addMouseListener(new PanelButtonMouseAdapter(filmList){
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			  textArea.setText(films.get(filmList.getSelectedIndex()).getDescription());
+				Film flm = films.get(filmList.getSelectedIndex());
+			  textArea.setText(flm.getDescription());
+			  film_id= flm.getId();
+			  tab_sel = 1;
+			  toRentPanel.setVisible(false);
+			  
+				  
+				  
+			  
+			  
 			}
 		});
 		
@@ -97,23 +126,6 @@ public class mockCatalogue2 extends JPanel {
 		
 		
 		
-		JPanel toRentPanel = new JPanel();
-		toRentPanel.setBounds(324, 223, 188, 110);
-		toRentPanel.setBackground(new Color(112, 128, 144));
-		add(toRentPanel);
-		toRentPanel.setLayout(null);
-		
-		JComboBox<Seasons> comboBox = new JComboBox<>();
-		comboBox.setBounds(10, 11, 125, 22);
-		toRentPanel.add(comboBox);
-		
-		JComboBox<Episode> comboBox_1 = new JComboBox<>();
-		comboBox_1.setBounds(10, 53, 125, 22);
-		toRentPanel.add(comboBox_1);
-		
-		JLabel episodeLngth = new JLabel("Length: ");
-		episodeLngth.setBounds(10, 85, 168, 14);
-		toRentPanel.add(episodeLngth);
 		
 		//Mouse adapter for series list selection
 		seriesList.addMouseListener(new PanelButtonMouseAdapter(seriesList){
@@ -121,6 +133,8 @@ public class mockCatalogue2 extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 			int index=0;
 			int seasonIndex = 0;
+			tab_sel = 2;
+			toRentPanel.setVisible(true);
 			  index = seriesList.getSelectedIndex();
 			  textArea.setText(series.get(index).getDescription());
 			  int series_id;
@@ -159,12 +173,24 @@ public class mockCatalogue2 extends JPanel {
 		rent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					qri.dadadirladada(episode_id);
+					if(tab_sel == 1)
+					{
+						qri.rentAFilm(film_id);
+						
+					}
+					else if(tab_sel == 2)
+					{
+						qri.dadadirladada(episode_id);
+						
+					}
+					
+					
 				}
 				catch(Exception ex)
 				{
 					
 				}
+				
 			}
 		});
 		

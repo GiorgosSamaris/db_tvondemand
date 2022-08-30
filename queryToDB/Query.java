@@ -272,6 +272,17 @@ public class Query {
 		return list;
 	}
 	
+	
+	
+	public void rentAFilm(int film_id)throws Exception
+	{
+		CallableStatement cs = con.prepareCall("CALL filmForRent(?,?);");
+		cs.setInt(1, film_id);
+		cs.setInt(2, usr.getUser_id());
+		ResultSet rs = cs.executeQuery();
+
+	}
+	
 	//does exactly what is says
 	public void dadadirladada(int episode_id)throws Exception
 	{
