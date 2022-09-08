@@ -32,14 +32,14 @@ public class Query {
 	private Connection con;
 	public static User usr = null;
 	
-	public void setUser(User usr)
-	{
-		this.usr= usr;
-	}
-	
 	public Query(Connection con)
 	{
 		this.con = con;
+	}
+	
+	public void setUser(User usr)
+	{
+		this.usr= usr;
 	}
 	
 	//given email return user type
@@ -197,7 +197,6 @@ public class Query {
 		}
 	}
 	
-	
 	//get all films in inventory
 	public List<Film> getAvailableFilms() throws Exception
 	{				
@@ -220,7 +219,6 @@ public class Query {
 		return list;
 	}
 	
-	
 	//get all series in inventory
 	public List<Series> getAvailableSeries() throws Exception
 	{
@@ -242,8 +240,6 @@ public class Query {
 		}
 		return list;
 	}
-	
-	
 	
 	//Gets the number of seasons in a series based on series id
 	public List<Episode> getSeasonsEpisodes(int episode_id)throws Exception
@@ -271,8 +267,6 @@ public class Query {
 		}
 		return list;
 	}
-	
-	
 	
 	public void rentAFilm(int film_id)throws Exception
 	{
@@ -319,9 +313,6 @@ public class Query {
 		return list;
 	}
 
-	
-	
-	
 	//get all rents of current user
 	public List<Rent> getUserRents() throws Exception{
 		List<Rent> list = new ArrayList<Rent>();
@@ -478,7 +469,6 @@ public class Query {
 		}
 		return sum;
 	}
-	
 	
 	//updates user's address with a new one
 	public void newAddress(int uID, String address, String city, String country, String district, String postal, String phone) throws Exception {
